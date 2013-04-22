@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Actuate Example" package="io.nme.samples.actuateexample" version="1.0.0" company="NME" />
+	<meta title="Actuate Example" package="org.pazu.samples.actuateexample" version="1.0.0" company="Pazu" />
 	<app main="Main" path="Export" file="ActuateExample" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="pazu" />
 	<haxelib name="actuate" />
 	
 	<assets path="Assets" rename="assets" exclude="nme.svg" />
