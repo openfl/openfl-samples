@@ -1,7 +1,11 @@
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.Assets;
-import nme.Lib;
+package;
+
+
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Sprite;
+
+@:bitmap("nme.png") class Image extends BitmapData {}
 
 
 class Main extends Sprite {
@@ -11,11 +15,11 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var bitmap = new Bitmap (Assets.getBitmapData ("assets/nme.png"));
+		var bitmap = new Bitmap (new Image (0, 0));
 		addChild (bitmap);
 		
-		bitmap.x = (Lib.current.stage.stageWidth - bitmap.width) / 2;
-		bitmap.y = (Lib.current.stage.stageHeight - bitmap.height) / 2;
+		bitmap.x = (stage.stageWidth - bitmap.width) / 2;
+		bitmap.y = (stage.stageHeight - bitmap.height) / 2;
 		
 	}
 	

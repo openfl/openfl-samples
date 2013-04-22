@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Displaying a Bitmap" package="io.nme.samples.displayingabitmap" version="1.0.0" company="NME" />
+	<meta title="Displaying a Bitmap" package="org.pazu.samples.displayingabitmap" version="1.0.0" company="Pazu" />
 	<app main="Main" path="Export" file="DisplayingABitmap" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="pazu" />
 	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" />
+	<source path="Assets" />
 	<icon path="Assets/nme.svg" />
 	
 </project>
