@@ -1,7 +1,12 @@
-import nme.display.Sprite;
-import nme.text.TextField;
-import nme.text.TextFormat;
-import nme.Assets;
+package;
+
+
+import flash.display.Sprite;
+import flash.text.Font;
+import flash.text.TextField;
+import flash.text.TextFormat;
+
+@:font("KatamotzIkasi.ttf") class DefaultFont extends Font {}
 
 
 class Main extends Sprite {
@@ -11,7 +16,9 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var format = new TextFormat (Assets.getFont ("assets/KatamotzIkasi.ttf").fontName, 30, 0x7A0026);
+		Font.registerFont (DefaultFont);
+		
+		var format = new TextFormat ("Katamotz Ikasi", 30, 0x7A0026);
 		var textField = new TextField ();
 		
 		textField.defaultTextFormat = format;

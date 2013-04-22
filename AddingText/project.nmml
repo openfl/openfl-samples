@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Adding Text" package="io.nme.samples.addingtext" version="1.0.0" company="NME" />
+	<meta title="Adding Text" package="org.pazu.samples.addingtext" version="1.0.0" company="Pazu" />
 	<app main="Main" path="Export" file="AddingText" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="pazu" />
 	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" glyphs="32-255" />
+	<source path="Assets" />
 	<icon path="Assets/nme.svg" />
 	
 </project>
