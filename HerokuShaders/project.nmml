@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Heroku Shaders" package="io.nme.samples.herokushaders" version="1.0.0" company="NME" />
+	<meta title="Heroku Shaders" package="org.pazu.samples.herokushaders" version="1.0.0" company="Pazu" />
 	<app main="Main" path="Export" file="HerokuShaders" />
 	<window require-shaders="true" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="pazu" />
 	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" />
+	<source path="Assets" />
 	<icon path="Assets/nme.svg" />
 	
 </project>

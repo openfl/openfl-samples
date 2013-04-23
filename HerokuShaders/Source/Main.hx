@@ -1,58 +1,60 @@
-import nme.display.OpenGLView;
-import nme.display.Sprite;
-import nme.geom.Matrix3D;
-import nme.geom.Rectangle;
-import nme.gl.GL;
-import nme.gl.GLBuffer;
-import nme.gl.GLProgram;
-import nme.gl.GLShader;
-import nme.utils.Float32Array;
-import nme.Lib;
-import shaders.FragmentShader_4278_1;
-import shaders.FragmentShader_5359_8;
-import shaders.FragmentShader_5398_8;
-import shaders.FragmentShader_5454_21;
-import shaders.FragmentShader_5492;
-import shaders.FragmentShader_5733;
-import shaders.FragmentShader_5805_18;
-import shaders.FragmentShader_5812;
-import shaders.FragmentShader_5891_5;
-import shaders.FragmentShader_6022;
-import shaders.FragmentShader_6043_1;
-import shaders.FragmentShader_6049;
-import shaders.FragmentShader_6147_1;
-import shaders.FragmentShader_6162;
-import shaders.FragmentShader_6175;
-import shaders.FragmentShader_6223_2;
-import shaders.FragmentShader_6238;
-import shaders.FragmentShader_6284_1;
-import shaders.FragmentShader_6286;
-import shaders.FragmentShader_6288_1;
-import shaders.VertexShader;
+package;
+
+
+import flash.display.Sprite;
+import flash.geom.Matrix3D;
+import flash.geom.Rectangle;
+import flash.utils.ByteArray;
+import flash.Lib;
+import pazu.display.OpenGLView;
+import pazu.gl.GL;
+import pazu.gl.GLBuffer;
+import pazu.gl.GLProgram;
+import pazu.gl.GLShader;
+import pazu.gl.GLUniformLocation;
+import pazu.utils.Float32Array;
+
+@:file("fragment/4278.1.txt") class FragmentSource_4278_1 extends ByteArray {}
+@:file("fragment/5359.8.txt") class FragmentSource_5359_8 extends ByteArray {}
+@:file("fragment/5398.8.txt") class FragmentSource_5398_8 extends ByteArray {}
+@:file("fragment/5454.21.txt") class FragmentSource_5454_21 extends ByteArray {}
+@:file("fragment/5492.txt") class FragmentSource_5492 extends ByteArray {}
+@:file("fragment/5733.txt") class FragmentSource_5733 extends ByteArray {}
+@:file("fragment/5805.18.txt") class FragmentSource_5805_18 extends ByteArray {}
+@:file("fragment/5812.txt") class FragmentSource_5812 extends ByteArray {}
+@:file("fragment/5891.5.txt") class FragmentSource_5891_5 extends ByteArray {}
+@:file("fragment/6022.txt") class FragmentSource_6022 extends ByteArray {}
+@:file("fragment/6043.1.txt") class FragmentSource_6043_1 extends ByteArray {}
+@:file("fragment/6049.txt") class FragmentSource_6049 extends ByteArray {}
+@:file("fragment/6147.1.txt") class FragmentSource_6147_1 extends ByteArray {}
+@:file("fragment/6162.txt") class FragmentSource_6162 extends ByteArray {}
+@:file("fragment/6175.txt") class FragmentSource_6175 extends ByteArray {}
+@:file("fragment/6223.2.txt") class FragmentSource_6223_2 extends ByteArray {}
+@:file("fragment/6238.txt") class FragmentSource_6238 extends ByteArray {}
+@:file("fragment/6284.1.txt") class FragmentSource_6284_1 extends ByteArray {}
+@:file("fragment/6286.txt") class FragmentSource_6286 extends ByteArray {}
+@:file("fragment/6288.1.txt") class FragmentSource_6288_1 extends ByteArray {}
+@:file("vertex.txt") class VertexSource extends ByteArray {}
 
 
 class Main extends Sprite {
 	
 	
-	#if !mobile
-	private static var fragmentShaders:Array<Dynamic> = [ FragmentShader_6286, FragmentShader_6288_1, FragmentShader_6284_1, FragmentShader_6238, FragmentShader_6223_2, FragmentShader_6175, FragmentShader_6162, FragmentShader_6147_1, FragmentShader_6049, FragmentShader_6043_1, FragmentShader_6022, FragmentShader_5891_5, FragmentShader_5805_18, FragmentShader_5812, FragmentShader_5733, FragmentShader_5454_21, FragmentShader_5492, FragmentShader_5359_8, FragmentShader_5398_8, FragmentShader_4278_1 ];
-	#else
-	private static var fragmentShaders:Array<Dynamic> = [ FragmentShader_6284_1, FragmentShader_6238, FragmentShader_6147_1, FragmentShader_5891_5, FragmentShader_5805_18, FragmentShader_5492, FragmentShader_5398_8 ];
-	#end
-	
+	// Some shaders will be disabled on mobile for performance
+	private static var fragmentShaders:Array<Class<Dynamic>> = [ #if !mobile FragmentSource_6286, FragmentSource_6288_1, #end FragmentSource_6284_1, FragmentSource_6238, #if !mobile FragmentSource_6223_2, FragmentSource_6175, FragmentSource_6162, #end FragmentSource_6147_1, #if !mobile FragmentSource_6049, FragmentSource_6043_1, FragmentSource_6022, #end FragmentSource_5891_5, FragmentSource_5805_18, #if !mobile FragmentSource_5812, FragmentSource_5733, FragmentSource_5454_21, #end FragmentSource_5492, #if !mobile FragmentSource_5359_8, #end FragmentSource_5398_8  #if !mobile , FragmentSource_4278_1 #end ];
 	private static var maxTime = 7000;
-	
+
+	private var backbufferUniform:GLUniformLocation;
 	private var buffer:GLBuffer;
 	private var currentIndex:Int;
 	private var currentProgram:GLProgram;
-	private var positionAttribute:Dynamic;
-	private var timeUniform:Dynamic;
-	private var mouseUniform:Dynamic;
-	private var resolutionUniform:Dynamic;
-	private var backbufferUniform:Dynamic;
-	private var surfaceSizeUniform:Dynamic;
-	private var startTime:Dynamic;
-	private var vertexPosition:Dynamic;
+	private var mouseUniform:GLUniformLocation;
+	private var positionAttribute:Int;
+	private var resolutionUniform:GLUniformLocation;
+	private var startTime:Int;
+	private var surfaceSizeUniform:GLUniformLocation;
+	private var timeUniform:GLUniformLocation;
+	private var vertexPosition:Int;
 	private var view:OpenGLView;
 	
 	
@@ -84,7 +86,8 @@ class Main extends Sprite {
 	private function compile ():Void {
 		
 		var program = GL.createProgram ();
-		var vertex = VertexShader.source;
+		var bytes = Type.createInstance(VertexSource, [ #if neko 0 #end ]);
+		var vertex = bytes.readUTFBytes(bytes.length);
 		
 		#if desktop
 		var fragment = "";
@@ -92,7 +95,8 @@ class Main extends Sprite {
 		var fragment = "precision mediump float;";
 		#end
 		
-		fragment += fragmentShaders[currentIndex].source;
+		var bytes = Type.createInstance (fragmentShaders[currentIndex], [ #if neko 0 #end ]);
+		fragment += bytes.readUTFBytes(bytes.length);
 		
 		var vs = createShader (vertex, GL.VERTEX_SHADER);
 		var fs = createShader (fragment, GL.FRAGMENT_SHADER);
@@ -188,8 +192,7 @@ class Main extends Sprite {
 		GL.useProgram (currentProgram);
 		
 		GL.uniform1f (timeUniform, time / 1000);
-		//GL.uniform2f (mouseUniform, (Lib.current.stage.mouseX / Lib.current.stage.stageWidth) * 2 - 1, (Lib.current.stage.mouseY / Lib.current.stage.stageHeight) * 2 - 1);
-		GL.uniform2f (mouseUniform, 0.1, 0.1);
+		GL.uniform2f (mouseUniform, 0.1, 0.1); //GL.uniform2f (mouseUniform, (stage.mouseX / stage.stageWidth) * 2 - 1, (stage.mouseY / stage.stageHeight) * 2 - 1);
 		GL.uniform2f (resolutionUniform, rect.width, rect.height);
 		GL.uniform1i (backbufferUniform, 0 );
 		GL.uniform2f (surfaceSizeUniform, rect.width, rect.height);

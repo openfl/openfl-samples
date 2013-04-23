@@ -1,11 +1,14 @@
-import nme.display.OpenGLView;
-import nme.display.Sprite;
-import nme.geom.Matrix3D;
-import nme.geom.Rectangle;
-import nme.gl.GL;
-import nme.gl.GLBuffer;
-import nme.gl.GLProgram;
-import nme.utils.Float32Array;
+package;
+
+
+import flash.display.Sprite;
+import flash.geom.Matrix3D;
+import flash.geom.Rectangle;
+import pazu.display.OpenGLView;
+import pazu.gl.GL;
+import pazu.gl.GLBuffer;
+import pazu.gl.GLProgram;
+import pazu.utils.Float32Array;
 
 
 class Main extends Sprite {
@@ -38,7 +41,7 @@ class Main extends Sprite {
 			
 			vertexBuffer = GL.createBuffer ();
 			GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);	
-			GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (vertices), GL.STATIC_DRAW);
+			GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (cast vertices), GL.STATIC_DRAW);
 			
 			view.render = renderView;
 			addChild (view);
