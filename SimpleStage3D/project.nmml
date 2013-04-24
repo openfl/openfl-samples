@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Simple Stage3D" package="org.pazu.samples.simplestage3d" version="1.0.0" company="Pazu" />
+	<app main="Main" path="Export" file="SimpleStage3D" />
+	
+	<source path="Source" />
+	
+	<haxelib name="pazu" />
+	<haxelib name="actuate" />
+	
+	<haxeflag name="-swf-lib" value="Assets/agalminiassembler.swf" if="flash" />
+	<haxeflag name="-swf-lib" value="Assets/glsl2agal.swf" if="flash" />
+	
+	<source path="Assets" />
+	<icon path="Assets/nme.svg" />
+	
+</project>
