@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Simple Box2D" package="org.pazu.samples.simplebox2d" version="1.0.0" company="Pazu" />
+	<app file="SimpleBox2D" main="Main" path="Export" />
+	
+	<source path="Source" />
+	
+	<haxelib name="pazu" />
+	<haxelib name="box2d" />
+	
+</project>
