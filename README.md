@@ -1,2 +1,2 @@
-pazu-samples
-============
+openfl-samples
+==============
