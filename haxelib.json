@@ -1,0 +1,11 @@
+{
+	"name": "openfl-samples",
+	"url": "http://www.openfl.org",
+	"license": "MIT",
+	"tags": [],
+	"description": "OpenFL samples",
+	"version": "1.0.0-rc.1",
+	"releasenote": "Initial release",
+	"contributors": [ "singmajesty" ],
+	"dependencies": {}
+}

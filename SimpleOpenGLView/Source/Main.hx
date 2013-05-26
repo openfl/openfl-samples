@@ -4,11 +4,11 @@ package;
 import flash.display.Sprite;
 import flash.geom.Matrix3D;
 import flash.geom.Rectangle;
-import pazu.display.OpenGLView;
-import pazu.gl.GL;
-import pazu.gl.GLBuffer;
-import pazu.gl.GLProgram;
-import pazu.utils.Float32Array;
+import openfl.display.OpenGLView;
+import openfl.gl.GL;
+import openfl.gl.GLBuffer;
+import openfl.gl.GLProgram;
+import openfl.utils.Float32Array;
 
 
 class Main extends Sprite {

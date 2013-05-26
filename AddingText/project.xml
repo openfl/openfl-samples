@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Adding Text" package="org.pazu.samples.addingtext" version="1.0.0" company="Pazu" />
+	<meta title="Adding Text" package="org.openfl.samples.addingtext" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="AddingText" />
 	
 	<source path="Source" />
 	
-	<haxelib name="pazu" />
+	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
 	<source path="Assets" />

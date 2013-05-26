@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Simple OpenGLView" package="org.pazu.samples.simpleopenglview" version="1.0.0" company="Pazu" />
+	<meta title="Simple OpenGLView" package="org.openfl.samples.simpleopenglview" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="SimpleOpenGLView" />
 	
 	<source path="Source" />
 	
-	<haxelib name="pazu" />
+	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
 	<source path="Assets" />

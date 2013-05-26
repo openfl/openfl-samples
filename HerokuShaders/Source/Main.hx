@@ -6,13 +6,13 @@ import flash.geom.Matrix3D;
 import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 import flash.Lib;
-import pazu.display.OpenGLView;
-import pazu.gl.GL;
-import pazu.gl.GLBuffer;
-import pazu.gl.GLProgram;
-import pazu.gl.GLShader;
-import pazu.gl.GLUniformLocation;
-import pazu.utils.Float32Array;
+import openfl.display.OpenGLView;
+import openfl.gl.GL;
+import openfl.gl.GLBuffer;
+import openfl.gl.GLProgram;
+import openfl.gl.GLShader;
+import openfl.gl.GLUniformLocation;
+import openfl.utils.Float32Array;
 
 @:file("4278.1.frag") class FragmentSource_4278_1 extends ByteArray {}
 @:file("5359.8.frag") class FragmentSource_5359_8 extends ByteArray {}
