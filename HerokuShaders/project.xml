@@ -8,7 +8,6 @@
 	<source path="Source" />
 	
 	<haxelib name="openfl" />
-	<haxelib name="actuate" />
 	
 	<source path="Assets" />
 	<icon path="Assets/nme.svg" />
