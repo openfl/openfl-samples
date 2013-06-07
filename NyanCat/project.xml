@@ -11,7 +11,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="swf" />
 	
-	<library path="Source/library.swf" if="html5" />
+	<library path="Source/library.swf" />
 	
 	<icon name="Assets/nme.svg" />
 	
