@@ -42,6 +42,7 @@ class Main extends Sprite {
 			vertexBuffer = GL.createBuffer ();
 			GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);	
 			GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (cast vertices), GL.STATIC_DRAW);
+			GL.bindBuffer (GL.ARRAY_BUFFER, null);
 			
 			view.render = renderView;
 			addChild (view);
@@ -102,9 +103,7 @@ class Main extends Sprite {
 			
 		}
 		
-		GL.useProgram (shaderProgram);
 		vertexAttribute = GL.getAttribLocation (shaderProgram, "vertexPosition");
-		GL.enableVertexAttribArray (vertexAttribute);
 		
 	}
 	
@@ -113,7 +112,7 @@ class Main extends Sprite {
 		
 		GL.viewport (Std.int (rect.x), Std.int (rect.y), Std.int (rect.width), Std.int (rect.height));
 		
-		GL.clearColor (0, 0, 0, 1.0);
+		GL.clearColor (8 >> 8, 146 >> 8, 208 >> 8, 1);
 		GL.clear (GL.COLOR_BUFFER_BIT);
 		
 		var positionX = rect.width / 2;
@@ -121,6 +120,9 @@ class Main extends Sprite {
 		
 		var projectionMatrix = Matrix3D.createOrtho (0, rect.width, rect.height, 0, 1000, -1000);
 		var modelViewMatrix = Matrix3D.create2D (positionX, positionY, 1, 0);
+		
+		GL.useProgram (shaderProgram);
+		GL.enableVertexAttribArray (vertexAttribute);
 		
 		GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);
 		GL.vertexAttribPointer (vertexAttribute, 3, GL.FLOAT, false, 0, 0);
@@ -132,6 +134,8 @@ class Main extends Sprite {
 		GL.uniformMatrix3D (modelViewMatrixUniform, false, modelViewMatrix);
 		
 		GL.drawArrays (GL.TRIANGLE_STRIP, 0, 4);
+		
+		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 	}
 	
