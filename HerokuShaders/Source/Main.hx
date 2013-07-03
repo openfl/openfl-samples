@@ -73,6 +73,7 @@ class Main extends Sprite {
 			buffer = GL.createBuffer ();
 			GL.bindBuffer (GL.ARRAY_BUFFER, buffer);
 			GL.bufferData (GL.ARRAY_BUFFER, new Float32Array ([ -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0 ]), GL.STATIC_DRAW);
+			GL.bindBuffer (GL.ARRAY_BUFFER, null);
 			
 			compile ();
 			
@@ -128,7 +129,6 @@ class Main extends Sprite {
 		}
 		
 		currentProgram = program;
-		GL.useProgram (currentProgram);
 		
 		positionAttribute = GL.getAttribLocation (currentProgram, "surfacePosAttrib");
 		GL.enableVertexAttribArray (positionAttribute);
@@ -205,6 +205,7 @@ class Main extends Sprite {
 		GL.clearColor (0, 0, 0, 1);
 		GL.clear (GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT );
 		GL.drawArrays (GL.TRIANGLES, 0, 6);
+		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 		if (time > maxTime && fragmentShaders.length > 1) {
 			
