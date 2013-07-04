@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "1.0.0-rc.2",
-	"releasenote": "Fix for OpenGLView samples",
+	"version": "1.0.0-rc.3",
+	"releasenote": "Added SimpleSWFLayout",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
