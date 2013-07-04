@@ -5,12 +5,10 @@ import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.utils.ByteArray;
-import format.SWF;
 import layout.LayoutItem;
 import layout.LayoutManager;
 import layout.LayoutType;
-
-@:file("layout.swf") class Layout extends ByteArray {}
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -24,7 +22,7 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var layout = new SWF (new Layout ()).createMovieClip ("Layout");
+		var layout = Assets.getMovieClip ("layout:Layout");
 		addChild (layout);
 		
 		layoutManager = new LayoutManager (800, 600);
@@ -34,7 +32,7 @@ class Main extends Sprite {
 		layoutManager.addItem (new LayoutItem (layout.getChildByName ("Column"), LayoutType.LEFT, LayoutType.STRETCH, true, false));
 		
 		layoutManager.resize (stage.stageWidth, stage.stageHeight);
-		stage.addEventListener (flash.events.Event.RESIZE, stage_onResize);
+		stage.addEventListener (Event.RESIZE, stage_onResize);
 		
 	}
 	
