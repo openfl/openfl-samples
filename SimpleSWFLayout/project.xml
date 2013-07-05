@@ -10,6 +10,8 @@
 	<haxelib name="swf" />
 	<haxelib name="layout" />
 	
+	<library path="Assets/layout.swf" />
+	
 	<source path="Assets" />
 	<icon path="Assets/nme.svg" />
 	
