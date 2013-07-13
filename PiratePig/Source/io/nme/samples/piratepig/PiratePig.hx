@@ -1,26 +1,22 @@
 package io.nme.samples.piratepig;
 
+import openfl.Assets;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.Lib;
+import flash.system.Capabilities;
 
-import nme.Assets;
-import nme.display.Bitmap;
-import nme.display.BitmapData;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.KeyboardEvent;
-import nme.Lib;
-import nme.system.Capabilities;
-
-
-class PiratePig extends Sprite {
-	
-	
+class PiratePig extends Sprite 
+{	
 	private var Background:Bitmap;
 	private var Footer:Bitmap;
 	private var Game:PiratePigGame; 
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
 		initialize ();
@@ -31,33 +27,27 @@ class PiratePig extends Sprite {
 		
 		#if android
 		Lib.current.stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
-		#end
-		
-	}
+		#end		
+	}	
 	
-	
-	private function construct ():Void {
-		
+	private function construct ()
+	{		
 		Footer.smoothing = true;
 		
 		addChild (Background);
 		addChild (Footer);
-		addChild (Game);
-		
-	}
+		addChild (Game);		
+	}	
 	
-	
-	private function initialize ():Void {
-		
+	private function initialize ()
+	{		
 		Background = new Bitmap (Assets.getBitmapData ("images/background_tile.png"));
 		Footer = new Bitmap (Assets.getBitmapData ("images/center_bottom.png"));
-		Game = new PiratePigGame ();
-		
+		Game = new PiratePigGame ();		
 	}
 	
-	
-	private function resize (newWidth:Int, newHeight:Int):Void {
-		
+	private function resize (newWidth:Int, newHeight:Int)
+	{		
 		Background.width = newWidth;
 		Background.height = newHeight;
 		
@@ -66,32 +56,22 @@ class PiratePig extends Sprite {
 		Footer.scaleX = Game.currentScale;
 		Footer.scaleY = Game.currentScale;
 		Footer.x = newWidth / 2 - Footer.width / 2;
-		Footer.y = newHeight - Footer.height;
-		
+		Footer.y = newHeight - Footer.height;		
 	}
 	
-	
-	private function stage_onKeyUp (event:KeyboardEvent):Void {
-		
-		#if android
-		
-		if (event.keyCode == 27) {
-			
+	private function stage_onKeyUp (event:KeyboardEvent)
+	{		
+		#if android		
+		if (event.keyCode == 27)
+		{		
 			event.stopImmediatePropagation ();
-			Lib.exit ();
-			
-		}
-		
-		#end
-		
+			Lib.exit ();			
+		}		
+		#end		
 	}
 	
-	
-	private function stage_onResize (event:Event):Void {
-		
-		resize (stage.stageWidth, stage.stageHeight);
-		
-	}
-	
-	
+	private function stage_onResize (event:Event)
+	{		
+		resize (stage.stageWidth, stage.stageHeight);		
+	}	
 }

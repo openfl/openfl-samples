@@ -9,7 +9,7 @@
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
 	<ios binaries="armv7" />
