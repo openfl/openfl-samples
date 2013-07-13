@@ -12,4 +12,5 @@
 	<assets path="Assets" rename="assets" exclude="nme.svg" />
 	<icon path="Assets/nme.svg" />
 	
+	<window orientation="landscape" vsync="false" antialiasing="4" if="cpp" />	
 </project>
