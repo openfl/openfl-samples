@@ -1,23 +1,20 @@
 import motion.Actuate;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.media.SoundChannel;
-import nme.Assets;
-import nme.Lib;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.media.SoundChannel;
+import flash.Lib;
+import openfl.Assets;
 
-
-class Main extends Sprite {
-	
-	
+class Main extends Sprite 
+{	
 	private var Fill:Sprite;
 	
 	private var channel:SoundChannel;
-	private var position:Float;
+	private var position:Float;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
 		Fill = new Sprite ();
@@ -28,61 +25,44 @@ class Main extends Sprite {
 		Fill.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
 		addChild (Fill);
 		
-		play ();
-		
-	}
+		play ();		
+	}	
 	
-	
-	private function pause ():Void {
-		
-		if (channel != null) {
-			
+	private function pause ()
+	{		
+		if (channel != null) 
+		{			
 			position = channel.position;
 			channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
 			channel.stop ();
-			channel = null;
-			
+			channel = null;			
 		}
 		
-		Actuate.tween (Fill, 3, { alpha: 0.1 } );
-		
-	}
-	
-	
-	private function play ():Void {
-		
+		Actuate.tween (Fill, 3, { alpha: 0.1 } );		
+	}	
+
+	private function play ()
+	{		
 		var sound = Assets.getSound ("assets/stars.mp3");
 		
 		channel = sound.play (position);
 		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
 		
-		Actuate.tween (Fill, 3, { alpha: 1 } );
-		
+		Actuate.tween (Fill, 3, { alpha: 1 } );		
+	}	
+	
+	private function channel_onSoundComplete (event:Event)
+	{		
+		pause ();		
+		position = 0;		
 	}
 	
 	
-	private function channel_onSoundComplete (event:Event):Void {
-		
-		pause ();
-		
-		position = 0;
-		
-	}
-	
-	
-	private function this_onMouseDown (event:MouseEvent):Void {
-		
-		if (channel == null) {
-			
+	private function this_onMouseDown (event:MouseEvent)
+	{		
+		if (channel == null) 
 			play ();
-			
-		} else {
-			
+		else 
 			pause ();
-			
-		}
-		
-	}
-	
-	
+	}	
 }
