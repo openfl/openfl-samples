@@ -1,22 +1,19 @@
 import motion.Actuate;
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.events.MouseEvent;
-import nme.Assets;
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.MouseEvent;
+import openfl.Assets;
 
-
-class Main extends Sprite {
-	
-	
+class Main extends Sprite 
+{	
 	private var Logo:Sprite;
 	private var Destination:Sprite;
 	
 	private var cacheOffsetX:Float;
-	private var cacheOffsetY:Float;
+	private var cacheOffsetY:Float;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
 		Logo = new Sprite ();
@@ -35,42 +32,31 @@ class Main extends Sprite {
 		addChild (Destination);
 		addChild (Logo);
 		
-		Logo.addEventListener (MouseEvent.MOUSE_DOWN, Logo_onMouseDown);
-		
+		Logo.addEventListener (MouseEvent.MOUSE_DOWN, Logo_onMouseDown);		
 	}
 	
-	
-	private function Logo_onMouseDown (event:MouseEvent):Void {
-		
+	private function Logo_onMouseDown (event:MouseEvent)
+	{		
 		cacheOffsetX = Logo.x - event.stageX;
 		cacheOffsetY = Logo.y - event.stageY;
 		
 		stage.addEventListener (MouseEvent.MOUSE_MOVE, stage_onMouseMove);
-		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
-		
+		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);		
 	}
 	
-	
-	private function stage_onMouseMove (event:MouseEvent):Void {
-		
+	private function stage_onMouseMove (event:MouseEvent)
+	{		
 		Logo.x = event.stageX + cacheOffsetX;
-		Logo.y = event.stageY + cacheOffsetY;
-		
+		Logo.y = event.stageY + cacheOffsetY;		
 	}
 	
-	
-	private function stage_onMouseUp (event:MouseEvent):Void {
+	private function stage_onMouseUp (event:MouseEvent)
+	{
 		
-		if (Destination.hitTestPoint (event.stageX, event.stageY)) {
-			
+		if (Destination.hitTestPoint (event.stageX, event.stageY))
 			Actuate.tween (Logo, 1, { x: Destination.x + 5, y: Destination.y + 5 } );
-			
-		}
 		
 		stage.removeEventListener (MouseEvent.MOUSE_MOVE, stage_onMouseMove);
 		stage.removeEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
-		
 	}
-	
-	
 }
