@@ -1,6 +1,5 @@
 package;
 
-
 import flash.display.Sprite;
 import flash.geom.Matrix3D;
 import flash.geom.Rectangle;
@@ -36,12 +35,9 @@ import openfl.utils.Float32Array;
 @:file("6288.1.frag") class FragmentSource_6288_1 extends ByteArray {}
 @:file("heroku.vert") class VertexSource extends ByteArray {}
 
-
-class Main extends Sprite {
-	
-	
-	// Some shaders will be disabled on mobile for performance
-	
+class Main extends Sprite 
+{	
+	// Some shaders will be disabled on mobile for performance	
 	private static var fragmentShaders:Array<Class<Dynamic>> = [ #if !mobile FragmentSource_6286, FragmentSource_6288_1, #end FragmentSource_6284_1, FragmentSource_6238, #if !mobile FragmentSource_6223_2, FragmentSource_6175, FragmentSource_6162, #end FragmentSource_6147_1, #if !mobile FragmentSource_6049, FragmentSource_6043_1, FragmentSource_6022, #end FragmentSource_5891_5, FragmentSource_5805_18, #if !mobile FragmentSource_5812, FragmentSource_5733, FragmentSource_5454_21, #end FragmentSource_5492, #if !mobile FragmentSource_5359_8, #end FragmentSource_5398_8  #if !mobile , FragmentSource_4278_1 #end ];
 	private static var maxTime = 7000;
 
@@ -56,15 +52,14 @@ class Main extends Sprite {
 	private var surfaceSizeUniform:GLUniformLocation;
 	private var timeUniform:GLUniformLocation;
 	private var vertexPosition:Int;
-	private var view:OpenGLView;
+	private var view:OpenGLView;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
-		if (OpenGLView.isSupported) {
-			
+		if (OpenGLView.isSupported) 
+		{			
 			view = new OpenGLView ();
 			
 			fragmentShaders = randomizeArray (fragmentShaders);
@@ -78,15 +73,12 @@ class Main extends Sprite {
 			compile ();
 			
 			view.render = renderView;
-			addChild (view);
-			
-		}
-		
-	}
+			addChild (view);			
+		}		
+	}	
 	
-	
-	private function compile ():Void {
-		
+	private function compile ()
+	{		
 		var program = GL.createProgram ();
 		var bytes = Type.createInstance(VertexSource, [ #if neko 0 #end ]);
 		var vertex = bytes.readUTFBytes(bytes.length);
@@ -113,20 +105,16 @@ class Main extends Sprite {
 		
 		GL.linkProgram (program);
 		
-		if (GL.getProgramParameter (program, GL.LINK_STATUS) == 0) {
-			
+		if (GL.getProgramParameter (program, GL.LINK_STATUS) == 0) 
+		{			
 			trace (GL.getProgramInfoLog (program));
 			trace ("VALIDATE_STATUS: " + GL.getProgramParameter (program, GL.VALIDATE_STATUS));
 			trace ("ERROR: " + GL.getError ());
-			return;
-			
+			return;			
 		}
 		
-		if (currentProgram != null) {
-			
+		if (currentProgram != null) 
 			GL.deleteProgram (currentProgram);
-			
-		}
 		
 		currentProgram = program;
 		
@@ -142,48 +130,42 @@ class Main extends Sprite {
 		backbufferUniform = GL.getUniformLocation (program, "backbuffer");
 		surfaceSizeUniform = GL.getUniformLocation (program, "surfaceSize");
 		
-		startTime = Lib.getTimer ();
-		
-	}
+		startTime = Lib.getTimer ();		
+	}	
 	
-	
-	private function createShader (source:String, type:Int):GLShader {
-		
+	private function createShader (source:String, type:Int):GLShader 
+	{		
 		var shader = GL.createShader (type);
 		GL.shaderSource (shader, source);
 		GL.compileShader (shader);
 		
-		if (GL.getShaderParameter (shader, GL.COMPILE_STATUS) == 0) {
-			
+		if (GL.getShaderParameter (shader, GL.COMPILE_STATUS) == 0) 
+		{			
 			trace (GL.getShaderInfoLog (shader));
-			return null;
-			
+			return null;			
 		}
 		
-		return shader;
-		
+		return shader;		
 	}
 	
 	
-	private function randomizeArray<T> (array:Array<T>):Array<T> {
-		
+	private function randomizeArray<T> (array:Array<T>):Array<T> 
+	{		
 		var arrayCopy = array.copy ();
 		var randomArray = new Array<T> ();
 		
-		while (arrayCopy.length > 0) {
-			
+		while (arrayCopy.length > 0) 
+		{			
 			var randomIndex = Math.round (Math.random () * (arrayCopy.length - 1));
-			randomArray.push (arrayCopy.splice (randomIndex, 1)[0]);
-			
+			randomArray.push (arrayCopy.splice (randomIndex, 1)[0]);			
 		}
 		
-		return randomArray;
-		
+		return randomArray;		
 	}
 	
 	
-	private function renderView (rect:Rectangle):Void {
-		
+	private function renderView (rect:Rectangle)
+	{		
 		GL.viewport (Std.int (rect.x), Std.int (rect.y), Std.int (rect.width), Std.int (rect.height));
 		
 		if (currentProgram == null) return;
@@ -193,7 +175,8 @@ class Main extends Sprite {
 		GL.useProgram (currentProgram);
 		
 		GL.uniform1f (timeUniform, time / 1000);
-		GL.uniform2f (mouseUniform, 0.1, 0.1); //GL.uniform2f (mouseUniform, (stage.mouseX / stage.stageWidth) * 2 - 1, (stage.mouseY / stage.stageHeight) * 2 - 1);
+		GL.uniform2f (mouseUniform, 0.1, 0.1); 
+		//GL.uniform2f (mouseUniform, (stage.mouseX / stage.stageWidth) * 2 - 1, (stage.mouseY / stage.stageHeight) * 2 - 1);
 		GL.uniform2f (resolutionUniform, rect.width, rect.height);
 		GL.uniform1i (backbufferUniform, 0 );
 		GL.uniform2f (surfaceSizeUniform, rect.width, rect.height);
@@ -207,21 +190,14 @@ class Main extends Sprite {
 		GL.drawArrays (GL.TRIANGLES, 0, 6);
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
-		if (time > maxTime && fragmentShaders.length > 1) {
-			
+		if (time > maxTime && fragmentShaders.length > 1) 
+		{			
 			currentIndex++;
 			
-			if (currentIndex > fragmentShaders.length - 1) {
-				
+			if (currentIndex > fragmentShaders.length - 1) 
 				currentIndex = 0;
-				
-			}
 			
-			compile ();
-			
-		}
-		
-	}
-	
-	
+			compile ();			
+		}		
+	}	
 }

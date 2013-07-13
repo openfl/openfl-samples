@@ -1,6 +1,5 @@
 package;
 
-
 import flash.display.Sprite;
 import flash.text.Font;
 import flash.text.TextField;
@@ -8,12 +7,10 @@ import flash.text.TextFormat;
 
 @:font("KatamotzIkasi.ttf") class DefaultFont extends Font {}
 
-
-class Main extends Sprite {
-	
-	
-	public function new () {
-		
+class Main extends Sprite 
+{
+	public function new () 
+	{		
 		super ();
 		
 		Font.registerFont (DefaultFont);
@@ -31,9 +28,6 @@ class Main extends Sprite {
 		
 		textField.text = "Hello World";
 		
-		addChild (textField);
-		
-	}
-	
-	
+		addChild (textField);		
+	}	
 }

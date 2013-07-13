@@ -1,26 +1,23 @@
 package io.nme.samples.piratepig;
 
-
 import motion.Actuate;
 import motion.easing.Quad;
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.filters.BlurFilter;
-import nme.filters.DropShadowFilter;
-import nme.geom.Point;
-import nme.media.Sound;
-import nme.text.TextField;
-import nme.text.TextFormat;
-import nme.text.TextFormatAlign;
-import nme.Assets;
-import nme.Lib;
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.filters.BlurFilter;
+import flash.filters.DropShadowFilter;
+import flash.geom.Point;
+import flash.media.Sound;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
+import flash.Lib;
+import openfl.Assets;
 
-
-class PiratePigGame extends Sprite {
-	
-	
+class PiratePigGame extends Sprite 
+{	
 	private static var NUM_COLUMNS:Int = 8;
 	private static var NUM_ROWS:Int = 8;
 	
@@ -42,41 +39,30 @@ class PiratePigGame extends Sprite {
 	private var needToCheckMatches:Bool;
 	private var selectedTile:Tile;
 	private var tiles:Array <Array <Tile>>;
-	private var usedTiles:Array <Tile>;
+	private var usedTiles:Array <Tile>;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
 		initialize ();
-		construct ();
-		
-		newGame ();
-		
-	}
+		construct ();		
+		newGame ();		
+	}	
 	
-	
-	private function addTile (row:Int, column:Int, animate:Bool = true):Void {
-		
+	private function addTile (row:Int, column:Int, animate:Bool = true)
+	{		
 		var tile = null;
 		var type = Math.round (Math.random () * (tileImages.length - 1));
 		
-		for (usedTile in usedTiles) {
-			
-			if (usedTile.removed && usedTile.parent == null && usedTile.type == type) {
-				
+		for (usedTile in usedTiles) 
+		{			
+			if (usedTile.removed && usedTile.parent == null && usedTile.type == type) 
 				tile = usedTile;
-				
-			}
-			
 		}
 		
-		if (tile == null) {
-			
+		if (tile == null)			
 			tile = new Tile (tileImages[type]);
-			
-		}
 		
 		tile.initialize ();
 		
@@ -87,8 +73,8 @@ class PiratePigGame extends Sprite {
 		
 		var position = getPosition (row, column);
 		
-		if (animate) {
-			
+		if (animate) 
+		{			
 			var firstPosition = getPosition (-1, column);
 			
 			#if !js
@@ -99,24 +85,23 @@ class PiratePigGame extends Sprite {
 			
 			tile.moveTo (0.15 * (row + 1), position.x, position.y);
 			#if !js
-			Actuate.tween (tile, 0.3, { alpha: 1 } ).delay (0.15 * (row - 2)).ease (Quad.easeOut);
+			Actuate.tween (tile, 0.3, { alpha: 1 } ).delay (0.15 * (row - 2))
+			       .ease (Quad.easeOut);
 			#end
 			
-		} else {
-			
+		} 
+		else 
+		{			
 			tile.x = position.x;
-			tile.y = position.y;
-			
+			tile.y = position.y;			
 		}
 		
 		TileContainer.addChild (tile);
-		needToCheckMatches = true;
-		
-	}
+		needToCheckMatches = true;		
+	}	
 	
-	
-	private function construct ():Void {
-		
+	private function construct ()
+	{		
 		Logo.smoothing = true;
 		addChild (Logo);
 		
@@ -165,30 +150,28 @@ class PiratePigGame extends Sprite {
 		IntroSound = Assets.getSound ("soundTheme");
 		Sound3 = Assets.getSound ("sound3");
 		Sound4 = Assets.getSound ("sound4");
-		Sound5 = Assets.getSound ("sound5");
-		
-	}
+		Sound5 = Assets.getSound ("sound5");		
+	}	
 	
-	
-	private function dropTiles ():Void {
-		
-		for (column in 0...NUM_COLUMNS) {
-			
+	private function dropTiles ()
+	{		
+		for (column in 0...NUM_COLUMNS) 
+		{			
 			var spaces = 0;
 			
-			for (row in 0...NUM_ROWS) {
-				
+			for (row in 0...NUM_ROWS) 
+			{				
 				var index = (NUM_ROWS - 1) - row;
 				var tile = tiles[index][column];
 				
-				if (tile == null) {
-					
-					spaces++;
-					
-				} else {
-					
-					if (spaces > 0) {
-						
+				if (tile == null) 
+				{					
+					spaces++;					
+				} 
+				else 
+				{					
+					if (spaces > 0) 
+					{						
 						var position = getPosition (index + spaces, column);
 						tile.moveTo (0.15 * spaces, position.x,position.y);
 						
@@ -196,222 +179,172 @@ class PiratePigGame extends Sprite {
 						tiles[index + spaces][column] = tile;
 						tiles[index][column] = null;
 						
-						needToCheckMatches = true;
-						
-					}
-					
-				}
-				
+						needToCheckMatches = true;						
+					}					
+				}				
 			}
 			
-			for (i in 0...spaces) {
-				
+			for (i in 0...spaces) 
+			{				
 				var row = (spaces - 1) - i;
-				addTile (row, column);
-				
-			}
-			
-		}
-		
-	}
+				addTile (row, column);				
+			}			
+		}		
+	}	
 	
-	
-	private function findMatches (byRow:Bool, accumulateScore:Bool = true):Array <Tile> {
-		
-		var matchedTiles = new Array <Tile> ();
+	private function findMatches (byRow:Bool, accumulateScore:Bool = true):Array<Tile>
+	{		
+		var matchedTiles = new Array<Tile>();
 		
 		var max:Int;
 		var secondMax:Int;
 		
-		if (byRow) {
-			
+		if (byRow) 
+		{			
 			max = NUM_ROWS;
-			secondMax = NUM_COLUMNS;
-			
-		} else {
-			
+			secondMax = NUM_COLUMNS;			
+		} 
+		else 
+		{			
 			max = NUM_COLUMNS;
-			secondMax = NUM_ROWS;
-			
+			secondMax = NUM_ROWS;			
 		}
 		
-		for (index in 0...max) {
-			
+		for (index in 0...max) 
+		{			
 			var matches = 0;
-			var foundTiles = new Array <Tile> ();
+			var foundTiles = new Array<Tile>();
 			var previousType = -1;
 			
-			for (secondIndex in 0...secondMax) {
-				
+			for (secondIndex in 0...secondMax) 
+			{				
 				var tile:Tile;
 				
-				if (byRow) {
-					
+				if (byRow) 
 					tile = tiles[index][secondIndex];
-					
-				} else {
-					
+				else					
 					tile = tiles[secondIndex][index];
-					
-				}
 				
-				if (tile != null && !tile.moving) {
-					
-					if (previousType == -1) {
-						
+				if (tile != null && !tile.moving) 
+				{					
+					if (previousType == -1) 
+					{						
 						previousType = tile.type;
 						foundTiles.push (tile);
-						continue;
-						
-					} else if (tile.type == previousType) {
-						
+						continue;						
+					} 
+					else if (tile.type == previousType) 
+					{						
 						foundTiles.push (tile);
-						matches++;
-						
-					}
-					
+						matches++;						
+					}					
 				}
 				
-				if (tile == null || tile.moving || tile.type != previousType || secondIndex == secondMax - 1) {
-					
-					if (matches >= 2 && previousType != -1) {
-						
-						if (accumulateScore) {
+				if (tile == null || tile.moving || tile.type != previousType || secondIndex == secondMax - 1) 
+				{					
+					if (matches >= 2 && previousType != -1) 
+					{						
+						if (accumulateScore) 
+						{
 							
-							if (matches > 3) {
-								
+							if (matches > 3) 
 								Sound5.play ();
-								
-							} else if (matches > 2) {
-								
+							else if (matches > 2) 
 								Sound4.play ();
-								
-							} else {
-								
+							else
 								Sound3.play ();
-								
-							}
 							
 							currentScore += Std.int (Math.pow (matches, 2) * 50);
-							
 						}
 						
-						matchedTiles = matchedTiles.concat (foundTiles);
-						
+						matchedTiles = matchedTiles.concat (foundTiles);						
 					}
 					
 					matches = 0;
-					foundTiles = new Array <Tile> ();
+					foundTiles = new Array<Tile>();
 					
-					if (tile == null || tile.moving) {
-						
+					if (tile == null || tile.moving) 
+					{						
 						needToCheckMatches = true;
-						previousType = -1;
-						
-					} else {
-						
+						previousType = -1;						
+					} 
+					else 
+					{						
 						previousType = tile.type;
-						foundTiles.push (tile);
-						
-					}
-					
-				}
-				
-			}
-			
+						foundTiles.push (tile);						
+					}					
+				}				
+			}			
 		}
 		
-		return matchedTiles;
-		
+		return matchedTiles;		
 	}
 	
 	
-	private function getPosition (row:Int, column:Int):Point {
-		
-		return new Point (column * (57 + 16), row * (57 + 16));
-		
+	private function getPosition (row:Int, column:Int):Point 
+	{		
+		return new Point (column * (57 + 16), row * (57 + 16));		
 	}
 	
 	
-	private function initialize ():Void {
-		
+	private function initialize ()
+	{		
 		currentScale = 1;
 		currentScore = 0;
 		
-		tiles = new Array <Array <Tile>> ();
-		usedTiles = new Array <Tile> ();
+		tiles = new Array <Array<Tile>>();
+		usedTiles = new Array<Tile>();
 		
-		for (row in 0...NUM_ROWS) {
-			
+		for (row in 0...NUM_ROWS) 
+		{			
 			tiles[row] = new Array <Tile> ();
 			
-			for (column in 0...NUM_COLUMNS) {
-				
+			for (column in 0...NUM_COLUMNS) 
 				tiles[row][column] = null;
-				
-			}
-			
 		}
 		
 		Background = new Sprite ();
 		Logo = new Bitmap (Assets.getBitmapData ("images/logo.png"));
 		Score = new TextField ();
-		TileContainer = new Sprite ();
-		
-	}
+		TileContainer = new Sprite ();		
+	}	
 	
-	
-	public function newGame ():Void {
-		
+	public function newGame ()
+	{		
 		currentScore = 0;
 		Score.text = "0";
 		
-		for (row in 0...NUM_ROWS) {
-			
-			for (column in 0...NUM_COLUMNS) {
-				
+		for (row in 0...NUM_ROWS) 
+			for (column in 0...NUM_COLUMNS)				
 				removeTile (row, column, false);
-				
-			}
-			
-		}
 		
-		for (row in 0...NUM_ROWS) {
-			
-			for (column in 0...NUM_COLUMNS) {
-				
+		for (row in 0...NUM_ROWS)			
+			for (column in 0...NUM_COLUMNS)				
 				addTile (row, column, false);
-				
-			}
-			
-		}
 		
 		IntroSound.play ();
 		
 		removeEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		
+		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);		
 	}
 	
 	
-	public function removeTile (row:Int, column:Int, animate:Bool = true):Void {
-		
+	public function removeTile (row:Int, column:Int, animate:Bool = true)
+	{
 		var tile = tiles[row][column];
 		
-		if (tile != null) {
-			
+		if (tile != null) 
+		{			
 			tile.remove (animate);
-			usedTiles.push (tile);
-			
+			usedTiles.push (tile);			
 		}
 		
-		tiles[row][column] = null;
-		
+		tiles[row][column] = null;		
 	}
 	
 	
-	public function resize (newWidth:Int, newHeight:Int):Void {
-		
+	public function resize (newWidth:Int, newHeight:Int)
+	{		
 		var maxWidth = newWidth * 0.90;
 		var maxHeight = newHeight * 0.86;
 		
@@ -419,58 +352,48 @@ class PiratePigGame extends Sprite {
 		scaleX = 1;
 		scaleY = 1;
 		
-		#if js
-		
-		// looking up the total width and height is not working, so we'll calculate it ourselves
-		
+		#if js		
+		// looking up the total width and height is not working, so we'll calculate it ourselves		
 		var currentWidth = 75 * NUM_COLUMNS;
-		var currentHeight = 75 * NUM_ROWS + 85;
-		
-		#else
-		
+		var currentHeight = 75 * NUM_ROWS + 85;		
+		#else		
 		var currentWidth = width;
-		var currentHeight = height;
-		
+		var currentHeight = height;		
 		#end
 		
-		if (currentWidth > maxWidth || currentHeight > maxHeight) {
+		if (currentWidth > maxWidth || currentHeight > maxHeight) 
+		{
 			
 			var maxScaleX = maxWidth / currentWidth;
 			var maxScaleY = maxHeight / currentHeight;
 			
-			if (maxScaleX < maxScaleY) {
+			if (maxScaleX < maxScaleY) 
 				
 				currentScale = maxScaleX;
-				
-			} else {
-				
+			else			
 				currentScale = maxScaleY;
-				
-			}
 			
 			scaleX = currentScale;
-			scaleY = currentScale;
-			
+			scaleY = currentScale;			
 		}
 		
-		x = newWidth / 2 - (currentWidth * currentScale) / 2;
-		
+		x = newWidth / 2 - (currentWidth * currentScale) / 2;		
 	}
 	
 	
-	private function swapTile (tile:Tile, targetRow:Int, targetColumn:Int):Void {
-		
-		if (targetColumn >= 0 && targetColumn < NUM_COLUMNS && targetRow >= 0 && targetRow < NUM_ROWS) {
-			
+	private function swapTile (tile:Tile, targetRow:Int, targetColumn:Int)
+	{		
+		if (targetColumn >= 0 && targetColumn < NUM_COLUMNS && targetRow >= 0 && targetRow < NUM_ROWS) 
+		{			
 			var targetTile = tiles[targetRow][targetColumn];
 			
-			if (targetTile != null && !targetTile.moving) {
-				
+			if (targetTile != null && !targetTile.moving) 
+			{				
 				tiles[targetRow][targetColumn] = tile;
 				tiles[tile.row][tile.column] = targetTile;
 				
-				if (findMatches (true, false).length > 0 || findMatches (false, false).length > 0) {
-					
+				if (findMatches (true, false).length > 0 || findMatches (false, false).length > 0) 
+				{					
 					targetTile.row = tile.row;
 					targetTile.column = tile.column;
 					tile.row = targetRow;
@@ -481,121 +404,85 @@ class PiratePigGame extends Sprite {
 					targetTile.moveTo (0.3, targetTilePosition.x, targetTilePosition.y);
 					tile.moveTo (0.3, tilePosition.x, tilePosition.y);
 					
-					needToCheckMatches = true;
-					
-				} else {
-					
+					needToCheckMatches = true;					
+				} 
+				else 
+				{					
 					tiles[targetRow][targetColumn] = targetTile;
-					tiles[tile.row][tile.column] = tile;
-					
-				}
-				
-			}
-			
-		}
-		
-	}
+					tiles[tile.row][tile.column] = tile;					
+				}				
+			}			
+		}		
+	}	
 	
-	
-	
-	
-	// Event Handlers
-	
-	
-	
-	
-	private function stage_onMouseUp (event:MouseEvent):Void {
-		
-		if (cacheMouse != null && selectedTile != null && !selectedTile.moving) {
-			
+	// Event Handlers	
+	private function stage_onMouseUp (event:MouseEvent)
+	{		
+		if (cacheMouse != null && selectedTile != null && !selectedTile.moving) 
+		{			
 			var differenceX = event.stageX - cacheMouse.x;
 			var differenceY = event.stageY - cacheMouse.y;
 			
-			if (Math.abs (differenceX) > 10 || Math.abs (differenceY) > 10) {
+			if (Math.abs (differenceX) > 10 || Math.abs (differenceY) > 10) 
+			{
 				
 				var swapToRow = selectedTile.row;
 				var swapToColumn = selectedTile.column;
 				
-				if (Math.abs (differenceX) > Math.abs (differenceY)) {
-					
-					if (differenceX < 0) {
-						
+				if (Math.abs (differenceX) > Math.abs (differenceY)) 
+				{					
+					if (differenceX < 0) 
 						swapToColumn --;
-						
-					} else {
-						
-						swapToColumn ++;
-						
-					}
-					
-				} else {
-					
-					if (differenceY < 0) {
-						
+					else 
+						swapToColumn ++;					
+				} 
+				else 
+				{					
+					if (differenceY < 0) 
 						swapToRow --;
-						
-					} else {
-						
-						swapToRow ++;
-						
-					}
-					
+					else
+						swapToRow ++;					
 				}
 				
-				swapTile (selectedTile, swapToRow, swapToColumn);
-				
-			}
-			
+				swapTile (selectedTile, swapToRow, swapToColumn);				
+			}			
 		}
 		
 		selectedTile = null;
-		cacheMouse = null;
-		
-	}
+		cacheMouse = null;		
+	}	
 	
-	
-	private function this_onEnterFrame (event:Event):Void {
-		
-		if (needToCheckMatches) {
-			
-			var matchedTiles = new Array <Tile> ();
+	private function this_onEnterFrame (event:Event)
+	{		
+		if (needToCheckMatches) 
+		{			
+			var matchedTiles = new Array<Tile>();
 			
 			matchedTiles = matchedTiles.concat (findMatches (true));
 			matchedTiles = matchedTiles.concat (findMatches (false));
 			
-			for (tile in matchedTiles) {
-				
+			for (tile in matchedTiles) 
 				removeTile (tile.row, tile.column);
-				
-			}
 			
-			if (matchedTiles.length > 0) {
-				
+			if (matchedTiles.length > 0)
+			{				
 				Score.text = Std.string (currentScore);
-				dropTiles ();
-				
-			}
-			
-		}
-		
-	}
+				dropTiles();				
+			}			
+		}		
+	}	
 	
-	
-	private function TileContainer_onMouseDown (event:MouseEvent):Void {
-		
-		if (Std.is (event.target, Tile)) {
-			
+	private function TileContainer_onMouseDown (event:MouseEvent)
+	{		
+		if (Std.is (event.target, Tile)) 
+		{			
 			selectedTile = cast event.target;
 			cacheMouse = new Point (event.stageX, event.stageY);
-			
-		} else {
-			
+		} 
+		else 
+		{
 			cacheMouse = null;
 			selectedTile = null;
-			
 		}
-		
 	}
-	
-	
 }

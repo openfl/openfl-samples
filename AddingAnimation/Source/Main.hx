@@ -1,6 +1,5 @@
 package;
 
-
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -9,12 +8,10 @@ import motion.Actuate;
 
 @:bitmap("nme.png") class Image extends BitmapData {}
 
-
-class Main extends Sprite {
-	
-	
-	public function new () {
-		
+class Main extends Sprite 
+{	
+	public function new () 
+	{		
 		super ();
 		
 		var bitmap = new Bitmap (new Image (0, 0));
@@ -33,9 +30,6 @@ class Main extends Sprite {
 		addChild (container);
 		
 		Actuate.tween (container, 3, { alpha: 1 } );
-		Actuate.tween (container, 4, { scaleX: 1, scaleY: 1 } ).delay (0.4).ease (Elastic.easeOut);
-		
-	}
-	
-	
+		Actuate.tween (container, 4, { scaleX: 1, scaleY: 1 } ).delay (0.4).ease (Elastic.easeOut);		
+	}	
 }

@@ -1,6 +1,5 @@
 package;
 
-
 import flash.display.Sprite;
 import flash.geom.Matrix3D;
 import flash.geom.Rectangle;
@@ -10,34 +9,27 @@ import openfl.gl.GLBuffer;
 import openfl.gl.GLProgram;
 import openfl.utils.Float32Array;
 
-
-class Main extends Sprite {
-	
-	
+class Main extends Sprite 
+{
 	private var shaderProgram:GLProgram;
 	private var vertexAttribute:Int;
 	private var vertexBuffer:GLBuffer;
-	private var view:OpenGLView;
+	private var view:OpenGLView;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
-		if (OpenGLView.isSupported) {
-			
+		if (OpenGLView.isSupported) 
+		{			
 			view = new OpenGLView ();
 			
 			createProgram ();
 			
-			var vertices = [
-				
-				100, 100, 0,
-				-100, 100, 0,
-				100, -100, 0,
-				-100, -100, 0
-				
-			];
+			var vertices = [100, 100, 0,
+							-100, 100, 0,
+							100, -100, 0,
+							-100, -100, 0];
 			
 			vertexBuffer = GL.createBuffer ();
 			GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);	
@@ -45,17 +37,13 @@ class Main extends Sprite {
 			GL.bindBuffer (GL.ARRAY_BUFFER, null);
 			
 			view.render = renderView;
-			addChild (view);
-			
-		}
-		
-	}
+			addChild (view);			
+		}		
+	}	
 	
-	
-	private function createProgram ():Void {
-		
-		var vertexShaderSource = 
-			
+	private function createProgram ()
+	{		
+		var vertexShaderSource = 			
 			"attribute vec3 vertexPosition;
 			
 			uniform mat4 modelViewMatrix;
@@ -69,14 +57,10 @@ class Main extends Sprite {
 		GL.shaderSource (vertexShader, vertexShaderSource);
 		GL.compileShader (vertexShader);
 		
-		if (GL.getShaderParameter (vertexShader, GL.COMPILE_STATUS) == 0) {
-			
+		if (GL.getShaderParameter (vertexShader, GL.COMPILE_STATUS) == 0) 
 			throw "Error compiling vertex shader";
-			
-		}
 		
-		var fragmentShaderSource = 
-			
+		var fragmentShaderSource = 			
 			"void main(void) {
 				gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 			}";
@@ -86,30 +70,22 @@ class Main extends Sprite {
 		GL.shaderSource (fragmentShader, fragmentShaderSource);
 		GL.compileShader (fragmentShader);
 		
-		if (GL.getShaderParameter (fragmentShader, GL.COMPILE_STATUS) == 0) {
-			
+		if (GL.getShaderParameter (fragmentShader, GL.COMPILE_STATUS) == 0) 
 			throw "Error compiling fragment shader";
-			
-		}
-		
-		shaderProgram = GL.createProgram ();
+
+			shaderProgram = GL.createProgram ();
 		GL.attachShader (shaderProgram, vertexShader);
 		GL.attachShader (shaderProgram, fragmentShader);
 		GL.linkProgram (shaderProgram);
 		
-		if (GL.getProgramParameter (shaderProgram, GL.LINK_STATUS) == 0) {
-			
+		if (GL.getProgramParameter (shaderProgram, GL.LINK_STATUS) == 0) 
 			throw "Unable to initialize the shader program.";
-			
-		}
 		
-		vertexAttribute = GL.getAttribLocation (shaderProgram, "vertexPosition");
-		
+		vertexAttribute = GL.getAttribLocation (shaderProgram, "vertexPosition");		
 	}
 	
-	
-	private function renderView (rect:Rectangle):Void {
-		
+	private function renderView (rect:Rectangle)
+	{		
 		GL.viewport (Std.int (rect.x), Std.int (rect.y), Std.int (rect.width), Std.int (rect.height));
 		
 		GL.clearColor (8 >> 8, 146 >> 8, 208 >> 8, 1);
@@ -135,9 +111,6 @@ class Main extends Sprite {
 		
 		GL.drawArrays (GL.TRIANGLE_STRIP, 0, 4);
 		
-		GL.bindBuffer (GL.ARRAY_BUFFER, null);
-		
-	}
-	
-	
+		GL.bindBuffer (GL.ARRAY_BUFFER, null);		
+	}	
 }

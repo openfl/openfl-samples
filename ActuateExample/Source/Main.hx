@@ -1,50 +1,43 @@
 package;
 
-
 import flash.display.Sprite;
 import flash.events.Event;
+
 import motion.Actuate;
 import motion.easing.Quad;
 
-
-class Main extends Sprite {
-	
-	
-	public function new () {
+class Main extends Sprite 
+{	
+	public function new () 
+	{		
+		super();
 		
-		super ();
-		
-		initialize ();
-		construct ();
-		
-	}
+		initialize();
+		construct();		
+	}	
 	
-	
-	private function animateCircle (circle:Sprite):Void {
-		
+	private function animateCircle (circle:Sprite)
+	{		
 		var duration = 1.5 + Math.random () * 4.5;
 		var targetX = Math.random () * stage.stageWidth;
 		var targetY = Math.random () * stage.stageHeight;
 		
-		Actuate.tween (circle, duration, { x: targetX, y: targetY }, false).ease (Quad.easeOut).onComplete (animateCircle, [ circle ]);
-		
-	}
+		Actuate.tween(circle, duration, { x: targetX, y: targetY }, false)
+					 .ease (Quad.easeOut)
+					 .onComplete (animateCircle, [ circle ]);		
+	}	
 	
-	
-	private function construct ():Void {
-		
-		for (i in 0...80) {
-			
+	private function construct ()
+	{		
+		for (i in 0...80) 
+		{			
 			var creationDelay = Math.random () * 10;
-			Actuate.timer (creationDelay).onComplete (createCircle);
-			
-		}
-		
-	}
+			Actuate.timer (creationDelay).onComplete (createCircle);	
+		}		
+	}	
 	
-	
-	private function createCircle ():Void {
-		
+	private function createCircle ()
+	{		
 		var size = 5 + Math.random () * 35 + 20;
 		var circle = new Sprite ();
 		
@@ -55,38 +48,23 @@ class Main extends Sprite {
 		circle.y = Math.random () * stage.stageHeight;
 		
 		addChildAt (circle, 0);
-		animateCircle (circle);
-		
-	}
+		animateCircle (circle);		
+	}	
 	
-	
-	private function initialize ():Void {
-		
+	private function initialize ()
+	{
 		stage.addEventListener (Event.ACTIVATE, stage_onActivate);
 		stage.addEventListener (Event.DEACTIVATE, stage_onDeactivate);
-		
-	}
+	}	
 	
+	// Event Handlers	
+	private function stage_onActivate (event:Event) 
+	{		
+		Actuate.resumeAll ();		
+	}	
 	
-	
-	
-	// Event Handlers
-	
-	
-	
-	
-	private function stage_onActivate (event:Event):Void {
-		
-		Actuate.resumeAll ();
-		
-	}
-	
-	
-	private function stage_onDeactivate (event:Event):Void {
-		
-		Actuate.pauseAll ();
-		
-	}
-	
-	
+	private function stage_onDeactivate (event:Event)
+	{		
+		Actuate.pauseAll ();		
+	}	
 }
