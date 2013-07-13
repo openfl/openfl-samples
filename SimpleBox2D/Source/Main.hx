@@ -1,6 +1,5 @@
 package;
 
-
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2PolygonShape;
 import box2D.common.math.B2Vec2;
@@ -14,18 +13,15 @@ import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
 
-
-class Main extends Sprite {
-	
-	
+class Main extends Sprite 
+{	
 	private static var PHYSICS_SCALE:Float = 1 / 30;
 	
 	private var PhysicsDebug:Sprite;
-	private var World:B2World;
+	private var World:B2World;	
 	
-	
-	public function new () {
-		
+	public function new () 
+	{		
 		super ();
 		
 		World = new B2World (new B2Vec2 (0, 10.0), true);
@@ -45,21 +41,16 @@ class Main extends Sprite {
 		createCircle (100, 100, 50, false);
 		createCircle (400, 100, 50, true);
 		
-		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		
-	}
+		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);		
+	}	
 	
-	
-	private function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):Void {
-		
+	private function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool)
+	{		
 		var bodyDefinition = new B2BodyDef ();
 		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
 		
-		if (dynamicBody) {
-			
+		if (dynamicBody) 
 			bodyDefinition.type = B2Body.b2_dynamicBody;
-			
-		}
 		
 		var polygon = new B2PolygonShape ();
 		polygon.setAsBox ((width / 2) * PHYSICS_SCALE, (height / 2) * PHYSICS_SCALE);
@@ -68,21 +59,16 @@ class Main extends Sprite {
 		fixtureDefinition.shape = polygon;
 		
 		var body = World.createBody (bodyDefinition);
-		body.createFixture (fixtureDefinition);
-		
-	}
+		body.createFixture (fixtureDefinition);		
+	}	
 	
-	
-	private function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):Void {
-		
+	private function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool)
+	{		
 		var bodyDefinition = new B2BodyDef ();
 		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
 		
-		if (dynamicBody) {
-			
+		if (dynamicBody)
 			bodyDefinition.type = B2Body.b2_dynamicBody;
-			
-		}
 		
 		var circle = new B2CircleShape (radius * PHYSICS_SCALE);
 		
@@ -90,25 +76,14 @@ class Main extends Sprite {
 		fixtureDefinition.shape = circle;
 		
 		var body = World.createBody (bodyDefinition);
-		body.createFixture (fixtureDefinition);
-		
-	}
+		body.createFixture (fixtureDefinition);		
+	}	
 	
-	
-	
-	
-	// Event Handlers
-	
-	
-	
-	
-	private function this_onEnterFrame (event:Event):Void {
-		
+	// Event Handlers	
+	private function this_onEnterFrame (event:Event)
+	{		
 		World.step (1 / 30, 10, 10);
 		World.clearForces ();
-		World.drawDebugData ();
-		
-	}
-	
-	
+		World.drawDebugData ();		
+	}	
 }
