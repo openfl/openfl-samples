@@ -33,7 +33,6 @@ class Main extends Sprite
 		Lib.current.stage.addEventListener (Event.ENTER_FRAME, this_onEnterFrame);		
 	}
 	
-	
 	private function stage_onKeyDown (event:KeyboardEvent) 
 	{		
 		switch (event.keyCode) 
@@ -48,7 +47,6 @@ class Main extends Sprite
 				movingUp = true;			
 		}		
 	}
-	
 	
 	private function stage_onKeyUp (event:KeyboardEvent) 
 	{		
