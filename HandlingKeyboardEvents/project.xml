@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Handling Keyboard Events" package="io.nme.samples.handlingkeyboardevents" version="1.0.0" company="NME" />
+	<meta title="Handling Keyboard Events" package="org.openfl.samples.handlingkeyboardevents" version="1.0.0" company="OpenFL Technologies" />
 	<app main="Main" path="Export" file="HandlingKeyboardEvents" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" />
-	<icon path="Assets/nme.svg" />
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

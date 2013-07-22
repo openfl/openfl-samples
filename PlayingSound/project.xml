@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Playing Sound" package="io.nme.samples.playingsound" version="1.0.0" company="NME" />
+	<meta title="Playing Sound" package="org.openfl.samples.playingsound" version="1.0.0" company="OpenFL Technologies" />
 	<app main="Main" path="Export" file="PlayingSound" />
 	
 	<window background="#777777" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" include="*.mp3" />
-	<icon path="Assets/nme.svg" />
+	<assets path="Assets" rename="assets" exclude="*.svg" include="*.mp3" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

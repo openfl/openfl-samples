@@ -6,8 +6,7 @@ import flash.display.BitmapData;
 import flash.display.Sprite;
 import motion.easing.Elastic;
 import motion.Actuate;
-
-@:bitmap("nme.png") class Image extends BitmapData {}
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -17,7 +16,7 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var bitmap = new Bitmap (new Image (0, 0));
+		var bitmap = new Bitmap (Assets.getBitmapData ("assets/openfl.png"));
 		bitmap.x = - bitmap.width / 2;
 		bitmap.y = - bitmap.height / 2;
 		bitmap.smoothing = true;

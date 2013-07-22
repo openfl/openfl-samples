@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Adding Animation" package="org.openfl.samples.addinganimation" version="1.0.0" company="OpenFL" />
+	<meta title="Adding Animation" package="org.openfl.samples.addinganimation" version="1.0.0" company="OpenFL Technologies" />
 	<app main="Main" path="Export" file="AddingAnimation" />
 	
 	<source path="Source" />
@@ -9,7 +9,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
-	<source path="Assets" />
-	<icon path="Assets/nme.svg" />
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

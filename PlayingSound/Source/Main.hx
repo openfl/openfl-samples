@@ -1,10 +1,12 @@
+package;
+
+
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.media.SoundChannel;
 import motion.Actuate;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.media.SoundChannel;
-import nme.Assets;
-import nme.Lib;
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -22,7 +24,7 @@ class Main extends Sprite {
 		
 		Fill = new Sprite ();
 		Fill.graphics.beginFill (0x3CB878);
-		Fill.graphics.drawRect (0, 0, Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
+		Fill.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
 		Fill.alpha = 0.1;
 		Fill.buttonMode = true;
 		Fill.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
@@ -59,6 +61,13 @@ class Main extends Sprite {
 		Actuate.tween (Fill, 3, { alpha: 1 } );
 		
 	}
+	
+	
+	
+	
+	// Event Handlers
+	
+	
 	
 	
 	private function channel_onSoundComplete (event:Event):Void {

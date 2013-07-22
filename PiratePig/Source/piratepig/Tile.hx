@@ -1,13 +1,13 @@
-package io.nme.samples.piratepig;
+package piratepig;
 
 
+import flash.display.Bitmap;
+import flash.display.Sprite;
 import motion.Actuate;
 import motion.actuators.GenericActuator;
 import motion.easing.Linear;
 import motion.easing.Quad;
-import nme.Assets;
-import nme.display.Bitmap;
-import nme.display.Sprite;
+import openfl.Assets;
 
 
 class Tile extends Sprite {
@@ -30,10 +30,6 @@ class Tile extends Sprite {
 		
 		mouseChildren = false;
 		buttonMode = true;
-		
-		// Currently, MouseEvent listeners are added to each Tile.
-		// To make them easier to tap, add an empty fill to increase 
-		// the size of the hit area
 		
 		graphics.beginFill (0x000000, 0);
 		graphics.drawRect (-5, -5, 66, 66);

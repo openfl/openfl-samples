@@ -1,14 +1,14 @@
-package io.nme.samples.piratepig;
+package piratepig;
 
 
-import nme.Assets;
-import nme.display.Bitmap;
-import nme.display.BitmapData;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.KeyboardEvent;
-import nme.Lib;
-import nme.system.Capabilities;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.system.Capabilities;
+import flash.Lib;
+import openfl.Assets;
 
 
 class PiratePig extends Sprite {
@@ -26,11 +26,11 @@ class PiratePig extends Sprite {
 		initialize ();
 		construct ();
 		
-		resize (Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
-		Lib.current.stage.addEventListener (Event.RESIZE, stage_onResize);
+		resize (stage.stageWidth, stage.stageHeight);
+		stage.addEventListener (Event.RESIZE, stage_onResize);
 		
 		#if android
-		Lib.current.stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
+		stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
 		#end
 		
 	}

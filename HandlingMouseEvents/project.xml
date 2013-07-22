@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Handling Mouse Events" package="io.nme.samples.handlingmouseevents" version="1.0.0" company="NME" />
+	<meta title="Handling Mouse Events" package="org.openfl.samples.handlingmouseevents" version="1.0.0" company="OpenFL Technologies" />
 	<app main="Main" path="Export" file="HandlingMouseEvents" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="nme.svg" />
-	<icon path="Assets/nme.svg" />
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

@@ -13,38 +13,15 @@ import openfl.gl.GLProgram;
 import openfl.gl.GLShader;
 import openfl.gl.GLUniformLocation;
 import openfl.utils.Float32Array;
-
-@:file("4278.1.frag") class FragmentSource_4278_1 extends ByteArray {}
-@:file("5359.8.frag") class FragmentSource_5359_8 extends ByteArray {}
-@:file("5398.8.frag") class FragmentSource_5398_8 extends ByteArray {}
-@:file("5454.21.frag") class FragmentSource_5454_21 extends ByteArray {}
-@:file("5492.frag") class FragmentSource_5492 extends ByteArray {}
-@:file("5733.frag") class FragmentSource_5733 extends ByteArray {}
-@:file("5805.18.frag") class FragmentSource_5805_18 extends ByteArray {}
-@:file("5812.frag") class FragmentSource_5812 extends ByteArray {}
-@:file("5891.5.frag") class FragmentSource_5891_5 extends ByteArray {}
-@:file("6022.frag") class FragmentSource_6022 extends ByteArray {}
-@:file("6043.1.frag") class FragmentSource_6043_1 extends ByteArray {}
-@:file("6049.frag") class FragmentSource_6049 extends ByteArray {}
-@:file("6147.1.frag") class FragmentSource_6147_1 extends ByteArray {}
-@:file("6162.frag") class FragmentSource_6162 extends ByteArray {}
-@:file("6175.frag") class FragmentSource_6175 extends ByteArray {}
-@:file("6223.2.frag") class FragmentSource_6223_2 extends ByteArray {}
-@:file("6238.frag") class FragmentSource_6238 extends ByteArray {}
-@:file("6284.1.frag") class FragmentSource_6284_1 extends ByteArray {}
-@:file("6286.frag") class FragmentSource_6286 extends ByteArray {}
-@:file("6288.1.frag") class FragmentSource_6288_1 extends ByteArray {}
-@:file("heroku.vert") class VertexSource extends ByteArray {}
+import openfl.Assets;
 
 
 class Main extends Sprite {
 	
 	
-	// Some shaders will be disabled on mobile for performance
-	
-	private static var fragmentShaders:Array<Class<Dynamic>> = [ #if !mobile FragmentSource_6286, FragmentSource_6288_1, #end FragmentSource_6284_1, FragmentSource_6238, #if !mobile FragmentSource_6223_2, FragmentSource_6175, FragmentSource_6162, #end FragmentSource_6147_1, #if !mobile FragmentSource_6049, FragmentSource_6043_1, FragmentSource_6022, #end FragmentSource_5891_5, FragmentSource_5805_18, #if !mobile FragmentSource_5812, FragmentSource_5733, FragmentSource_5454_21, #end FragmentSource_5492, #if !mobile FragmentSource_5359_8, #end FragmentSource_5398_8  #if !mobile , FragmentSource_4278_1 #end ];
+	private static var fragmentShaders = [ #if mobile "6284.1", "6238", "6147.1", "5891.5", "5805.18", "5492", "5398.8" #else "6286", "6288.1", "6284.1", "6238", "6223.2", "6175", "6162", "6147.1", "6049", "6043.1", "6022", "5891.5", "5805.18", "5812", "5733", "5454.21", "5492", "5359.8", "5398.8", "4278.1" #end ];
 	private static var maxTime = 7000;
-
+	
 	private var backbufferUniform:GLUniformLocation;
 	private var buffer:GLBuffer;
 	private var currentIndex:Int;
@@ -88,8 +65,7 @@ class Main extends Sprite {
 	private function compile ():Void {
 		
 		var program = GL.createProgram ();
-		var bytes = Type.createInstance(VertexSource, [ #if neko 0 #end ]);
-		var vertex = bytes.readUTFBytes(bytes.length);
+		var vertex = Assets.getText ("assets/heroku.vert");
 		
 		#if desktop
 		var fragment = "";
@@ -97,8 +73,7 @@ class Main extends Sprite {
 		var fragment = "precision mediump float;";
 		#end
 		
-		var bytes = Type.createInstance (fragmentShaders[currentIndex], [ #if neko 0 #end ]);
-		fragment += bytes.readUTFBytes(bytes.length);
+		fragment += Assets.getText ("assets/" + fragmentShaders[currentIndex] + ".frag");
 		
 		var vs = createShader (vertex, GL.VERTEX_SHADER);
 		var fs = createShader (fragment, GL.FRAGMENT_SHADER);

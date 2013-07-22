@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Pirate Pig" package="io.nme.samples.piratepig" version="1.0.0" company="NME" />
-	<app path="Export" file="PiratePig" main="io.nme.samples.piratepig.PiratePig" />
+	<meta title="Pirate Pig" package="org.openfl.samples.piratepig" version="1.0.0" company="OpenFL Technologies" />
+	<app path="Export" file="PiratePig" main="piratepig.PiratePig" />
 	
 	<window width="800" height="600" if="desktop" />
 	<window width="0" height="0" if="html5" />
 	
 	<source path="Source" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
 	<ios binaries="armv7" />

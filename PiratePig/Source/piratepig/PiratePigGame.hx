@@ -1,30 +1,30 @@
-package io.nme.samples.piratepig;
+package piratepig;
 
 
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.filters.BlurFilter;
+import flash.filters.DropShadowFilter;
+import flash.geom.Point;
+import flash.media.Sound;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
+import flash.Lib;
 import motion.Actuate;
 import motion.easing.Quad;
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.MouseEvent;
-import nme.filters.BlurFilter;
-import nme.filters.DropShadowFilter;
-import nme.geom.Point;
-import nme.media.Sound;
-import nme.text.TextField;
-import nme.text.TextFormat;
-import nme.text.TextFormatAlign;
-import nme.Assets;
-import nme.Lib;
+import openfl.Assets;
 
 
 class PiratePigGame extends Sprite {
 	
 	
-	private static var NUM_COLUMNS:Int = 8;
-	private static var NUM_ROWS:Int = 8;
+	private static var NUM_COLUMNS = 8;
+	private static var NUM_ROWS = 8;
 	
-	private static var tileImages:Array <String> = [ "images/game_bear.png", "images/game_bunny_02.png", "images/game_carrot.png", "images/game_lemon.png", "images/game_panda.png", "images/game_piratePig.png" ];
+	private static var tileImages = [ "images/game_bear.png", "images/game_bunny_02.png", "images/game_carrot.png", "images/game_lemon.png", "images/game_panda.png", "images/game_piratePig.png" ];
 	
 	private var Background:Sprite;
 	private var IntroSound:Sound;
@@ -125,7 +125,6 @@ class PiratePigGame extends Sprite {
 		defaultFormat.align = TextFormatAlign.RIGHT;
 		
 		#if js
-		// Right-aligned text is not supported in HTML5 yet
 		defaultFormat.align = TextFormatAlign.LEFT;
 		#end
 		
@@ -420,8 +419,6 @@ class PiratePigGame extends Sprite {
 		scaleY = 1;
 		
 		#if js
-		
-		// looking up the total width and height is not working, so we'll calculate it ourselves
 		
 		var currentWidth = 75 * NUM_COLUMNS;
 		var currentHeight = 75 * NUM_ROWS + 85;

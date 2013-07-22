@@ -1,8 +1,11 @@
+package;
+
+
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.MouseEvent;
 import motion.Actuate;
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.events.MouseEvent;
-import nme.Assets;
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -20,7 +23,7 @@ class Main extends Sprite {
 		super ();
 		
 		Logo = new Sprite ();
-		Logo.addChild (new Bitmap (Assets.getBitmapData ("assets/nme.png")));
+		Logo.addChild (new Bitmap (Assets.getBitmapData ("assets/openfl.png")));
 		Logo.x = 100;
 		Logo.y = 100;
 		Logo.buttonMode = true;
@@ -38,6 +41,13 @@ class Main extends Sprite {
 		Logo.addEventListener (MouseEvent.MOUSE_DOWN, Logo_onMouseDown);
 		
 	}
+	
+	
+	
+	
+	// Event Handlers
+	
+	
 	
 	
 	private function Logo_onMouseDown (event:MouseEvent):Void {

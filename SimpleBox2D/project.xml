@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Simple Box2D" package="org.openfl.samples.simplebox2d" version="1.0.0" company="OpenFL" />
+	<meta title="Simple Box2D" package="org.openfl.samples.simplebox2d" version="1.0.0" company="OpenFL Technologies" />
 	<app file="SimpleBox2D" main="Main" path="Export" />
 	
 	<source path="Source" />
 	
 	<haxelib name="openfl" />
 	<haxelib name="box2d" />
+	
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Adding Text" package="org.openfl.samples.addingtext" version="1.0.0" company="OpenFL" />
+	<meta title="Adding Text" package="org.openfl.samples.addingtext" version="1.0.0" company="OpenFL Technologies" />
 	<app main="Main" path="Export" file="AddingText" />
 	
 	<source path="Source" />
@@ -9,6 +9,6 @@
 	<haxelib name="openfl" />
 	
 	<source path="Assets" />
-	<icon path="Assets/nme.svg" />
+	<icon path="Assets/openfl.svg" />
 	
 </project>

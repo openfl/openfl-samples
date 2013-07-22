@@ -1,10 +1,12 @@
-import nme.display.Bitmap;
-import nme.display.Sprite;
-import nme.events.Event;
-import nme.events.KeyboardEvent;
-import nme.Assets;
-import nme.Lib;
-import nme.ui.Keyboard;
+package;
+
+
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -23,17 +25,24 @@ class Main extends Sprite {
 		super ();
 		
 		Logo = new Sprite ();
-		Logo.addChild (new Bitmap (Assets.getBitmapData ("assets/nme.png")));
+		Logo.addChild (new Bitmap (Assets.getBitmapData ("assets/openfl.png")));
 		Logo.x = 100;
 		Logo.y = 100;
 		Logo.buttonMode = true;
 		addChild (Logo);
 		
-		Lib.current.stage.addEventListener (KeyboardEvent.KEY_DOWN, stage_onKeyDown);
-		Lib.current.stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
-		Lib.current.stage.addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
+		stage.addEventListener (KeyboardEvent.KEY_DOWN, stage_onKeyDown);
+		stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
+		stage.addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
 		
 	}
+	
+	
+	
+	
+	// Event Handlers
+	
+	
 	
 	
 	private function stage_onKeyDown (event:KeyboardEvent):Void {
