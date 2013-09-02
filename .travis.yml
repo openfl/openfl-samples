@@ -10,6 +10,7 @@ before_install:
   - haxelib setup ~/haxelib
   - haxelib install openfl
   - haxelib install openfl-tools
+  - haxelib install hxcpp
   - haxelib install openfl-native
   - haxelib install actuate
   - haxelib install box2d
