@@ -6,7 +6,7 @@ openfl-samples
 Install
 -------
 
-https://github.com/openfl/openfl/wiki/Get-Started
+http://www.openfl.org/developer/documentation/get-started
 
 
 Development Build
