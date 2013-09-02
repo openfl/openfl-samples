@@ -15,6 +15,6 @@ Development Build
     git clone https://github.com/openfl/openfl-samples
     haxelib dev openfl-samples openfl-samples
 
-To return to a release build:
+To return to release builds:
 
     haxelib dev openfl-samples
