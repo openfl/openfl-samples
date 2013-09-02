@@ -1,0 +1,29 @@
+language: c++
+
+before_install:
+  - sudo apt-get install python-software-properties -y
+  - sudo add-apt-repository ppa:eyecreate/haxe -y
+  - sudo apt-get update
+  - sudo apt-get install haxe -y --force-yes
+  - sudo apt-get install g++-multilib gcc-multilib
+  - mkdir ~/haxelib
+  - haxelib setup ~/haxelib
+  - haxelib install openfl
+  - haxelib install openfl-tools
+  - haxelib install openfl-native
+  - haxelib install actuate
+  - haxelib install box2d
+  - haxelib dev openfl-samples $(pwd)
+
+script:
+  - haxelib run openfl build $(pwd)/ActuateExample flash
+  - haxelib run openfl build $(pwd)/AddingAnimation flash
+  - haxelib run openfl build $(pwd)/AddingText flash
+  - haxelib run openfl build $(pwd)/DisplayingABitmap flash
+  - haxelib run openfl build $(pwd)/HandlingKeyboardEvents flash
+  - haxelib run openfl build $(pwd)/HandlingMouseEvents flash
+  - haxelib run openfl build $(pwd)/HerokuShaders linux
+  - haxelib run openfl build $(pwd)/PiratePig flash
+  - haxelib run openfl build $(pwd)/PlayingSound flash
+  - haxelib run openfl build $(pwd)/SimpleBox2D flash
+  - haxelib run openfl build $(pwd)/SimpleOpenGLView linux
