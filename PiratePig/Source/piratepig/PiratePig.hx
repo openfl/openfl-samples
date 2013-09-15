@@ -29,10 +29,6 @@ class PiratePig extends Sprite {
 		resize (stage.stageWidth, stage.stageHeight);
 		stage.addEventListener (Event.RESIZE, stage_onResize);
 		
-		#if android
-		stage.addEventListener (KeyboardEvent.KEY_UP, stage_onKeyUp);
-		#end
-		
 	}
 	
 	
@@ -67,22 +63,6 @@ class PiratePig extends Sprite {
 		Footer.scaleY = Game.currentScale;
 		Footer.x = newWidth / 2 - Footer.width / 2;
 		Footer.y = newHeight - Footer.height;
-		
-	}
-	
-	
-	private function stage_onKeyUp (event:KeyboardEvent):Void {
-		
-		#if android
-		
-		if (event.keyCode == 27) {
-			
-			event.stopImmediatePropagation ();
-			Lib.exit ();
-			
-		}
-		
-		#end
 		
 	}
 	
