@@ -53,7 +53,7 @@ class Main extends Sprite {
 	
 	private function play ():Void {
 		
-		var sound = Assets.getSound ("assets/stars.mp3");
+		var sound = Assets.getSound ("assets/stars.ogg");
 		
 		channel = sound.play (position);
 		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
