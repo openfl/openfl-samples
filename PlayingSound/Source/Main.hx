@@ -25,6 +25,7 @@ class Main extends Sprite {
 		super ();
 		
 		sound = Assets.getSound ("assets/stars.ogg");
+		position = 0;
 		
 		Fill = new Sprite ();
 		Fill.graphics.beginFill (0x3CB878);
