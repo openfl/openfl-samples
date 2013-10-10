@@ -36,7 +36,12 @@ class Main extends Sprite {
 		background.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
 		addChild (background);
 		
+		#if flash
+		sound = Assets.getSound ("assets/stars.mp3");
+		#else
 		sound = Assets.getSound ("assets/stars.ogg");
+		#end
+		
 		position = 0;
 		
 		play ();
