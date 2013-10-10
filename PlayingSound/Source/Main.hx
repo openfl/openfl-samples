@@ -4,6 +4,7 @@ package;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.media.Sound;
 import flash.media.SoundChannel;
 import motion.Actuate;
 import openfl.Assets;
@@ -16,11 +17,14 @@ class Main extends Sprite {
 	
 	private var channel:SoundChannel;
 	private var position:Float;
+	private var sound:Sound;
 	
 	
 	public function new () {
 		
 		super ();
+		
+		sound = Assets.getSound ("assets/stars.ogg");
 		
 		Fill = new Sprite ();
 		Fill.graphics.beginFill (0x3CB878);
@@ -52,8 +56,6 @@ class Main extends Sprite {
 	
 	
 	private function play ():Void {
-		
-		var sound = Assets.getSound ("assets/stars.ogg");
 		
 		channel = sound.play (position);
 		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
