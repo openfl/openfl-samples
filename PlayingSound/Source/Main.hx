@@ -6,16 +6,18 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.media.Sound;
 import flash.media.SoundChannel;
+import flash.media.SoundTransform;
 import motion.Actuate;
+import motion.easing.Quad;
 import openfl.Assets;
 
 
 class Main extends Sprite {
 	
 	
-	private var Fill:Sprite;
-	
+	private var background:Sprite;
 	private var channel:SoundChannel;
+	private var playing:Bool;
 	private var position:Float;
 	private var sound:Sound;
 	
@@ -24,44 +26,63 @@ class Main extends Sprite {
 		
 		super ();
 		
+		Actuate.defaultEase = Quad.easeOut;
+		
+		background = new Sprite ();
+		background.graphics.beginFill (0x3CB878);
+		background.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
+		background.alpha = 0.1;
+		background.buttonMode = true;
+		background.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
+		addChild (background);
+		
 		sound = Assets.getSound ("assets/stars.ogg");
 		position = 0;
-		
-		Fill = new Sprite ();
-		Fill.graphics.beginFill (0x3CB878);
-		Fill.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
-		Fill.alpha = 0.1;
-		Fill.buttonMode = true;
-		Fill.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
-		addChild (Fill);
 		
 		play ();
 		
 	}
 	
 	
-	private function pause ():Void {
+	private function pause (fadeOut:Float = 1.2):Void {
 		
-		if (channel != null) {
+		if (playing) {
 			
-			position = channel.position;
-			channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-			channel.stop ();
-			channel = null;
+			playing = false;
+			
+			Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (function () {
+				
+				position = channel.position;
+				channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
+				channel.stop ();
+				channel = null;
+				
+			});
+			
+			Actuate.tween (background, fadeOut, { alpha: 0.1 });
 			
 		}
-		
-		Actuate.tween (Fill, 3, { alpha: 0.1 } );
 		
 	}
 	
 	
-	private function play ():Void {
+	private function play (fadeIn:Float = 3):Void {
 		
-		channel = sound.play (position);
+		playing = true;
+		
+		if (fadeIn <= 0) {
+			
+			channel = sound.play (position);
+			
+		} else {
+			
+			channel = sound.play (position, new SoundTransform (0, 0));
+			Actuate.transform (channel, fadeIn).sound (1, 0);
+			
+		}
+		
 		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-		
-		Actuate.tween (Fill, 3, { alpha: 1 } );
+		Actuate.tween (background, fadeIn, { alpha: 1 });
 		
 	}
 	
@@ -76,7 +97,6 @@ class Main extends Sprite {
 	private function channel_onSoundComplete (event:Event):Void {
 		
 		pause ();
-		
 		position = 0;
 		
 	}
