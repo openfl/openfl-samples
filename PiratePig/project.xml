@@ -30,7 +30,7 @@
 		<sound path="3.wav" id="sound3" />
 		<sound path="4.wav" id="sound4" />
 		<sound path="5.wav" id="sound5" />
-		<music path="theme.mp3" id="soundTheme" />
+		<music path="theme.ogg" id="soundTheme" />
 	</assets>
 	
 	<section if="release-sign">
