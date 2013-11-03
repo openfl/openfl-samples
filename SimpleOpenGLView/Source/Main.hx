@@ -112,7 +112,7 @@ class Main extends Sprite {
 		
 		GL.viewport (Std.int (rect.x), Std.int (rect.y), Std.int (rect.width), Std.int (rect.height));
 		
-		GL.clearColor (8 >> 8, 146 >> 8, 208 >> 8, 1);
+		GL.clearColor (8.0 / 256.0, 146.0 / 256.0, 208.0 / 256.0, 1);
 		GL.clear (GL.COLOR_BUFFER_BIT);
 		
 		var positionX = rect.width / 2;
