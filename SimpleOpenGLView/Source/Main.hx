@@ -198,7 +198,6 @@ class Main extends Sprite {
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		GL.disable (GL.TEXTURE_2D);
 		GL.bindTexture (GL.TEXTURE_2D, null);
-		GL.activeTexture (null);
 		GL.useProgram (null);
 		
 	}
