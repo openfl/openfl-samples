@@ -1,6 +1,7 @@
 package;
 
 
+import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.geom.Matrix3D;
 import flash.geom.Rectangle;
@@ -17,6 +18,7 @@ import openfl.Assets;
 class Main extends Sprite {
 	
 	
+	private var bitmapData:BitmapData;
 	private var imageUniform:Int;
 	private var modelViewMatrixUniform:Int;
 	private var projectionMatrixUniform:Int;
@@ -32,6 +34,8 @@ class Main extends Sprite {
 	public function new () {
 		
 		super ();
+		
+		bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		
 		if (OpenGLView.isSupported) {
 			
@@ -54,10 +58,10 @@ class Main extends Sprite {
 		
 		var vertices = [
 			
-			200, 200, 0,
-			-200, 200, 0,
-			200, -200, 0,
-			-200, -200, 0
+			bitmapData.width, bitmapData.width, 0,
+			0, bitmapData.width, 0,
+			bitmapData.width, 0, 0,
+			0, 0, 0
 			
 		];
 		
@@ -86,7 +90,6 @@ class Main extends Sprite {
 	private function createTexture ():Void {
 		
 		texture = GL.createTexture ();
-		var bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		GL.bindTexture (GL.TEXTURE_2D, texture);
 		GL.texImage2D (GL.TEXTURE_2D, 0, GL.RGBA, bitmapData.width, bitmapData.height, 0, GL.RGBA, GL.UNSIGNED_BYTE, new UInt8Array(bitmapData.getPixels (bitmapData.rect)));
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
@@ -159,9 +162,6 @@ class Main extends Sprite {
 		modelViewMatrixUniform = GL.getUniformLocation (shaderProgram, "uModelViewMatrix");
 		imageUniform = GL.getUniformLocation (shaderProgram, "uImage0");
 		
-		GL.enableVertexAttribArray (vertexAttribute);
-		GL.enableVertexAttribArray (texCoordAttribute);
-		
 	}
 	
 	
@@ -173,12 +173,15 @@ class Main extends Sprite {
 		GL.clearColor (1.0, 1.0, 1.0, 1.0);
 		GL.clear (GL.COLOR_BUFFER_BIT);
 		
-		var positionX = rect.width / 2;
-		var positionY = rect.height / 2;
+		var positionX = (stage.stageWidth - bitmapData.width) / 2;
+		var positionY = (stage.stageHeight - bitmapData.height) / 2;
+		
 		var projectionMatrix = Matrix3D.createOrtho (0, rect.width, rect.height, 0, 1000, -1000);
 		var modelViewMatrix = Matrix3D.create2D (positionX, positionY, 1, 0);
 		
 		GL.useProgram (shaderProgram);
+		GL.enableVertexAttribArray (vertexAttribute);
+		GL.enableVertexAttribArray (texCoordAttribute);
 		
 		GL.activeTexture (GL.TEXTURE0);
 		GL.bindTexture (GL.TEXTURE_2D, texture);
@@ -198,6 +201,9 @@ class Main extends Sprite {
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		GL.disable (GL.TEXTURE_2D);
 		GL.bindTexture (GL.TEXTURE_2D, null);
+		
+		GL.disableVertexAttribArray (vertexAttribute);
+		GL.disableVertexAttribArray (texCoordAttribute);
 		GL.useProgram (null);
 		
 	}
