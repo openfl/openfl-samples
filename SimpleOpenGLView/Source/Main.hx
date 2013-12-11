@@ -58,8 +58,8 @@ class Main extends Sprite {
 		
 		var vertices = [
 			
-			bitmapData.width, bitmapData.width, 0,
-			0, bitmapData.width, 0,
+			bitmapData.width, bitmapData.height, 0,
+			0, bitmapData.height, 0,
 			bitmapData.width, 0, 0,
 			0, 0, 0
 			
