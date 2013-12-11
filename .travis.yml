@@ -9,7 +9,8 @@ before_install:
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib install openfl
-  - haxelib install hxtools
+  - haxelib install lime
+  - haxelib install lime-tools
   - haxelib install hxlibc
   - haxelib install openfl-native
   - haxelib install actuate
