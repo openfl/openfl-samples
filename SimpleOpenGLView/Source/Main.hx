@@ -201,7 +201,10 @@ class Main extends Sprite {
 		
 		GL.activeTexture (GL.TEXTURE0);
 		GL.bindTexture (GL.TEXTURE_2D, texture);
+		
+		#if desktop
 		GL.enable (GL.TEXTURE_2D);
+		#end
 		
 		GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);
 		GL.vertexAttribPointer (vertexAttribute, 3, GL.FLOAT, false, 0, 0);
@@ -215,8 +218,11 @@ class Main extends Sprite {
 		GL.drawArrays (GL.TRIANGLE_STRIP, 0, 4);
 		
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
-		GL.disable (GL.TEXTURE_2D);
 		GL.bindTexture (GL.TEXTURE_2D, null);
+		
+		#if desktop
+		GL.disable (GL.TEXTURE_2D);
+		#end
 		
 		GL.disableVertexAttribArray (vertexAttribute);
 		GL.disableVertexAttribArray (texCoordAttribute);
