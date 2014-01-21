@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="BunnyMark" package="org.openfl.samples.bunnymark" version="1.0.0" company="OpenFL Technologies" />
+	<app main="BunnyMark" path="Export" file="BunnyMark" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
+	
+</project>
