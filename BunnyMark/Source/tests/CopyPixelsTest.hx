@@ -6,7 +6,6 @@ import flash.display.Graphics;
 import flash.display.PixelSnapping;
 import flash.display.Sprite;
 import flash.display.StageQuality;
-import flash.display.Tilesheet;
 import flash.display.BlendMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -44,7 +43,11 @@ class CopyPixelsTest extends Sprite
 	public function new() 
 	{
 		super ();
-
+		
+		minX = 0;
+		maxX = Env.width;
+		minY = 0;
+		maxY = Env.height;
 		gravity = 0.5;
 		incBunnies = 100;
 		#if flash
