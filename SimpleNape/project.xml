@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="Simple Nape" package="org.openfl.samples.simplenape" version="1.0.0" company="OpenFL Technologies" />
+	<app file="SimpleNape" main="Main" path="Export" />
+	<window fps="60" background="#FFFFFF" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+	<haxelib name="nape" />
+
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
+
+</project>
