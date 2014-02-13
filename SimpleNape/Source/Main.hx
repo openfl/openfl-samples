@@ -74,8 +74,6 @@ class Main extends Sprite {
 	}
 
 	private function onKeyDown(e:KeyboardEvent):Void {
-		trace("TESTA");
-
 		if(e.keyCode == Keyboard.SPACE) {
 			this.space.clear();
 			this.createObjects();

@@ -4,6 +4,7 @@
 	<meta title="Simple Nape" package="org.openfl.samples.simplenape" version="1.0.0" company="OpenFL Technologies" />
 	<app file="SimpleNape" main="Main" path="Export" />
 	<window fps="60" background="#FFFFFF" />
+	<window width="0" height="0" if="html5" />
 
 	<source path="Source" />
 
@@ -12,5 +13,8 @@
 
 	<assets path="Assets" rename="assets" exclude="*.svg" />
 	<icon path="Assets/openfl.svg" />
+
+	<haxedef name="NAPE_RELEASE_BUILD"/>
+	<haxedef name="NAPE_NO_INLINE" if="neko" />
 
 </project>
