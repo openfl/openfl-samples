@@ -174,7 +174,7 @@ class CopyPixelsTest extends Sprite
 				bunny.position.y = minY;
 			}
 			
-			canvasData.copyPixels (bunnyAsset, source, bunny.position);
+			canvasData.copyPixels (bunnyAsset, source, bunny.position, null, null, true);
 		}
 
 		var t = Lib.getTimer();

@@ -5,7 +5,9 @@ import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
+#if !html5
 import flash.Vector;
+#end
 
 
 class Background extends Sprite {
@@ -15,9 +17,11 @@ class Background extends Sprite {
 	public var rows:Int;
 	public var texture:BitmapData;
 	
+	#if !html5
 	private var indices:Vector<Int>;
 	private var uvt:Vector<Float>;
 	private var vertices:Vector<Float>;
+	#end
 	private var _width:Int;
 	private var _height:Int;
 	
@@ -36,6 +40,7 @@ class Background extends Sprite {
 	
 	private function build ():Void {
 		
+		#if !html5
 		var sw = _width;
 		var sh = _height;
 		var uw = sw / texture.width;
@@ -84,6 +89,7 @@ class Background extends Sprite {
 			}
 			
 		}
+		#end
 		
 	}
 	
@@ -135,7 +141,7 @@ class Background extends Sprite {
 		
 		#if html5
 		return;
-		#end
+		#else
 		
 		if (_width == 0 || _height == 0) return;
 		
@@ -163,6 +169,8 @@ class Background extends Sprite {
 		}
 		
 		paint ();
+		
+		#end
 		
 	}
 	

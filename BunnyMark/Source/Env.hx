@@ -2,7 +2,9 @@ package;
 
 
 import flash.events.Event;
+#if !html5
 import flash.system.Capabilities;
+#end
 import flash.Lib;
 
 
@@ -15,6 +17,10 @@ class Env {
 	
 	
 	public static function setup ():Void {
+		
+		#if html5
+		screenDensity = 1;
+		#else
 		
 		var dpi = Capabilities.screenDPI;
 		
@@ -31,6 +37,8 @@ class Env {
 			screenDensity = 2;
 			
 		}
+		
+		#end
 		
 		stage_onResize (null);
 		Lib.current.stage.addEventListener (Event.RESIZE, stage_onResize);
