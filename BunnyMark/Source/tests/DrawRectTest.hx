@@ -6,7 +6,6 @@ import flash.display.Graphics;
 import flash.display.PixelSnapping;
 import flash.display.Sprite;
 import flash.display.StageQuality;
-import flash.display.Tilesheet;
 import flash.display.BlendMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -24,7 +23,7 @@ import flash.text.TextFormatAlign;
  * @author Joshua Granick
  * @author Philippe Elsass
  */
-class RectTest extends Sprite 
+class DrawRectTest extends Sprite 
 {
 	var tf:TextField;	
 	var numBunnies:Int;
@@ -38,13 +37,16 @@ class RectTest extends Sprite
 	var minY:Int;
 	var bunnyAsset:BitmapData;
 	var pirate:Bitmap;
-	var tilesheet:Tilesheet;
-	var drawList:Array<Float>;
 	
 	public function new() 
 	{
 		super ();
-
+		
+		minX = 0;
+		maxX = Env.width;
+		minY = 0;
+		maxY = Env.height;
+		
 		gravity = 0.5;
 		incBunnies = 100;
 		#if flash
