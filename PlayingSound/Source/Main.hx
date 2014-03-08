@@ -81,7 +81,7 @@ class Main extends Sprite {
 			
 		} else {
 			
-			channel = sound.play (position, new SoundTransform (0, 0));
+			channel = sound.play (position, 0, new SoundTransform (0, 0));
 			Actuate.transform (channel, fadeIn).sound (1, 0);
 			
 		}

@@ -14,12 +14,15 @@ before_install:
   - haxelib install openfl-native
   - haxelib install actuate
   - haxelib install box2d
+  - haxelib install swf
+  - haxelib install layout
   - haxelib dev openfl-samples $(pwd)
 
 script:
   - haxelib run openfl build $(pwd)/ActuateExample flash
   - haxelib run openfl build $(pwd)/AddingAnimation flash
   - haxelib run openfl build $(pwd)/AddingText flash
+  - haxelib run openfl build $(pwd)/BunnyMark neko
   - haxelib run openfl build $(pwd)/DisplayingABitmap flash
   - haxelib run openfl build $(pwd)/HandlingKeyboardEvents flash
   - haxelib run openfl build $(pwd)/HandlingMouseEvents flash
@@ -28,3 +31,4 @@ script:
   - haxelib run openfl build $(pwd)/PlayingSound flash
   - haxelib run openfl build $(pwd)/SimpleBox2D flash
   - haxelib run openfl build $(pwd)/SimpleOpenGLView linux
+  - haxelib run openfl build $(pwd)/SimpleSWFLayout flash

@@ -91,14 +91,14 @@ class PiratePigGame extends Sprite {
 			
 			var firstPosition = getPosition (-1, column);
 			
-			#if !js
+			#if (!js || openfl_html5)
 			tile.alpha = 0;
 			#end
 			tile.x = firstPosition.x;
 			tile.y = firstPosition.y;
 			
 			tile.moveTo (0.15 * (row + 1), position.x, position.y);
-			#if !js
+			#if (!js || openfl_html5)
 			Actuate.tween (tile, 0.3, { alpha: 1 } ).delay (0.15 * (row - 2)).ease (Quad.easeOut);
 			#end
 			
@@ -418,7 +418,7 @@ class PiratePigGame extends Sprite {
 		scaleX = 1;
 		scaleY = 1;
 		
-		#if js
+		#if (js && !openfl_html5)
 		
 		var currentWidth = 75 * NUM_COLUMNS;
 		var currentHeight = 75 * NUM_ROWS + 85;
