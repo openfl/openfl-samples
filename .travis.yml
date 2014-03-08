@@ -16,6 +16,7 @@ before_install:
   - haxelib install box2d
   - haxelib install swf
   - haxelib install layout
+  - haxelib install format
   - haxelib dev openfl-samples $(pwd)
 
 script:
