@@ -124,7 +124,7 @@ class PiratePigGame extends Sprite {
 		var defaultFormat = new TextFormat (font.fontName, 60, 0x000000);
 		defaultFormat.align = TextFormatAlign.RIGHT;
 		
-		#if js
+		#if (!js || openfl_html5)
 		defaultFormat.align = TextFormatAlign.LEFT;
 		#end
 		
@@ -136,7 +136,7 @@ class PiratePigGame extends Sprite {
 		Score.selectable = false;
 		Score.defaultTextFormat = defaultFormat;
 		
-		#if !js
+		#if (!js || openfl_html5)
 		Score.filters = [ new BlurFilter (1.5, 1.5), new DropShadowFilter (1, 45, 0, 0.2, 5, 5) ];
 		#else
 		Score.y = 0;
@@ -150,7 +150,7 @@ class PiratePigGame extends Sprite {
 		Background.graphics.beginFill (0xFFFFFF, 0.4);
 		Background.graphics.drawRect (0, 0, contentWidth, 75 * NUM_ROWS);
 		
-		#if !js
+		#if (!js || openfl_html5)
 		Background.filters = [ new BlurFilter (10, 10) ];
 		addChild (Background);
 		#end
@@ -418,7 +418,7 @@ class PiratePigGame extends Sprite {
 		scaleX = 1;
 		scaleY = 1;
 		
-		#if (js && !openfl_html5)
+		#if (js || !openfl_html5)
 		
 		var currentWidth = 75 * NUM_COLUMNS;
 		var currentHeight = 75 * NUM_ROWS + 85;
