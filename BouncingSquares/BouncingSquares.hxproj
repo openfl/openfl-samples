@@ -10,7 +10,7 @@
     <movie height="600" />
     <movie version="3" />
     <movie minorVersion="0" />
-    <movie platform="OpenFl" />
+    <movie platform="OpenFL" />
     <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
@@ -27,8 +27,7 @@
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="nme" />
-    <library name="actuate" />
+    <library name="openfl" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
