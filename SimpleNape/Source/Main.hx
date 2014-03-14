@@ -27,7 +27,8 @@ class Main extends Sprite {
 		super();
 
 		this.addEventListener(Event.ADDED_TO_STAGE, init);
-		this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		
+		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 	}
 
 	private function init(e:Event):Void {
@@ -35,42 +36,42 @@ class Main extends Sprite {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 		}
 
-		gravity = Vec2.weak(0, 600);
-		space = new Space(gravity);
-
-		debug = new ShapeDebug(stage.stageWidth, stage.stageHeight);
+		this.gravity = Vec2.weak(0, 600);
+		this.space = new Space(this.gravity);
+		
+		this.debug = new ShapeDebug(stage.stageWidth, stage.stageHeight);
 		debug.thickness = 1.0;
 
-		addChild(debug.display);
+		addChild(this.debug.display);
 
 		createObjects();
 
-		this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 	}
 
 	private function createObjects():Void {
 		var floor = new Body(BodyType.STATIC);
 		floor.shapes.add(new Polygon(Polygon.rect(150, 300, 500, 100, true)));
-		floor.space = space;
+		floor.space = this.space;
 
 		var box = new Body(BodyType.DYNAMIC);
 		box.shapes.add(new Polygon(Polygon.box(100, 100)));
 		box.position.setxy(500, 100);
-		box.space = space;
+		box.space = this.space;
 
 		var circle = new Body(BodyType.DYNAMIC);
 		circle.shapes.add(new Circle(100));
 		circle.position.setxy(210, 100);
 		circle.angularVel = 10;
-		circle.space = space;
+		circle.space = this.space;
 	}
 
 	private function onEnterFrame(e:Event):Void {
-		space.step(1 / stage.frameRate);
+		this.space.step(1 / stage.frameRate);
 
-		debug.clear();
-		debug.draw(space);
-		debug.flush();
+		this.debug.clear();
+		this.debug.draw(space);
+		this.debug.flush();
 	}
 
 	private function onKeyDown(e:KeyboardEvent):Void {
