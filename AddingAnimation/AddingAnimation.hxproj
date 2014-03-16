@@ -21,7 +21,7 @@
   <build>
     <option directives="" />
     <option flashStrict="False" />
-    <option mainClass="org.openfl.samples.AddingActuateAnimation" />
+    <option mainClass="org.openfl.samples.AddingAnimation" />
     <option enabledebug="False" />
     <option additional="" />
   </build>
