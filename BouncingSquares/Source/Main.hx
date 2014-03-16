@@ -72,8 +72,8 @@ class BouncingSquare extends Sprite {
     	
     		super();
     	
-    		x = _x;		//as BouncingSquare extends Sprite, x is already a defined Sprite property, 
-    		y = _y;		//as well as y
+    		x = _x;		//as BouncingSquare extends Sprite, x is already a defined Sprite property... 
+    		y = _y;		//and y as well.
     		sx = _sx;
     		sy = _sy;
     		col = _col;
