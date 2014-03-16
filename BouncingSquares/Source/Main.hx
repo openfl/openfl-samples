@@ -11,14 +11,14 @@ class Main extends Sprite {
 
 	private var _stageW:Int;
 	private var _stageH:Int;
-	private var _squares:Array<BouncingSquare>;
-	private var _amount:Int = 100;
+	private var _squares:Array<BouncingSquare>;	//holder of our squares
+	private var _amount:Int = 100;	//amount of squars to generate and display. You can change this to test more or less squares
 	
 	public function new() {
 
 		super();
 		
-		haxe.Timer.delay( init, 100 );
+		haxe.Timer.delay( init, 100 );	//wait for 100 milliseconds before init
 
 	}
 
@@ -26,12 +26,12 @@ class Main extends Sprite {
 	
 		this.mouseEnabled = false;
         	this.mouseChildren = false;
+
 		//gather stage dimensions to work with
 		_stageW = Lib.current.stage.stageWidth;
 		_stageH = Lib.current.stage.stageHeight;
 		
-		//init squares holder
-		_squares = [];
+		_squares = [];	//init squares holder
 		
 		//prepare boucing squares
 		for ( i in 0..._amount ) {
@@ -45,7 +45,7 @@ class Main extends Sprite {
 	}
 	
 	private function onEnterFrame( e:Event ):Void {
-		//handle move logic
+		//handle move logic, loop through every square and move them
 		for ( i in 0..._amount ) {
 			var n:BouncingSquare = _squares[i];
 			if ( n.x < 0 || n.x + n.width > _stageW ) n.sx *= -1; //constraint horizontal translation
@@ -64,16 +64,16 @@ class Main extends Sprite {
 
 class BouncingSquare extends Sprite {
 	
-	public var sx:Int; //horizontal translation
-	public var sy:Int; //vertical translation
-	public var col:Int; //color
+	public var sx:Int;	//horizontal translation
+	public var sy:Int;	//vertical translation
+	public var col:Int;	//color
 	
 	public function new ( _x:Int, _y:Int, _sx:Int, _sy:Int, _col:Int ) {
     	
     		super();
     	
-    		x = _x; //as this is extends Sprite, x is already a defined Sprite property, 
-    		y = _y; //as well as y
+    		x = _x;		//as this is extends Sprite, x is already a defined Sprite property, 
+    		y = _y;		//as well as y
     		sx = _sx;
     		sy = _sy;
     		col = _col;
