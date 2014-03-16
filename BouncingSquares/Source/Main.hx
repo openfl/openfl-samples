@@ -9,7 +9,7 @@ import flash.Lib;
 
 class Main extends Sprite {
 
-    private var _stageW:Int;
+	private var _stageW:Int;
 	private var _stageH:Int;
 	private var _squares:Array<BouncingSquare>;
 	private var _amount:Int = 100;
@@ -24,7 +24,7 @@ class Main extends Sprite {
 
 	private function init():Void {
 		this.mouseEnabled = false;
-        this.mouseChildren = false;
+        	this.mouseChildren = false;
 		//gather stage dimensions to work with
 		_stageW = Lib.current.stage.stageWidth;
 		_stageH = Lib.current.stage.stageHeight;
