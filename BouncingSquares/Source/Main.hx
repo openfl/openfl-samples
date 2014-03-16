@@ -12,7 +12,7 @@ class Main extends Sprite {
 	private var _stageW:Int;
 	private var _stageH:Int;
 	private var _squares:Array<BouncingSquare>;	//holder of our squares
-	private var _amount:Int = 100;	//amount of squars to generate and display. You can change this to test more or less squares
+	private var _amount:Int = 100;	//amount of squars to generate and display.
 	
 	public function new() {
 
