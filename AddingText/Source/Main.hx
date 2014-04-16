@@ -5,8 +5,7 @@ import flash.display.Sprite;
 import flash.text.Font;
 import flash.text.TextField;
 import flash.text.TextFormat;
-
-@:font("KatamotzIkasi.ttf") class DefaultFont extends Font {}
+import openfl.Assets;
 
 
 class Main extends Sprite {
@@ -16,9 +15,8 @@ class Main extends Sprite {
 		
 		super ();
 		
-		Font.registerFont (DefaultFont);
-		
-		var format = new TextFormat ("Katamotz Ikasi", 30, 0x7A0026);
+		var font = Assets.getFont ("assets/KatamotzIkasi.ttf");
+		var format = new TextFormat (font.fontName, 30, 0x7A0026);
 		var textField = new TextField ();
 		
 		textField.defaultTextFormat = format;
