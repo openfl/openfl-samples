@@ -124,7 +124,7 @@ class PiratePigGame extends Sprite {
 		var defaultFormat = new TextFormat (font.fontName, 60, 0x000000);
 		defaultFormat.align = TextFormatAlign.RIGHT;
 		
-		#if (!js || openfl_html5)
+		#if (js && !openfl_html5)
 		defaultFormat.align = TextFormatAlign.LEFT;
 		#end
 		
