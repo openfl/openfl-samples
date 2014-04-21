@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "1.2.1",
-	"releasenote": "Improvements to GLView samples",
+	"version": "1.3.0",
+	"releasenote": "Improvements for OpenFL 1.3 release",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
