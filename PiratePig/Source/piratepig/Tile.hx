@@ -45,11 +45,9 @@ class Tile extends Sprite {
 		mouseEnabled = true;
 		buttonMode = true;
 		
-		#if (!js || openfl_html5)
 		scaleX = 1;
 		scaleY = 1;
 		alpha = 1;
-		#end
 		
 	}
 	
@@ -65,7 +63,7 @@ class Tile extends Sprite {
 	
 	public function remove (animate:Bool = true):Void {
 		
-		#if (js && !openfl_html5)
+		#if (js && (dom || !openfl_html5))
 		animate = false;
 		#end
 		
