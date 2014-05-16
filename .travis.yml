@@ -10,7 +10,7 @@ before_install:
   - haxelib install openfl
   - haxelib install lime
   - haxelib install lime-tools
-  - haxelib install hxlibc
+  - haxelib install hxcpp
   - haxelib install openfl-native
   - haxelib install actuate
   - haxelib install box2d
