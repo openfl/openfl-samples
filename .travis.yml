@@ -33,3 +33,6 @@ script:
   - haxelib run openfl build $(pwd)/SimpleBox2D flash
   - haxelib run openfl build $(pwd)/SimpleOpenGLView linux
   - haxelib run openfl build $(pwd)/SimpleSWFLayout flash
+
+notifications:
+  slack: openfl:ba3HbgtZflW8TNcJEQ1B4tAY
