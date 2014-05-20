@@ -33,7 +33,7 @@ class Main extends Sprite {
 		
 		_squares = [];	//init squares holder
 		
-		//prepare boucing squares
+		//prepare bouncing squares
 		for ( i in 0..._amount ) {
 			var n:BouncingSquare = new BouncingSquare( randomNumber( 200, _stageW-200 ), randomNumber( 200, _stageH-200 ),randomNumber( 1, 10 )*( randomNumber( 0, 1 ) > 0 ?1:-1), randomNumber( 1, 10 ) * ( randomNumber( 0, 1 ) > 0?1:-1 ), randomNumber( 0, 0xffffff ) );
 			addChild( n );
@@ -48,8 +48,8 @@ class Main extends Sprite {
 		//handle move logic, loop through every square and move them
 		for ( i in 0..._amount ) {
 			var n:BouncingSquare = _squares[i];
-			if ( n.x < 0 || n.x + n.width > _stageW ) n.sx *= -1; //constraint horizontal translation
-			if ( n.y < 0 || n.y + n.height > _stageH ) n.sy *= -1; //constraint vertical translation
+			if ( n.x < 0 || n.x + n.width > _stageW ) n.sx *= -1; //constrain horizontal translation
+			if ( n.y < 0 || n.y + n.height > _stageH ) n.sy *= -1; //constrain vertical translation
 			n.x += n.sx;
 			n.y += n.sy;
 		}
