@@ -143,13 +143,9 @@ class Main extends Sprite {
 			uniform sampler2D uImage0;
 			
 			void main(void)
-			{"
-			#if html5
-				+ "gl_FragColor = texture2D (uImage0, vTexCoord);" + 
-			#else
-				+ "gl_FragColor = texture2D (uImage0, vTexCoord).gbar;" + 
-			#end
-			"}";
+			{
+				gl_FragColor = texture2D (uImage0, vTexCoord);
+			}";
 		
 		var fragmentShader = GL.createShader (GL.FRAGMENT_SHADER);
 		GL.shaderSource (fragmentShader, fragmentShaderSource);
@@ -181,7 +177,6 @@ class Main extends Sprite {
 	}
 	
 	
-	
 	private function renderView (rect:Rectangle):Void {
 		
 		GL.viewport (Std.int (rect.x), Std.int (rect.y), Std.int (rect.width), Std.int (rect.height));
@@ -211,8 +206,8 @@ class Main extends Sprite {
 		GL.bindBuffer (GL.ARRAY_BUFFER, texCoordBuffer);
 		GL.vertexAttribPointer (texCoordAttribute, 2, GL.FLOAT, false, 0, 0);
 		
-		GL.uniformMatrix3D (projectionMatrixUniform, false, projectionMatrix);
-		GL.uniformMatrix3D (modelViewMatrixUniform, false, modelViewMatrix);
+		GL.uniformMatrix4fv (projectionMatrixUniform, false, new Float32Array (projectionMatrix.rawData));
+		GL.uniformMatrix4fv (modelViewMatrixUniform, false, new Float32Array (modelViewMatrix.rawData));
 		GL.uniform1i (imageUniform, 0);
 		
 		GL.drawArrays (GL.TRIANGLE_STRIP, 0, 4);
