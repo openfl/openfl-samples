@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Generating Dynamic Sound" package="org.openfl.samples.generatingdynamicsound" version="1.0.0" company="OpenFL Technologies" />
+	<app main="Main" path="Export" file="GeneratingDynamicSound" />
+	
+	<window background="#777777" />
+	
+	<source path="Source" />
+
+        <set name="next" />
+
+        <haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
+	
+</project>

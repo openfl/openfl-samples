@@ -6,6 +6,6 @@
 	"description": "OpenFL samples",
 	"version": "1.3.0",
 	"releasenote": "Improvements for OpenFL 1.3 release",
-	"contributors": [ "singmajesty" ],
+	"contributors": [ "singmajesty", "type1j" ],
 	"dependencies": {}
 }
