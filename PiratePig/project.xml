@@ -11,9 +11,7 @@
 	
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-	
-	<haxedef name="dom" if="firefoxos" />
-	
+		
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
 	
