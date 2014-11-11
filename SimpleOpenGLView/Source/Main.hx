@@ -143,9 +143,13 @@ class Main extends Sprite {
 			uniform sampler2D uImage0;
 			
 			void main(void)
-			{
-				gl_FragColor = texture2D (uImage0, vTexCoord);
-			}";
+			{"
+			#if lime_legacy
+				+ "gl_FragColor = texture2D (uImage0, vTexCoord).gbar;" + 
+			#else
+				+ "gl_FragColor = texture2D (uImage0, vTexCoord);" + 
+			#end
+			"}";
 		
 		var fragmentShader = GL.createShader (GL.FRAGMENT_SHADER);
 		GL.shaderSource (fragmentShader, fragmentShaderSource);
