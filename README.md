@@ -2,44 +2,47 @@ openfl-samples
 ==============
 [![Build Status](https://travis-ci.org/openfl/openfl-samples.png)](https://travis-ci.org/openfl/openfl-samples)
 
-A collection of OpenFL sample projects which are installed using [Lime's](https://github.com/openfl/lime) project functionality.
-
-[Official OpenFL Projects Docs](http://www.openfl.org/documentation/projects/)
+A collection of sample projects, illustrating different OpenFL features.
 
 
 Installation
 ------------
 
+    haxelib install openfl
+    haxelib run openfl setup
+    
+The `openfl-samples` library will be installed automatically. If you need to install it alone, you can use the following command:
+
     haxelib install openfl-samples
 
 
-###Listing Samples
+### Listing Samples
 
-OpenFL includes a number of samples, which you can duplicate to build or to use as a starting point. To list all of the available samples:
+You can browse the project directory, but it is generally simpler to use the following command to list available OpenFL samples:
 
-    lime create openfl
+    openfl create
 
 
-###Creating Samples
+### Creating Samples
 
-If you find a sample you would like to create, you can create it using the "create" command:
+Once you find a sample you would like to create, you can generate a copy using the "create" command:
 
-    lime create openfl:PiratePig
+    openfl create PiratePig
 
-This will create a copy of the sample within the current directory, using the same name as the sample. If you prefer, you can also specify a custom target directory:
+This creates a copy in the current directory, but you can also specify an output directory if you prefer:
 
-    lime create openfl:DisplayingABitmap BitmapTest
+    openfl create DisplayingABitmap BitmapTest
 
 
 Development Builds
 ------------------
 
-Clone the OpenFL repository:
+Clone the openfl-samples repository:
 
     git clone https://github.com/openfl/openfl-samples
 
 
-Tell haxelib where your development copy of OpenFL is installed:
+Tell haxelib where your development copy of openfl-samples is installed:
 
     haxelib dev openfl-samples openfl-samples
 
