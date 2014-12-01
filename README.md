@@ -2,7 +2,7 @@ openfl-samples
 ==============
 [![Build Status](https://travis-ci.org/openfl/openfl-samples.png)](https://travis-ci.org/openfl/openfl-samples)
 
-A collection of sample projects, illustrating different OpenFL features.
+A collection of sample projects illustrating different OpenFL features.
 
 
 Installation
