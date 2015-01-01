@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "2.1.0",
-	"releasenote": "Update for OpenFL 2.1",
+	"version": "2.2.0",
+	"releasenote": "Update for OpenFL 2.2",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
