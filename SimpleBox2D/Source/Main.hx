@@ -9,10 +9,10 @@ import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
-import flash.display.Sprite;
-import flash.display.StageAlign;
-import flash.display.StageScaleMode;
-import flash.events.Event;
+import openfl.display.Sprite;
+import openfl.display.StageAlign;
+import openfl.display.StageScaleMode;
+import openfl.events.Event;
 
 
 class Main extends Sprite {

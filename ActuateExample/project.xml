@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Actuate Example" package="org.openfl.samples.actuateexample" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="Actuate Example" package="org.openfl.samples.actuateexample" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="ActuateExample" />
 	
 	<source path="Source" />

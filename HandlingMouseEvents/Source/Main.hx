@@ -1,10 +1,10 @@
 package;
 
 
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import flash.events.MouseEvent;
 import motion.Actuate;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 import openfl.Assets;
 
 

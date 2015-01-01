@@ -1,11 +1,10 @@
 package;
 
 
-import flash.display.Sprite;
-import flash.text.Font;
-import flash.text.TextField;
-import flash.text.TextFormat;
-import openfl.Assets;
+import openfl.display.Sprite;
+import openfl.text.Font;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 
 
 class Main extends Sprite {
@@ -15,8 +14,7 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var font = Assets.getFont ("assets/KatamotzIkasi.ttf");
-		var format = new TextFormat (font.fontName, 30, 0x7A0026);
+		var format = new TextFormat ("Katamotz Ikasi", 30, 0x7A0026);
 		var textField = new TextField ();
 		
 		textField.defaultTextFormat = format;

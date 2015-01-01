@@ -1,14 +1,14 @@
 package piratepig;
 
 
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.KeyboardEvent;
-import flash.system.Capabilities;
-import flash.Lib;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.KeyboardEvent;
+import openfl.system.Capabilities;
 import openfl.Assets;
+import openfl.Lib;
 
 
 class PiratePig extends Sprite {

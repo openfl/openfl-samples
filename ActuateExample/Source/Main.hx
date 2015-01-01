@@ -1,10 +1,10 @@
 package;
 
 
-import flash.display.Sprite;
-import flash.events.Event;
-import motion.Actuate;
 import motion.easing.Quad;
+import motion.Actuate;
+import openfl.display.Sprite;
+import openfl.events.Event;
 
 
 class Main extends Sprite {

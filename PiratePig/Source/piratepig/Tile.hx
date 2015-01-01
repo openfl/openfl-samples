@@ -1,12 +1,10 @@
 package piratepig;
 
 
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import motion.Actuate;
-import motion.actuators.GenericActuator;
-import motion.easing.Linear;
 import motion.easing.Quad;
+import motion.Actuate;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
 import openfl.Assets;
 
 
@@ -62,10 +60,6 @@ class Tile extends Sprite {
 	
 	
 	public function remove (animate:Bool = true):Void {
-		
-		#if (js && (dom || !openfl_html5))
-		animate = false;
-		#end
 		
 		if (!removed) {
 			

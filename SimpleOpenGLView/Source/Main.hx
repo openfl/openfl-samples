@@ -1,11 +1,11 @@
 package;
 
 
-import flash.display.BitmapData;
-import flash.display.Sprite;
-import flash.geom.Matrix3D;
-import flash.geom.Rectangle;
+import openfl.display.BitmapData;
 import openfl.display.OpenGLView;
+import openfl.display.Sprite;
+import openfl.geom.Matrix3D;
+import openfl.geom.Rectangle;
 import openfl.gl.GL;
 import openfl.gl.GLBuffer;
 import openfl.gl.GLProgram;
@@ -90,7 +90,7 @@ class Main extends Sprite {
 	
 	private function createTexture ():Void {
 		
-		#if html5
+		#if lime
 		var pixelData = bitmapData.getPixels (bitmapData.rect).byteView;
 		#else
 		var pixelData = new UInt8Array (bitmapData.getPixels (bitmapData.rect));
@@ -101,8 +101,8 @@ class Main extends Sprite {
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
 		GL.texImage2D (GL.TEXTURE_2D, 0, GL.RGBA, bitmapData.width, bitmapData.height, 0, GL.RGBA, GL.UNSIGNED_BYTE, pixelData);
-		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
-		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
+		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
+		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
 		GL.bindTexture (GL.TEXTURE_2D, null);
 		
 	}

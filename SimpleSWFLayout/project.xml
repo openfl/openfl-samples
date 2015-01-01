@@ -12,7 +12,7 @@
 	<haxelib name="swf" />
 	<haxelib name="layout" />
 	
-	<library path="Assets/layout.swf" />
+	<library path="Assets/layout.swf" preload="true" />
 	
 	<source path="Assets" />
 	<icon path="Assets/openfl.svg" />

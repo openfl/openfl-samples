@@ -1,11 +1,11 @@
 package;
 
 
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.display.Sprite;
 import motion.easing.Elastic;
 import motion.Actuate;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.display.Sprite;
 import openfl.Assets;
 
 
@@ -32,7 +32,7 @@ class Main extends Sprite {
 		addChild (container);
 		
 		Actuate.tween (container, 3, { alpha: 1 } );
-		Actuate.tween (container, 4, { scaleX: 1, scaleY: 1 } ).delay (0.4).ease (Elastic.easeOut);
+		Actuate.tween (container, 6, { scaleX: 1, scaleY: 1 } ).delay (0.4).ease (Elastic.easeOut);
 		
 	}
 	

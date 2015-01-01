@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="BunnyMark" package="org.openfl.samples.bunnymark" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="BunnyMark" package="org.openfl.samples.bunnymark" version="1.0.0" company="OpenFL" />
 	<app main="BunnyMark" path="Export" file="BunnyMark" />
 	
 	<source path="Source" />

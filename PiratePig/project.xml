@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Pirate Pig" package="org.openfl.samples.piratepig" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="Pirate Pig" package="org.openfl.samples.piratepig" version="1.0.0" company="OpenFL" />
 	<app path="Export" file="PiratePig" main="piratepig.PiratePig" />
 	
 	<window width="800" height="600" if="desktop" />

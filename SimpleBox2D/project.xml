@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Simple Box2D" package="org.openfl.samples.simplebox2d" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="Simple Box2D" package="org.openfl.samples.simplebox2d" version="1.0.0" company="OpenFL" />
 	<app file="SimpleBox2D" main="Main" path="Export" />
 	
 	<source path="Source" />

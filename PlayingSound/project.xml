@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Playing Sound" package="org.openfl.samples.playingsound" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="Playing Sound" package="org.openfl.samples.playingsound" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="PlayingSound" />
 	
 	<window background="#777777" />

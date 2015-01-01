@@ -1,19 +1,19 @@
 package;
 
 
-import flash.display.Sprite;
-import flash.geom.Matrix3D;
-import flash.geom.Rectangle;
-import flash.utils.ByteArray;
-import flash.Lib;
 import openfl.display.OpenGLView;
+import openfl.display.Sprite;
+import openfl.geom.Matrix3D;
+import openfl.geom.Rectangle;
 import openfl.gl.GL;
 import openfl.gl.GLBuffer;
 import openfl.gl.GLProgram;
 import openfl.gl.GLShader;
 import openfl.gl.GLUniformLocation;
+import openfl.utils.ByteArray;
 import openfl.utils.Float32Array;
 import openfl.Assets;
+import openfl.Lib;
 
 
 class Main extends Sprite {

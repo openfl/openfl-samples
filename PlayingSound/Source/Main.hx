@@ -1,14 +1,14 @@
 package;
 
 
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.media.Sound;
-import flash.media.SoundChannel;
-import flash.media.SoundTransform;
-import motion.Actuate;
 import motion.easing.Quad;
+import motion.Actuate;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.MouseEvent;
+import openfl.media.Sound;
+import openfl.media.SoundChannel;
+import openfl.media.SoundTransform;
 import openfl.Assets;
 
 
@@ -29,7 +29,7 @@ class Main extends Sprite {
 		Actuate.defaultEase = Quad.easeOut;
 		
 		background = new Sprite ();
-		background.graphics.beginFill (0x3CB878);
+		background.graphics.beginFill (0x24AFC4);
 		background.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
 		background.alpha = 0.1;
 		background.buttonMode = true;

@@ -1,11 +1,11 @@
 package;
 
 
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.KeyboardEvent;
-import flash.ui.Keyboard;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.KeyboardEvent;
+import openfl.ui.Keyboard;
 import openfl.Assets;
 
 

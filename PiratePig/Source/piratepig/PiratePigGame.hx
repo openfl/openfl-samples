@@ -1,21 +1,21 @@
 package piratepig;
 
 
-import flash.display.Bitmap;
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.filters.BlurFilter;
-import flash.filters.DropShadowFilter;
-import flash.geom.Point;
-import flash.media.Sound;
-import flash.text.TextField;
-import flash.text.TextFormat;
-import flash.text.TextFormatAlign;
-import flash.Lib;
-import motion.Actuate;
 import motion.easing.Quad;
+import motion.Actuate;
+import openfl.display.Bitmap;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.MouseEvent;
+import openfl.filters.BlurFilter;
+import openfl.filters.DropShadowFilter;
+import openfl.geom.Point;
+import openfl.media.Sound;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+import openfl.text.TextFormatAlign;
 import openfl.Assets;
+import openfl.Lib;
 
 
 class PiratePigGame extends Sprite {
@@ -91,16 +91,12 @@ class PiratePigGame extends Sprite {
 			
 			var firstPosition = getPosition (-1, column);
 			
-			#if (!js || openfl_html5)
 			tile.alpha = 0;
-			#end
 			tile.x = firstPosition.x;
 			tile.y = firstPosition.y;
 			
 			tile.moveTo (0.15 * (row + 1), position.x, position.y);
-			#if (!js || openfl_html5)
 			Actuate.tween (tile, 0.3, { alpha: 1 } ).delay (0.15 * (row - 2)).ease (Quad.easeOut);
-			#end
 			
 		} else {
 			
@@ -124,10 +120,6 @@ class PiratePigGame extends Sprite {
 		var defaultFormat = new TextFormat (font.fontName, 60, 0x000000);
 		defaultFormat.align = TextFormatAlign.RIGHT;
 		
-		#if (js && !openfl_html5)
-		defaultFormat.align = TextFormatAlign.LEFT;
-		#end
-		
 		var contentWidth = 75 * NUM_COLUMNS;
 		
 		Score.x = contentWidth - 200;
@@ -136,12 +128,7 @@ class PiratePigGame extends Sprite {
 		Score.selectable = false;
 		Score.defaultTextFormat = defaultFormat;
 		
-		#if (!js || openfl_html5)
 		Score.filters = [ new BlurFilter (1.5, 1.5), new DropShadowFilter (1, 45, 0, 0.2, 5, 5) ];
-		#else
-		Score.y = 0;
-		Score.x += 90;
-		#end
 		
 		Score.embedFonts = true;
 		addChild (Score);
@@ -150,10 +137,8 @@ class PiratePigGame extends Sprite {
 		Background.graphics.beginFill (0xFFFFFF, 0.4);
 		Background.graphics.drawRect (0, 0, contentWidth, 75 * NUM_ROWS);
 		
-		#if (!js || openfl_html5)
 		Background.filters = [ new BlurFilter (10, 10) ];
 		addChild (Background);
-		#end
 		
 		TileContainer.x = 14;
 		TileContainer.y = Background.y + 14;
@@ -418,17 +403,8 @@ class PiratePigGame extends Sprite {
 		scaleX = 1;
 		scaleY = 1;
 		
-		#if (js || !openfl_html5)
-		
-		var currentWidth = 75 * NUM_COLUMNS;
-		var currentHeight = 75 * NUM_ROWS + 85;
-		
-		#else
-		
 		var currentWidth = width;
 		var currentHeight = height;
-		
-		#end
 		
 		if (currentWidth > maxWidth || currentHeight > maxHeight) {
 			

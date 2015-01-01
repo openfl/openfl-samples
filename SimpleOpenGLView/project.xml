@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Simple OpenGLView" package="org.openfl.samples.simpleopenglview" version="1.0.0" company="OpenFL Technologies" />
+	<meta title="Simple OpenGLView" package="org.openfl.samples.simpleopenglview" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="SimpleOpenGLView" />
 	
 	<source path="Source" />
