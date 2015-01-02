@@ -27,9 +27,9 @@ THE SOFTWARE.
 
 Portions of other MIT-license projects are also used, including content that is
 
-    Copyright (c) 2012-2015 Joshua Granick
     Copyright (c) 2011-2012 Philippe Elsass
     Copyright (c) 2010 Iain Lobb
+    Copyright (c) 2009-2015 Joshua Granick
 
 -------
 
