@@ -91,7 +91,7 @@ class Main extends Sprite {
 	private function createTexture ():Void {
 		
 		#if lime
-		var pixelData = bitmapData.getPixels (bitmapData.rect).byteView;
+		var pixelData = @:privateAccess (bitmapData.__image).data;
 		#else
 		var pixelData = new UInt8Array (bitmapData.getPixels (bitmapData.rect));
 		#end
