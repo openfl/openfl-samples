@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/openfl/openfl-samples.svg?style=flat)](https://travis-ci.org/openfl/openfl) [![Haxelib Version](https://img.shields.io/github/tag/openfl/openfl-samples.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/openfl-samples)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE.md) [![Haxelib Version](https://img.shields.io/github/tag/openfl/openfl-samples.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/openfl-samples) [![Build Status](https://img.shields.io/travis/openfl/openfl-samples.svg?style=flat)](https://travis-ci.org/openfl/openfl)
 
 OpenFL Samples
 ==============
