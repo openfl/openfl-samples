@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension>
+	
+	<haxelib name="actuate" if="setup" />
+	<haxelib name="box2d" if="setup" />
+	<haxelib name="layout" if="setup" />
+	<haxelib name="swf" if="setup" />
+	
+</extension>
