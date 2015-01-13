@@ -1,9 +1,8 @@
 package;
 
 
+import layout.LayoutGroup;
 import layout.LayoutItem;
-import layout.LayoutManager;
-import layout.LayoutType;
 import openfl.display.MovieClip;
 import openfl.display.Sprite;
 import openfl.events.Event;
@@ -15,7 +14,7 @@ class Main extends Sprite {
 	
 	
 	private var layout:MovieClip;
-	private var layoutManager:LayoutManager;
+	private var layoutGroup:LayoutGroup;
 	
 	
 	public function new () {
@@ -25,13 +24,13 @@ class Main extends Sprite {
 		var layout = Assets.getMovieClip ("layout:Layout");
 		addChild (layout);
 		
-		layoutManager = new LayoutManager (800, 600);
+		layoutGroup = new LayoutGroup (800, 600);
 		
-		layoutManager.addItem (new LayoutItem (layout.getChildByName ("Background"), LayoutType.STRETCH, LayoutType.STRETCH, false, false));
-		layoutManager.addItem (new LayoutItem (layout.getChildByName ("Header"), LayoutType.STRETCH, LayoutType.TOP, false));
-		layoutManager.addItem (new LayoutItem (layout.getChildByName ("Column"), LayoutType.LEFT, LayoutType.STRETCH, true, false));
+		layoutGroup.addItem (new LayoutItem (layout.getChildByName ("Background"), STRETCH, STRETCH, false, false));
+		layoutGroup.addItem (new LayoutItem (layout.getChildByName ("Header"), STRETCH, TOP, false));
+		layoutGroup.addItem (new LayoutItem (layout.getChildByName ("Column"), LEFT, STRETCH, true, false));
 		
-		layoutManager.resize (stage.stageWidth, stage.stageHeight);
+		layoutGroup.resize (stage.stageWidth, stage.stageHeight);
 		stage.addEventListener (Event.RESIZE, stage_onResize);
 		
 	}
@@ -39,7 +38,7 @@ class Main extends Sprite {
 	
 	private function stage_onResize (event:Event):Void {
 		
-		layoutManager.resize (stage.stageWidth, stage.stageHeight);
+		layoutGroup.resize (stage.stageWidth, stage.stageHeight);
 		
 	}
 	
