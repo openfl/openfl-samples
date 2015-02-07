@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "2.2.1",
-	"releasenote": "Add NyanCat sample, install dependency libraries, refresh SimpleSWFLayout sample",
+	"version": "2.2.2",
+	"releasenote": "Update for layout 1.2.0",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
