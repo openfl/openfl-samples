@@ -20,6 +20,44 @@ import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 
+#if !lime_legacy
+import lime.ui.Gamepad;
+import lime.ui.GamepadButton;
+#end
+
+
+#if !lime_legacy
+class TilesheetTestInput extends lime.app.Module {
+
+
+	public var addBunnies:Void->Void;
+
+	public override function onGamepadButtonDown(gamepad:Gamepad, button:GamepadButton):Void
+	{
+		switch (button)
+		{
+			case A:
+				addBunnies ();
+			case B:
+				addBunnies ();
+				addBunnies ();
+			case X:
+				addBunnies ();
+				addBunnies ();
+				addBunnies ();
+			case Y:
+				addBunnies ();
+				addBunnies ();
+				addBunnies ();
+				addBunnies ();
+			default:
+		}
+	}
+
+
+}
+#end
+
 
 class TilesheetTest extends Sprite {
 	
@@ -38,6 +76,9 @@ class TilesheetTest extends Sprite {
 	private var pirate:Bitmap;
 	private var tilesheet:Tilesheet;
 	private var drawList:Array<Float>;
+	#if !lime_legacy
+	private var inputModule:TilesheetTestInput;
+	#end
 	
 	public function new() 
 	{
@@ -86,6 +127,12 @@ class TilesheetTest extends Sprite {
 		addEventListener(Event.ENTER_FRAME, enterFrame);
 		Lib.current.stage.addEventListener(Event.RESIZE, stage_resize);
 		stage_resize(null);
+
+		#if !lime_legacy
+		inputModule = new TilesheetTestInput();
+		inputModule.addBunnies = function() { counter_click(null); };
+		Lib.application.addModule (inputModule);
+		#end
 	}
 
 	function createCounter()
@@ -125,7 +172,7 @@ class TilesheetTest extends Sprite {
 
 		stage_resize(null);
 	}
-	
+
 	function stage_resize(e) 
 	{
 		maxX = Env.width;
