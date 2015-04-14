@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Text Metrics" package="org.openfl.samples.textmetrics" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="TextMetrics" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
+	
+</project>
