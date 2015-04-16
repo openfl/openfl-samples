@@ -77,18 +77,21 @@ class Main extends Sprite {
 	
 	private function traceLineMetrics(text:TextField):Void
 	{
-		var tlm = text.getLineMetrics(0);
-		
 		var str = "";
 		str += ("x/y = " + text.x + " / " + text.y);
 		str += "\n" + ("width/height = " + text.width + " / " + text.height);
 		str += "\n" + ("textWidth/textHeight = " + text.textWidth + " / " + text.textHeight);
-		str += "\n" + ("line(0) x = " + tlm.x);
-		str += "\n" + ("line(0) width = " + tlm.width);
-		str += "\n" + ("line(0) height = " + tlm.height);
-		str += "\n" + ("line(0) ascent = " + tlm.ascent);
-		str += "\n" + ("line(0) descent = " + tlm.descent);
-		str += "\n" + ("line(0) leading = " + tlm.leading);
+		
+		for (i in 0...text.numLines)
+		{
+			var tlm = text.getLineMetrics(i);
+			str += "\n" + ("line("+i+") x = " + tlm.x);
+			str += "\n" + ("line("+i+") width = " + tlm.width);
+			str += "\n" + ("line("+i+") height = " + tlm.height);
+			str += "\n" + ("line("+i+") ascent = " + tlm.ascent);
+			str += "\n" + ("line("+i+") descent = " + tlm.descent);
+			str += "\n" + ("line("+i+") leading = " + tlm.leading);
+		}
 		
 		out.text = str;
 	}
@@ -210,6 +213,23 @@ class Main extends Sprite {
 			
 			rect.width = 1;
 		
+		//textHeight
+		
+		rect.x =  buffer * 1 / 8;
+		rect.y = buffer + gutter;
+		rect.height = text.textHeight;
+		bmp.fillRect(rect, green);
+		
+			//top line
+			rect.width = bmp.width - gutter * 2;
+			rect.height = 1;
+			bmp.fillRect(rect, red);
+			
+			rect.y = rect.y + text.textHeight;
+			bmp.fillRect(rect, red);
+			
+			rect.width = 1;
+			
 		//ascent
 		
 		rect.x = bmp.width - (buffer * 3 / 4);
