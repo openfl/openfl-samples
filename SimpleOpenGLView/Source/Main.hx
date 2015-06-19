@@ -68,7 +68,7 @@ class Main extends Sprite {
 		
 		vertexBuffer = GL.createBuffer ();
 		GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);
-		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (cast vertices), GL.STATIC_DRAW);
+		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (vertices), GL.STATIC_DRAW);
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 		var texCoords = [
@@ -81,8 +81,8 @@ class Main extends Sprite {
 		];
 		
 		texCoordBuffer = GL.createBuffer ();
-		GL.bindBuffer (GL.ARRAY_BUFFER, texCoordBuffer);	
-		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (cast texCoords), GL.STATIC_DRAW);
+		GL.bindBuffer (GL.ARRAY_BUFFER, texCoordBuffer);
+		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (texCoords), GL.STATIC_DRAW);
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 	}
