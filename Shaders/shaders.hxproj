@@ -19,7 +19,7 @@
     <class path="Z:\HaxeToolkit\libs\lime" />
     <class path="Z:\HaxeToolKit\haxe\lib\actuate\1,8,5" />
     <class path="Source" />
-    <class path="Export\windows\neko\haxe" />
+    <class path="Export\windows\cpp\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -28,7 +28,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)" />
+    <option additional="--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
