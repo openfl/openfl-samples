@@ -17,7 +17,8 @@ class Main extends Sprite {
 		//addChild(new BitmapExample());
 		//addChild(new SpriteExample());
 		//addChild(new FilterExample());
-		addChild(new TilesheetExample());
+		//addChild(new TilesheetExample());
+		addChild(new LightExample());
 		
 	}
 

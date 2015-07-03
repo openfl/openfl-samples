@@ -19,7 +19,7 @@
     <class path="Z:\HaxeToolkit\libs\lime" />
     <class path="Z:\HaxeToolKit\haxe\lib\actuate\1,8,5" />
     <class path="Source" />
-    <class path="Export\windows\cpp\haxe" />
+    <class path="Export\windows\neko\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
