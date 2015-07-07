@@ -29,8 +29,6 @@ class Main extends Sprite {
 		Actuate.defaultEase = Quad.easeOut;
 		
 		background = new Sprite ();
-		background.graphics.beginFill (0x24AFC4);
-		background.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
 		background.alpha = 0.1;
 		background.buttonMode = true;
 		background.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
@@ -44,6 +42,9 @@ class Main extends Sprite {
 		
 		position = 0;
 		
+		resize ();
+		stage.addEventListener (Event.RESIZE, stage_onResize);
+		
 		play ();
 		
 	}
@@ -54,16 +55,8 @@ class Main extends Sprite {
 		if (playing) {
 			
 			playing = false;
-			
-			Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (function () {
 				
-				position = channel.position;
-				channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-				channel.stop ();
-				channel = null;
-				
-			});
-			
+			Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (stop);
 			Actuate.tween (background, fadeOut, { alpha: 0.1 });
 			
 		}
@@ -72,6 +65,8 @@ class Main extends Sprite {
 	
 	
 	private function play (fadeIn:Float = 3):Void {
+		
+		stop ();
 		
 		playing = true;
 		
@@ -92,6 +87,33 @@ class Main extends Sprite {
 	}
 	
 	
+	private function resize ():Void {
+		
+		background.graphics.clear ();
+		background.graphics.beginFill (0x24afc4);
+		background.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
+		
+	}
+	
+	
+	private function stop ():Void {
+		
+		playing = false;
+		
+		Actuate.stop (channel);
+		
+		if (channel != null) {
+			
+			position = channel.position;
+			channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
+			channel.stop ();
+			channel = null;
+			
+		}
+		
+	}
+	
+	
 	
 	
 	// Event Handlers
@@ -107,9 +129,16 @@ class Main extends Sprite {
 	}
 	
 	
+	private function stage_onResize (event:Event):Void {
+		
+		resize ();
+		
+	}
+	
+	
 	private function this_onMouseDown (event:MouseEvent):Void {
 		
-		if (channel == null) {
+		if (!playing) {
 			
 			play ();
 			
