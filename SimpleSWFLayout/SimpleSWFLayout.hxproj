@@ -10,13 +10,13 @@
     <movie height="600" />
     <movie version="3" />
     <movie minorVersion="0" />
-    <movie platform="NME" />
+    <movie platform="OpenFL" />
     <movie background="FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="Source" />
-    <class path="D:\Development\Haxe\openfl\" />
+    <class path="openfl" />
     <class path="Assets" />
     <class path="Export/flash/haxe" />
   </classpaths>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Bouncing Squares" package="org.openfl.samples.bouncingsquares" version="1.0.0" company="OpenFL Technologies" />
+	<app main="Main" path="Export" file="BouncingSquares" />
+	<window width="800" height="600" resizable="false" hardware="true" background="#000000" orientation="landscape" vsync="true" fps="60"/>
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" exclude="*.svg" />
+	<icon path="Assets/openfl.svg" />
+	
+</project>

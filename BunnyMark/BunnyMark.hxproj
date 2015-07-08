@@ -10,7 +10,7 @@
     <movie height="600" />
     <movie version="3" />
     <movie minorVersion="0" />
-    <movie platform="NME" />
+    <movie platform="OpenFL" />
     <movie background="FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
