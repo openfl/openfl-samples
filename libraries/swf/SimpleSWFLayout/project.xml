@@ -4,8 +4,6 @@
 	<meta title="Simple SWF Layout" package="org.openfl.samples.simpleswflayout" version="1.0.0" company="OpenFL" />
 	<app main="Main" path="Export" file="SimpleSWFLayout" />
 	
-	<window width="0" height="0" if="web" />
-	
 	<source path="Source" />
 	
 	<haxelib name="openfl" />
@@ -13,8 +11,5 @@
 	<haxelib name="layout" />
 	
 	<library path="Assets/layout.swf" preload="true" />
-	
-	<source path="Assets" />
-	<icon path="Assets/openfl.svg" />
 	
 </project>

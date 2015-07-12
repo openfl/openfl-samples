@@ -13,7 +13,6 @@
 	
 	<library path="Assets/library.swf" preload="true" />
 	
-	<assets path="Assets" rename="assets" exclude="openfl.svg" />
-	<icon path="Assets/openfl.svg" />
+	<assets path="Assets" rename="assets" />
 	
 </project>

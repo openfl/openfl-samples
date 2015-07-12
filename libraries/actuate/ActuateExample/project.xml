@@ -9,7 +9,6 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	
-	<assets path="Assets" rename="assets" exclude="*.svg" />
-	<icon path="Assets/openfl.svg" />
+	<assets path="Assets" rename="assets" />
 	
 </project>
