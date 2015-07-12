@@ -74,12 +74,14 @@ class Main extends Sprite {
 		bitmap.alpha = 0.4;
 		sprite.addChild (bitmap);
 		
+		#if (flash || html5 || lime_legacy)
 		var bitmapData = new BitmapData (image.width, image.height);
 		bitmapData.draw (sprite);
 		var bitmap = new Bitmap (bitmapData);
 		bitmap.x = 130;
 		bitmap.y = 140;
 		addChild (bitmap);
+		#end
 		
 		var bitmapData = image.clone ();
 		bitmapData.scroll (Std.int (image.width / 2), 0);
