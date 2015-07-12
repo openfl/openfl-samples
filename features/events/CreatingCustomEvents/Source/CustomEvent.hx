@@ -30,7 +30,7 @@ class CustomEvent extends Event {
 	
 	public override function toString ():String {
 		
-		return "[CustomEvent type=\"" + type + "\" customData=" + customData + " bubbles=" + bubbles + " cancelable=" + cancelable + " eventPhase=" + eventPhase + "]";
+		return "[CustomEvent type=\"" + type + "\" bubbles=" + bubbles + " cancelable=" + cancelable + " eventPhase=" + eventPhase + " customData=" + customData + "]";
 		
 	}
 	
