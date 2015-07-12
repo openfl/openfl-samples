@@ -7,10 +7,12 @@
 	<haxelib name="swf" if="setup" />
 	
 	<sample path="demos" />
+	<sample path="features/audio" />
 	<sample path="features/graphics" />
 	<sample path="features/input" />
-	<sample path="features/misc" />
-	<sample path="features/sound" />
 	<sample path="features/text" />
+	<sample path="libraries/actuate" />
+	<sample path="libraries/box2d" />
+	<sample path="libraries/swf" />
 	
 </extension>
