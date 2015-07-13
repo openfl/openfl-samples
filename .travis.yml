@@ -18,6 +18,19 @@ before_install:
   - haxelib dev openfl-samples $(pwd)
 
 script:
+  - haxelib run openfl create ActuateExample
+  - haxelib run openfl create AddingAnimation
+  - haxelib run openfl create AddingText
+  - haxelib run openfl create BunnyMark
+  - haxelib run openfl create DisplayingABitmap
+  - haxelib run openfl create HandlingKeyboardEvents
+  - haxelib run openfl create HandlingMouseEvents
+  - haxelib run openfl create HerokuShaders
+  - haxelib run openfl create PiratePig
+  - haxelib run openfl create PlayingSound
+  - haxelib run openfl create SimpleBox2D
+  - haxelib run openfl create SimpleOpenGLView
+  - haxelib run openfl create SimpleSWFLayout
   - haxelib run openfl build $(pwd)/ActuateExample flash
   - haxelib run openfl build $(pwd)/AddingAnimation flash
   - haxelib run openfl build $(pwd)/AddingText flash
@@ -25,11 +38,11 @@ script:
   - haxelib run openfl build $(pwd)/DisplayingABitmap flash
   - haxelib run openfl build $(pwd)/HandlingKeyboardEvents flash
   - haxelib run openfl build $(pwd)/HandlingMouseEvents flash
-  - haxelib run openfl build $(pwd)/HerokuShaders linux
+  - haxelib run openfl build $(pwd)/HerokuShaders neko
   - haxelib run openfl build $(pwd)/PiratePig flash
   - haxelib run openfl build $(pwd)/PlayingSound flash
   - haxelib run openfl build $(pwd)/SimpleBox2D flash
-  - haxelib run openfl build $(pwd)/SimpleOpenGLView linux
+  - haxelib run openfl build $(pwd)/SimpleOpenGLView neko
   - haxelib run openfl build $(pwd)/SimpleSWFLayout flash
 
 notifications:
