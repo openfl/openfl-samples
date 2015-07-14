@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "2.2.2",
-	"releasenote": "Update for layout 1.2.0",
+	"version": "3.1.0",
+	"releasenote": "Added more samples, minor changes for newer versions of Lime and OpenFL",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
