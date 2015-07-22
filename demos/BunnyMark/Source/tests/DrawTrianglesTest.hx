@@ -254,7 +254,7 @@ class Tilesheet
 	}
 	
 	
-	private function adjustIDs(vec:Vector<Int>, len:UInt)
+	private function adjustIDs(vec:Vector<Int>, len:Int)
 	{
 		if (vec.length != len)
 		{
@@ -269,7 +269,7 @@ class Tilesheet
 	}
 	
 	
-	private function adjustIndices(vec:Vector<Int>, len:UInt)
+	private function adjustIndices(vec:Vector<Int>, len:Int)
 	{
 		if (vec.length != len)
 		{
@@ -300,7 +300,7 @@ class Tilesheet
 	}
 	
 	
-	private function adjustLen(vec:Vector<Float>, len:UInt)
+	private function adjustLen(vec:Vector<Float>, len:Int)
 	{
 		if (vec.length != len)
 		{
@@ -312,7 +312,7 @@ class Tilesheet
 	}
 	
 	
-	private function drawTiles (graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0):Void
+	public function drawTiles (graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0):Void
 	{
 		var useScale = (flags & TILE_SCALE) > 0;
 		var useRotation = (flags & TILE_ROTATION) > 0;
