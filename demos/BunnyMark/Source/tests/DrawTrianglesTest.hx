@@ -9,18 +9,16 @@ import flash.display.StageQuality;
 import flash.display.BlendMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.geom.Matrix;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import openfl.Assets;
+import openfl.Vector;
 import flash.Lib;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
-
-#if !flash
-typedef UInt = Int;
-#end
 
 /**
  * @author Joshua Granick
@@ -46,7 +44,12 @@ class DrawTrianglesTest extends Sprite
 	public function new() 
 	{
 		super ();
-
+		
+		minX = 0;
+		maxX = Lib.current.stage.stageWidth;
+		minY = 0;
+		maxY = Lib.current.stage.stageHeight;
+		
 		gravity = 0.5;
 		incBunnies = 100;
 		#if flash
@@ -57,7 +60,7 @@ class DrawTrianglesTest extends Sprite
 		smooth = true;
 		numBunnies = 500;
 		#end
-
+		
 		bunnyAsset = Assets.getBitmapData("assets/wabbit_alpha.png");
 		pirate = new Bitmap(Assets.getBitmapData("assets/pirate.png"), PixelSnapping.AUTO, true);
 		pirate.scaleX = pirate.scaleY = Env.height / 768;
@@ -87,7 +90,7 @@ class DrawTrianglesTest extends Sprite
 		Lib.current.stage.addEventListener(Event.RESIZE, stage_resize);
 		stage_resize(null);
 	}
-
+	
 	function createCounter()
 	{
 		var format = new TextFormat("_sans", 20, 0, true);
@@ -173,7 +176,7 @@ class DrawTrianglesTest extends Sprite
 			var index = i * TILE_FIELDS;
 			drawList[index] = bunny.position.x;
 			drawList[index + 1] = bunny.position.y;
-			//drawList[index + 2] = 0; // sprite index
+			drawList[index + 2] = 0; // sprite index
 			drawList[index + 3] = bunny.scale;
 			drawList[index + 4] = bunny.rotation;
 			drawList[index + 5] = bunny.alpha;
@@ -189,14 +192,6 @@ class DrawTrianglesTest extends Sprite
 	
 	
 }
-
-
-
-import nme.geom.Matrix;
-import nme.geom.Point;
-import nme.geom.Rectangle;
-import nme.Loader;
-import nme.Vector;
 
 
 class Tilesheet
@@ -264,11 +259,9 @@ class Tilesheet
 		if (vec.length != len)
 		{
 			var prevLen = vec.length;
-			#if flash
 			vec.fixed = false;
 			vec.length = len;
 			vec.fixed = true;
-			#end
 			for(i in prevLen...len)
 				vec[i] = -1;
 		}
@@ -280,24 +273,18 @@ class Tilesheet
 	{
 		if (vec.length != len)
 		{
-			#if flash
 			vec.fixed = false;
-			#end
 			if (vec.length > len)
 			{
-				#if flash
 				vec.length = len;
 				vec.fixed = true;
-				#end
 			}
 			else 
 			{
 				var offset6 = vec.length;
 				var offset4 = cast(4 * offset6 / 6, Int);
-				#if flash
 				vec.length = len;
 				vec.fixed = true;
-				#end
 				while (offset6 < len)
 				{
 					vec[offset6] = 0 + offset4;
@@ -317,36 +304,15 @@ class Tilesheet
 	{
 		if (vec.length != len)
 		{
-			#if flash
 			vec.fixed = false;
 			vec.length = len;
 			vec.fixed = true;
-			#end
 		}
 		return vec;
 	}
 	
 	
-	/**
-	 * Fast method to draw a batch of tiles using a Tilesheet
-	 * 
-	 * The input array accepts the x, y and tile ID for each tile you wish to draw.
-	 * For example, an array of [ 0, 0, 0, 10, 10, 1 ] would draw tile 0 to (0, 0) and
-	 * tile 1 to (10, 10)
-	 * 
-	 * You can also set flags for TILE_SCALE, TILE_ROTATION, TILE_RGB and
-	 * TILE_ALPHA.
-	 * 
-	 * Depending on which flags are active, this is the full order of the array:
-	 * 
-	 * [ x, y, tile ID, scale, rotation, red, green, blue, alpha, x, y ... ]
-	 * 
-	 * @param	graphics		The neash.display.Graphics object to use for drawing
-	 * @param	tileData		An array of all position, ID and optional values for use in drawing
-	 * @param	smooth		(Optional) Whether drawn tiles should be smoothed (Default: false)
-	 * @param	flags		(Optional) Flags to enable scale, rotation, RGB and/or alpha when drawing (Default: 0)
-	 */
-	public function drawTiles (graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0):Void
+	private function drawTiles (graphics:Graphics, tileData:Array<Float>, smooth:Bool = false, flags:Int = 0):Void
 	{
 		var useScale = (flags & TILE_SCALE) > 0;
 		var useRotation = (flags & TILE_ROTATION) > 0;
