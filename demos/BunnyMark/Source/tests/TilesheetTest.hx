@@ -128,7 +128,7 @@ class TilesheetTest extends Sprite {
 		Lib.current.stage.addEventListener(Event.RESIZE, stage_resize);
 		stage_resize(null);
 
-		#if !lime_legacy
+		#if (!lime_legacy && !flash)
 		inputModule = new TilesheetTestInput();
 		inputModule.addBunnies = function() { counter_click(null); };
 		Lib.application.addModule (inputModule);
