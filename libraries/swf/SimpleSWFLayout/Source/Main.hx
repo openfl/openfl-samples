@@ -21,7 +21,7 @@ class Main extends Sprite {
 		
 		super ();
 		
-		var clip = Assets.getMovieClip ("layout:Layout");
+		clip = Assets.getMovieClip ("layout:Layout");
 		addChild (clip);
 		
 		layout = new Layout ();
