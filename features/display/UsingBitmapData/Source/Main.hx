@@ -88,6 +88,13 @@ class Main extends Sprite {
 		bitmap.y = 140;
 		addChild (bitmap);
 		
+		var bitmapData = image.clone ();
+		bitmapData.threshold (image, image.rect, new Point (40, 0), ">", 0x33000000, 0x88333333, 0xFF000000);
+		var bitmap = new Bitmap (bitmapData);
+		bitmap.x = 350;
+		bitmap.y = 140;
+		addChild (bitmap);
+		
 	}
 	
 	
