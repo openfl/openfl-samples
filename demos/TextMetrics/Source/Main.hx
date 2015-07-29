@@ -7,8 +7,10 @@ import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.geom.Point;
+import openfl.Lib;
 import openfl.text.Font;
 import openfl.text.TextField;
+import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
 import openfl.text.TextLineMetrics;
@@ -27,7 +29,7 @@ class Main extends Sprite {
 		
 		super ();
 		
-		openfl.Lib.current.stage.color = 0xA0A0A0;
+		Lib.current.stage.color = 0xA0A0A0;
 		
 		box = new Point(354, 354);
 		field = new Point(box.x - gutter*2, box.y - gutter*2);
@@ -48,7 +50,7 @@ class Main extends Sprite {
 		
 		textField.x = offset.x;
 		textField.y = offset.y;
-		textField.autoSize = openfl.text.TextFieldAutoSize.NONE;
+		textField.autoSize = TextFieldAutoSize.NONE;
 		
 		textField.multiline = true;
 		textField.text = "Wqx\nWqx";
@@ -71,11 +73,24 @@ class Main extends Sprite {
 		out.height = 1000;
 		addChild(out);
 		
-		traceLineMetrics(textField);
+		var white = new Bitmap(new BitmapData(200, 100, false));
+		addChild(white);
+		white.x = 0;
+		white.y = 250;
+		
+		var text2 = new TextField();
+		text2.wordWrap = true;
+		text2.width = 200;
+		text2.y = 250;
+		text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+		
+		addChild(text2);
+		
+		traceLineMetrics(textField, out);
 		drawLineMetrics(bmp.bitmapData, textField);
 	}
 	
-	private function traceLineMetrics(text:TextField):Void
+	private function traceLineMetrics(text:TextField, out:TextField):Void
 	{
 		var str = "";
 		str += ("x/y = " + text.x + " / " + text.y);
