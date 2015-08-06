@@ -19,6 +19,7 @@ class Main extends Sprite {
 	
 	private var alpha_step:Float = 0.25;
 	private var comparison:Bitmap;
+	private var label:TextField;
 	
 	public function new () {
 		
@@ -63,23 +64,32 @@ class Main extends Sprite {
 		}
 	}
 	
+	function getID():String
+	{
+		return
+		#if flash
+			"Flash";
+		#elseif html5
+			"HTML5";
+		#elseif openfl_legacy
+			"Legacy";
+		#else
+			"Next";
+		#end
+	}
+	
 	function identify():Void
 	{
 		var t:TextField = new TextField();
-		#if flash
-			t.text = "Flash";
-		#elseif html5
-			t.text = "HTML5";
-		#elseif openfl_legacy
-			t.text = "Legacy";
-		#else
-			t.text = "Next";
-		#end
+		t.text = getID();
 		addChild(t);
+		label = t;
 	}
 	
 	function compare(str:String):Void
 	{
+		label.text = getID() + " vs " + str;
+		
 		if (comparison == null)
 		{
 			comparison = new Bitmap();
@@ -96,6 +106,7 @@ class Main extends Sprite {
 	
 	function changeAlpha(i:Int):Void
 	{
+		if (comparison == null) return;
 		var a = comparison.alpha + alpha_step * i;
 		     if (a > 1.0) a = 0.0;
 		else if (a < 0.0) a = 1.0;
