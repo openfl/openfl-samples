@@ -44,11 +44,16 @@ class Main extends Sprite {
 			else if (e.keyCode == 49) { // 1
 				compare("flash");
 			}
-			else if (e.keyCode == 50) { // 1
+			else if (e.keyCode == 50) { // 2
 				compare("legacy");
-			}else if (e.keyCode == 38) { // Up
+			}
+			else if (e.keyCode == 51) { // 3
+				compare("html5");
+			}
+			else if (e.keyCode == 38) { // Up
 				changeAlpha(-1);
-			}else if (e.keyCode == 40) { // Down
+			}
+			else if (e.keyCode == 40) { // Down
 				changeAlpha(1);
 			}
 		});
