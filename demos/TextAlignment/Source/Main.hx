@@ -1,6 +1,7 @@
 package;
 
 import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.events.KeyboardEvent;
 import openfl.Lib;
@@ -15,6 +16,9 @@ class Main extends Sprite {
 	
 	private var demo:Int = 0;
 	private static inline var MAX_DEMO:Int = 5;
+	
+	private var alpha_step:Float = 0.25;
+	private var comparison:Bitmap;
 	
 	public function new () {
 		
@@ -35,6 +39,16 @@ class Main extends Sprite {
 					demo = MAX_DEMO;
 				}
 				showDemo(demo);
+			}
+			else if (e.keyCode == 49) { // 1
+				compare("flash");
+			}
+			else if (e.keyCode == 50) { // 1
+				compare("legacy");
+			}else if (e.keyCode == 38) { // Up
+				changeAlpha(-1);
+			}else if (e.keyCode == 40) { // Down
+				changeAlpha(1);
 			}
 		});
 		
@@ -64,6 +78,30 @@ class Main extends Sprite {
 		addChild(t);
 	}
 	
+	function compare(str:String):Void
+	{
+		if (comparison == null)
+		{
+			comparison = new Bitmap();
+		}
+		if (Assets.exists("assets/img/" + str + demo + ".png"))
+		{
+			comparison.bitmapData = Assets.getBitmapData("assets/img/" + str + demo + ".png");
+			if (!contains(comparison))
+			{
+				addChildAt(comparison, 0);
+			}
+		}
+	}
+	
+	function changeAlpha(i:Int):Void
+	{
+		var a = comparison.alpha + alpha_step * i;
+		     if (a > 1.0) a = 0.0;
+		else if (a < 0.0) a = 1.0;
+		comparison.alpha = a;
+	}
+	
 	function showDemo(i:Int):Void
 	{
 		clear();
@@ -79,10 +117,10 @@ class Main extends Sprite {
 		}
 		
 		var t:TextField = new TextField();
-		t.width = 400;
+		t.width = 800;
 		t.y = 20;
 		
-		t.text = "Showing demo (" + i + "), press Left or Right to change";
+		t.text = "Showing demo (" + i + "). Left/Right: Change demo; 1/2: Compare to Flash/Legacy; Up/Down: Change comparison alphas";
 		addChild(t);
 	}
 	
