@@ -22,14 +22,14 @@ class Main extends Sprite {
 		
 		stage.color = 0xA0A0A0;
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:KeyboardEvent) {
-			if (e.keyCode == 187) {		//Plus
+			if (e.keyCode == 39) {		//Right Arrow
 				demo++;
 				if (demo > MAX_DEMO) {
 					demo = 0;
 				}
 				showDemo(demo);
 			}
-			else if (e.keyCode == 189) { //Minus
+			else if (e.keyCode == 37) { //Left Arrow
 				demo--;
 				if (demo < 0) {
 					demo = MAX_DEMO;
@@ -47,7 +47,6 @@ class Main extends Sprite {
 		{
 			removeChild(getChildAt(0));
 		}
-		//removeChildren(0, numChildren-1);
 	}
 	
 	function identify():Void
@@ -83,7 +82,7 @@ class Main extends Sprite {
 		t.width = 400;
 		t.y = 20;
 		
-		t.text = "Showing demo (" + i + "), press - or + to change";
+		t.text = "Showing demo (" + i + "), press Left or Right to change";
 		addChild(t);
 	}
 	
