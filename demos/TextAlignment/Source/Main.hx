@@ -88,7 +88,7 @@ class Main extends Sprite {
 	
 	function font(str:String):String
 	{
-		var f = Assets.getFont(str);
+		var f = Assets.getFont("assets/"+str);
 		if (f != null)
 		{
 			return f.fontName;
@@ -109,10 +109,10 @@ class Main extends Sprite {
 	function demo1():Void
 	{
 		var f = font("LIBERATIONSERIF-REGULAR.TTF");
-		makeText(50, 50, TextFormatAlign.CENTER, 24, f);
-		makeText(50, 175, TextFormatAlign.LEFT, 24, f);
-		makeText(50, 300, TextFormatAlign.RIGHT, 24, f);
-		makeText(50, 425, TextFormatAlign.JUSTIFY, 24, f);
+		makeText(50, 50, TextFormatAlign.CENTER, 24, f, true);
+		makeText(50, 175, TextFormatAlign.LEFT, 24, f, true);
+		makeText(50, 300, TextFormatAlign.RIGHT, 24, f, true);
+		makeText(50, 425, TextFormatAlign.JUSTIFY, 24, f, true);
 	}
 	
 	function demo2():Void
@@ -126,33 +126,34 @@ class Main extends Sprite {
 	function demo3():Void
 	{
 		var f = font("LIBERATIONSERIF-REGULAR.TTF");
-		makeText(50, 50, TextFormatAlign.CENTER, 12, f);
-		makeText(50, 175, TextFormatAlign.LEFT, 12, f);
-		makeText(50, 300, TextFormatAlign.RIGHT, 12, f);
-		makeText(50, 425, TextFormatAlign.JUSTIFY, 12, f);
+		makeText(50, 50, TextFormatAlign.CENTER, 12, f, true);
+		makeText(50, 175, TextFormatAlign.LEFT, 12, f, true);
+		makeText(50, 300, TextFormatAlign.RIGHT, 12, f, true);
+		makeText(50, 425, TextFormatAlign.JUSTIFY, 12, f, true);
 	}
 	
 	function demo4():Void
 	{
 		var f = font("nokiafc22.ttf");
-		makeText(50, 50, TextFormatAlign.CENTER, 8, f);
-		makeText(50, 175, TextFormatAlign.LEFT, 8, f);
-		makeText(50, 300, TextFormatAlign.RIGHT, 8, f);
-		makeText(50, 425, TextFormatAlign.JUSTIFY, 8, f);
+		makeText(50, 50, TextFormatAlign.CENTER, 8, f, true);
+		makeText(50, 175, TextFormatAlign.LEFT, 8, f, true);
+		makeText(50, 300, TextFormatAlign.RIGHT, 8, f, true);
+		makeText(50, 425, TextFormatAlign.JUSTIFY, 8, f, true);
 	}
 	
 	function demo5():Void
 	{
 		var f = font("nokiafc22.ttf");
-		makeText(50, 50, TextFormatAlign.CENTER, 16, f);
-		makeText(50, 175, TextFormatAlign.LEFT, 16, f);
-		makeText(50, 300, TextFormatAlign.RIGHT, 16, f);
-		makeText(50, 425, TextFormatAlign.JUSTIFY, 16, f);
+		makeText(50, 50, TextFormatAlign.CENTER, 16, f, true);
+		makeText(50, 175, TextFormatAlign.LEFT, 16, f, true);
+		makeText(50, 300, TextFormatAlign.RIGHT, 16, f, true);
+		makeText(50, 425, TextFormatAlign.JUSTIFY, 16, f, true);
 	}
 	
-	function makeText(X:Float, Y:Float, align, size:Int, ?font:String)
+	function makeText(X:Float, Y:Float, align, size:Int, ?font:String, ?embed:Bool=false)
 	{
 		var textField = new TextField();
+		textField.embedFonts = embed;
 		textField.defaultTextFormat = new TextFormat(font, size, 0x000000, null, null, null, null, null, align, null, null, null, 20);
 		
 		textField.selectable = false;
