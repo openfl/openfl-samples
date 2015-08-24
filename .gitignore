@@ -1,2 +1,10 @@
 .DS_Store
 Export*
+demos/TextAlignment/Assets/VERDANA.TTF
+demos/TextAlignment/Assets/VERDANAB.TTF
+demos/TextAlignment/Assets/VERDANAI.TTF
+demos/TextAlignment/Assets/VERDANAZ.TTF
+demos/TextMetrics/Assets/nokiafc22.eot
+demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.eot
+demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.svg
+demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.woff
