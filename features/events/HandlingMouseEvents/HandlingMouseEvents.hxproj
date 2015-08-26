@@ -2,48 +2,48 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="project.xml" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="3" />
+    <movie version="1" />
     <movie minorVersion="0" />
-    <movie platform="NME" />
+    <movie platform="Lime" />
     <movie background="#FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
+    <class path="D:\Development\Haxe\openfl" />
+    <class path="D:\Development\Haxe\lime" />
+    <class path="D:\Development\Haxe\actuate" />
     <class path="Source" />
+    <class path="Export\windows\neko\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="" />
+    <option directives="openfl=3.2.0&#xA;lime=2.5.1&#xA;actuate=1.8.6&#xA;openfl-next&#xA;tools=2.5.1&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop" />
     <option flashStrict="False" />
-    <option mainClass="io.nme.samples.HandlingMouseEvents" />
+    <option noInlineOnDebug="False" />
+    <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="" />
+    <option additional="--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="nme" />
-    <library name="actuate" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <!-- example: <compile path="..." /> -->
   </compileTargets>
-  <!-- Assets to embed into the output SWF -->
-  <library>
-    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
-  </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>"$(CompilerPath)/haxelib" run lime build "$(OutputFile)" $(TargetBuild) -$(BuildConfig) -Dfdb</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

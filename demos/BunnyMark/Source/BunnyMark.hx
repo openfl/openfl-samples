@@ -30,14 +30,14 @@ class BunnyMark extends Sprite {
 		Env.setup ();
 		Lib.current.scaleX = Lib.current.scaleY = Env.screenDensity;
 		
-		background = new Background ();
-		background.texture = Assets.getBitmapData ("assets/grass.png");
-		background.cols = 8;
-		background.rows = 12;
-		background.x = -50;
-		background.y = -50;
-		background.setSize (Env.width + 100, Env.height + 100);
-		addChild (background);
+		//background = new Background ();
+		//background.texture = Assets.getBitmapData ("assets/grass.png");
+		//background.cols = 8;
+		//background.rows = 12;
+		//background.x = -50;
+		//background.y = -50;
+		//background.setSize (Env.width + 100, Env.height + 100);
+		//addChild (background);
 		
 		addChild (new TilesheetTest ());
 		//addChild (new DrawRectTest ()); // Does not support alpha or rotation
@@ -71,19 +71,19 @@ class BunnyMark extends Sprite {
 	
 	private function stage_onResize (event:Event):Void {
 		
-		if (Env.width > Env.height) {
-			
-			background.cols = 12;
-			background.rows = 8;
-			
-		} else {
-			
-			background.cols = 8;
-			background.rows = 12;
-			
-		}
-		
-		background.setSize (Env.width + 100, Env.height + 100);
+		//if (Env.width > Env.height) {
+			//
+			//background.cols = 12;
+			//background.rows = 8;
+			//
+		//} else {
+			//
+			//background.cols = 8;
+			//background.rows = 12;
+			//
+		//}
+		//
+		//background.setSize (Env.width + 100, Env.height + 100);
 		
 	}
 	

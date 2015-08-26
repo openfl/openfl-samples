@@ -62,7 +62,7 @@ class TilesheetTestInput extends lime.app.Module {
 class TilesheetTest extends Sprite {
 	
 	
-	private var tf:TextField;	
+	private var tf:TextField;
 	private var numBunnies:Int;
 	private var incBunnies:Int;
 	private var smooth:Bool;
@@ -100,9 +100,9 @@ class TilesheetTest extends Sprite {
 		#end
 
 		bunnyAsset = Assets.getBitmapData("assets/wabbit_alpha.png");
-		pirate = new Bitmap(Assets.getBitmapData("assets/pirate.png"), PixelSnapping.AUTO, true);
-		pirate.scaleX = pirate.scaleY = Env.height / 768;
-		addChild(pirate);
+		//pirate = new Bitmap(Assets.getBitmapData("assets/pirate.png"), PixelSnapping.AUTO, true);
+		//pirate.scaleX = pirate.scaleY = Env.height / 768;
+		//addChild(pirate);
 		
 		bunnies = new Array<Bunny>();
 		drawList = new Array<Float>();
@@ -117,8 +117,8 @@ class TilesheetTest extends Sprite {
 			bunny.position = new Point();
 			bunny.speedX = Math.random() * 5;
 			bunny.speedY = (Math.random() * 5) - 2.5;
-			bunny.scale = 0.3 + Math.random();
-			bunny.rotation = 15 - Math.random() * 30;
+			//bunny.scale = 0.3 + Math.random();
+			//bunny.rotation = 15 - Math.random() * 30;
 			bunnies.push(bunny);
 		}
 		
@@ -164,12 +164,12 @@ class TilesheetTest extends Sprite {
 			bunny.position = new Point();
 			bunny.speedX = Math.random() * 5;
 			bunny.speedY = (Math.random() * 5) - 2.5;
-			bunny.scale = 0.3 + Math.random();
-			bunny.rotation = 15 - Math.random() * 30;
+			//bunny.scale = 0.3 + Math.random();
+			//bunny.rotation = 15 - Math.random() * 30;
 			bunnies.push (bunny);
 		}
 		numBunnies = more;
-
+		trace (numBunnies);
 		stage_resize(null);
 	}
 
@@ -185,7 +185,7 @@ class TilesheetTest extends Sprite {
 	{	
 		graphics.clear ();
 
-		var TILE_FIELDS = 6; // x+y+index+scale+rotation+alpha
+		var TILE_FIELDS = 3; // x+y+index+scale+rotation+alpha
 		var bunny;
 	 	for (i in 0...numBunnies)
 		{
@@ -193,7 +193,7 @@ class TilesheetTest extends Sprite {
 			bunny.position.x += bunny.speedX;
 			bunny.position.y += bunny.speedY;
 			bunny.speedY += gravity;
-			bunny.alpha = 0.3 + 0.7 * bunny.position.y / maxY;
+			//bunny.alpha = 0.3 + 0.7 * bunny.position.y / maxY;
 			
 			if (bunny.position.x > maxX)
 			{
@@ -221,17 +221,16 @@ class TilesheetTest extends Sprite {
 			drawList[index] = bunny.position.x;
 			drawList[index + 1] = bunny.position.y;
 			//drawList[index + 2] = 0; // sprite index
-			drawList[index + 3] = bunny.scale;
-			drawList[index + 4] = bunny.rotation;
-			drawList[index + 5] = bunny.alpha;
+			//drawList[index + 3] = bunny.scale;
+			//drawList[index + 4] = bunny.rotation;
+			//drawList[index + 5] = bunny.alpha;
 		}
 		
-		tilesheet.drawTiles(graphics, drawList, smooth, 
-			Tilesheet.TILE_SCALE | Tilesheet.TILE_ROTATION | Tilesheet.TILE_ALPHA);
+		tilesheet.drawTiles(graphics, drawList, smooth);
 
-		var t = Lib.getTimer();
-		pirate.x = Std.int((Env.width - pirate.width) * (0.5 + 0.5 * Math.sin(t / 3000)));
-		pirate.y = Std.int(Env.height - pirate.height + 70 - 30 * Math.sin(t / 100));
+		//var t = Lib.getTimer();
+		//pirate.x = Std.int((Env.width - pirate.width) * (0.5 + 0.5 * Math.sin(t / 3000)));
+		//pirate.y = Std.int(Env.height - pirate.height + 70 - 30 * Math.sin(t / 100));
 	}
 	
 	

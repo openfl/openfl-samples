@@ -99,11 +99,11 @@ class Background extends Sprite {
 		graphics.clear ();
 		graphics.beginBitmapFill (texture);
 		
-		#if !html5
-		graphics.drawTriangles (vertices, indices, uvt);
-		#else
+		//#if !html5
+		//graphics.drawTriangles (vertices, indices, uvt);
+		//#else
 		graphics.drawRect (0, 0, stage.stageWidth * 1.2, stage.stageHeight * 1.2); // flat
-		#end
+		//#end
 		
 		graphics.endFill ();
 		
