@@ -2,7 +2,9 @@
 <project>
 	
 	<meta title="BunnyMark" package="org.openfl.samples.bunnymark" version="1.0.0" company="OpenFL" />
-	<app main="BunnyMark" path="Export" file="BunnyMark" />
+	<app main="Main" path="Export" file="BunnyMark" />
+	
+	<window width="800" height="600" fps="61" />
 	
 	<source path="Source" />
 	
