@@ -5,7 +5,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.display.Tile;
 import openfl.display.TileMap;
-import openfl.display.TileMapLayer;
+import openfl.display.TileLayer;
 import openfl.display.TileSet;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
@@ -23,8 +23,8 @@ class Main extends Sprite {
 	private var minY:Int;
 	private var maxX:Int;
 	private var maxY:Int;
+	private var tileLayer:TileLayer;
 	private var tileMap:TileMap;
-	private var tileMapLayer:TileMapLayer;
 	private var tileSet:TileSet;
 	
 	
@@ -44,10 +44,10 @@ class Main extends Sprite {
 		tileSet = new TileSet (bitmapData);
 		tileSet.addRect (bitmapData.rect);
 		
-		tileMapLayer = new TileMapLayer (tileSet);
+		tileLayer = new TileLayer (tileSet);
 		
 		tileMap = new TileMap (stage.stageWidth, stage.stageHeight);
-		tileMap.addLayer (tileMapLayer);
+		tileMap.addLayer (tileLayer);
 		addChild (tileMap);
 		
 		fps = new FPS ();
@@ -74,7 +74,7 @@ class Main extends Sprite {
 		bunny.speedX = Math.random () * 5;
 		bunny.speedY = (Math.random () * 5) - 2.5;
 		bunnies.push (bunny);
-		tileMapLayer.addTile (bunny);
+		tileLayer.addTile (bunny);
 		
 	}
 	
