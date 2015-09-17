@@ -4,9 +4,9 @@ package;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.display.Tile;
-import openfl.display.TileMap;
-import openfl.display.TileLayer;
-import openfl.display.TileSet;
+import openfl.display.Tilemap;
+import openfl.display.TilemapLayer;
+import openfl.display.Tileset;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.Assets;
@@ -19,13 +19,13 @@ class Main extends Sprite {
 	private var bunnies:Array<Bunny>;
 	private var fps:FPS;
 	private var gravity:Float;
+	private var layer:TilemapLayer;
 	private var minX:Int;
 	private var minY:Int;
 	private var maxX:Int;
 	private var maxY:Int;
-	private var tileLayer:TileLayer;
-	private var tileMap:TileMap;
-	private var tileSet:TileSet;
+	private var tilemap:Tilemap;
+	private var tileset:Tileset;
 	
 	
 	public function new () {
@@ -41,14 +41,14 @@ class Main extends Sprite {
 		gravity = 0.5;
 		
 		var bitmapData = Assets.getBitmapData ("assets/wabbit_alpha.png");
-		tileSet = new TileSet (bitmapData);
-		tileSet.addRect (bitmapData.rect);
+		tileset = new Tileset (bitmapData);
+		tileset.addRect (bitmapData.rect);
 		
-		tileLayer = new TileLayer (tileSet);
+		layer = new TilemapLayer (tileset);
 		
-		tileMap = new TileMap (stage.stageWidth, stage.stageHeight);
-		tileMap.addLayer (tileLayer);
-		addChild (tileMap);
+		tilemap = new Tilemap (stage.stageWidth, stage.stageHeight);
+		tilemap.addLayer (layer);
+		addChild (tilemap);
 		
 		fps = new FPS ();
 		addChild (fps);
@@ -74,7 +74,7 @@ class Main extends Sprite {
 		bunny.speedX = Math.random () * 5;
 		bunny.speedY = (Math.random () * 5) - 2.5;
 		bunnies.push (bunny);
-		tileLayer.addTile (bunny);
+		layer.addTile (bunny);
 		
 	}
 	
