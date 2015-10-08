@@ -1,10 +1,12 @@
 .DS_Store
 Export*
+demos/PiratePig/Assets/fonts/FreebooterUpdated.eot
+demos/PiratePig/Assets/fonts/FreebooterUpdated.svg
+demos/PiratePig/Assets/fonts/FreebooterUpdated.woff
 demos/TextAlignment/Assets/VERDANA.TTF
 demos/TextAlignment/Assets/VERDANAB.TTF
 demos/TextAlignment/Assets/VERDANAI.TTF
 demos/TextAlignment/Assets/VERDANAZ.TTF
-demos/TextMetrics/Assets/nokiafc22.eot
-demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.eot
-demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.svg
-demos/TextMetrics/Assets/LIBERATIONSERIF-REGULAR.woff
+demos/TextMetrics/Assets/LiberationSerif-Regular.eot
+demos/TextMetrics/Assets/LiberationSerif-Regular.svg
+demos/TextMetrics/Assets/LiberationSerif-Regular.woff

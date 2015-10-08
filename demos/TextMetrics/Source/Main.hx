@@ -1,21 +1,16 @@
 package;
 
-
-import haxe.remoting.FlashJsConnection;
-import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.geom.Point;
-import openfl.Lib;
-import openfl.text.Font;
+import openfl.geom.Rectangle;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
-import openfl.text.TextLineMetrics;
-import openfl.geom.Rectangle;
-
+import openfl.Assets;
+import openfl.Lib;
 
 class Main extends Sprite {
 	
@@ -24,7 +19,7 @@ class Main extends Sprite {
 	private var box:Point;
 	private var field:Point;
 	private var out:TextField;
-		
+	
 	public function new () {
 		
 		super ();
@@ -33,7 +28,7 @@ class Main extends Sprite {
 		
 		box = new Point(354, 354);
 		field = new Point(box.x - gutter*2, box.y - gutter*2);
-	
+		
 		var offset = new Point(300, 100);
 		
 		var font = Assets.getFont("assets/LIBERATIONSERIF-REGULAR.TTF");
@@ -323,6 +318,5 @@ class Main extends Sprite {
 			
 			rect.height = 1;
 	}
-	
 	
 }
