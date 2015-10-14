@@ -31,7 +31,7 @@ class Main extends Sprite {
 		
 		var offset = new Point(300, 100);
 		
-		var font = Assets.getFont("assets/LIBERATIONSERIF-REGULAR.TTF");
+		var font = Assets.getFont("assets/LiberationSerif-Regular.ttf");
 		
 		var format = new TextFormat(font.fontName, 120, 0x000000, null, null, null, null, null, TextFormatAlign.CENTER, null, null, null, 20);
 		var textField = new TextField();
