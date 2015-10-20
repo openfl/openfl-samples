@@ -147,6 +147,16 @@ class Main extends Sprite {
         ringPath.x = 160;
         ringPath.y = 380;
         addChild(ringPath);
+
+        var polyline = new Sprite ();
+        polyline.graphics.lineStyle (10, 0x24AFC4);
+        polyline.graphics.moveTo(0, 50);
+        polyline.graphics.lineTo (150, 0);
+        polyline.graphics.lineTo (300, 50);
+        polyline.graphics.lineStyle();
+        polyline.x = 300;
+        polyline.y = 380;
+        addChild (polyline);
 	}
 	
 	
