@@ -41,8 +41,7 @@ class GamepadVisual extends Sprite
 		}
 	}
 	
-	#if lime_legacy
-	public function makeLegacy(deviceId:Int)
+	public function makeJoystick(deviceId:Int)
 	{
 		id = deviceId;
 		var arr = [];
@@ -52,8 +51,12 @@ class GamepadVisual extends Sprite
 		}
 		arr = arr.concat(
 		[
+			#if lime_legacy
 			{type:"hat",  id:0, label:"hat.x" },
 			{type:"hat",  id:1, label:"hat.y" },
+			#else
+			{type:"hat",  id:0, label:"hat" },
+			#end
 			{type:"ball", id:0, label:"ball.x" },
 			{type:"ball", id:1, label:"ball.y" }
 		]);
@@ -62,13 +65,12 @@ class GamepadVisual extends Sprite
 				{type:"button", id:i, label:"bn"+Std.string(i) }
 			);
 		}
-		fromArray(30, 0, 0, 1, arr, "Device #" + deviceId);
+		fromArray(30, 0, 0, 1, arr, "Joystick #" + deviceId);
 	}
 	
-	#else
-	public function makeNext(device:GameInputDevice)
+	#if (flash || html5 || !lime_legacy)
+	public function makeGamepad(device:GameInputDevice)
 	{
-		trace("Makenext(" + device+")");
 		id = Std.parseInt(device.id);
 		var arr = [];
 		for (i in 0...device.numControls)
