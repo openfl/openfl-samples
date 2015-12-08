@@ -1,18 +1,18 @@
 package;
 
-
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.Assets;
 import openfl.display.StageDisplayState;
-#if lime_legacy
-	import openfl.events.JoystickEvent;
-#else
+
+#if (html5 || flash || !lime_legacy)
 	import openfl.events.GameInputEvent;
 	import openfl.ui.GameInput;
 	import openfl.ui.GameInputDevice;
 	import openfl.ui.GameInputControl;
+#else
+	import openfl.events.JoystickEvent;
 #end
 import openfl.events.Event;
 import openfl.events.KeyboardEvent;
@@ -23,11 +23,10 @@ class Main extends Sprite {
 	private var visuals:Array<GamepadVisual>;
 	private var traceAxis:Bool = true;
 	
-	#if !lime_legacy
+	#if (html5 || flash || !lime_legacy)
 		private static var _gameInput:GameInput = new GameInput();
 		private var devices:Array<GameInputDevice>;
 	#end
-	
 	
 	public function new () {
 		
@@ -40,7 +39,7 @@ class Main extends Sprite {
 			}
 		});
 		
-		#if !lime_legacy
+		#if (html5 || flash || !lime_legacy)
 		devices = [];
 		_gameInput.addEventListener(GameInputEvent.DEVICE_ADDED, onDeviceAdded);
 		_gameInput.addEventListener(GameInputEvent.DEVICE_REMOVED, onDeviceRemoved);
@@ -64,15 +63,25 @@ class Main extends Sprite {
 		}
 		for (visual in visuals)
 		{
-			if (visual.id == id) return;
+			if (visual.id == id) {
+				return;
+			}
 		}
 		
 		var visual = new GamepadVisual();
 		
-		#if !lime_legacy
+		#if (html5 || flash || !lime_legacy)
 		for (device in devices)
 		{
-			if (device.id == Std.string(id))
+			var did = (device.id);
+			#if flash
+			var temp = device.id.split("_");
+			if (temp != null && temp.length > 0)
+			{
+				did = (temp[temp.length - 1]);
+			}
+			#end
+			if (Std.string(id) == did)
 			{
 				visual.makeNext(device);
 				visuals.push(visual);
@@ -140,7 +149,7 @@ class Main extends Sprite {
 		#end
 	}
 	
-	#if !lime_legacy
+	#if (html5 || flash || !lime_legacy)
 	
 	private function onEnter(event:Event):Void
 	{
@@ -160,7 +169,9 @@ class Main extends Sprite {
 	
 	private function onDeviceAdded(event:GameInputEvent):Void
 	{
+		trace("on added");
 		var device = event.device;
+		device.enabled = true;
 		print("Added    device: " + device.name + " id: " + device.id + " enabled: " + device.enabled);
 		addDevice(device);
 	}
@@ -168,6 +179,7 @@ class Main extends Sprite {
 	private function onDeviceRemoved(event:GameInputEvent):Void
 	{
 		var device = event.device;
+		device.enabled = false;
 		print("Removed  device: " + device.name + " id: " + device.id);
 		removeDevice(device);
 	}
@@ -281,5 +293,4 @@ class Main extends Sprite {
 		return s;
 	}
 	#end
-	
 }

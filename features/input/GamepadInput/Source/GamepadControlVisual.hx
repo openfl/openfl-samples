@@ -37,11 +37,6 @@ class GamepadControlVisual extends Sprite
 		value = 0;
 	}
 	
-	override function get_height():Float 
-	{
-		return bmp.height;
-	}
-	
 	private function set_value(f:Float):Float
 	{
 		value = f;

@@ -68,6 +68,7 @@ class GamepadVisual extends Sprite
 	#else
 	public function makeNext(device:GameInputDevice)
 	{
+		trace("Makenext(" + device+")");
 		id = Std.parseInt(device.id);
 		var arr = [];
 		for (i in 0...device.numControls)
