@@ -225,6 +225,8 @@ class Main extends Sprite {
 	
 	
 	
+	#if !openfl_legacy
+	
 	private function gameInput_onDeviceAdded (event:GameInputEvent):Void {
 		
 		var device = event.device;
@@ -306,6 +308,8 @@ class Main extends Sprite {
 		
 	}
 	
+	#end
+	
 	
 	#if openfl_legacy
 	
@@ -367,6 +371,8 @@ class Main extends Sprite {
 	#end
 	
 	
+	#if !openfl_legacy
+	
 	private function this_onEnterFrame (event:Event):Void {
 		
 		for (device in gamepads) {
@@ -385,6 +391,8 @@ class Main extends Sprite {
 		}
 		
 	}
+	
+	#end
 	
 	
 }
