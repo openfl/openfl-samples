@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Gamepad Input" package="org.openfl.samples.gamepadinput" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="GamepadInput" />
+	<set name="SWF_VERSION" value="11.8" />
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="format" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
