@@ -28,7 +28,8 @@ class Main extends Sprite {
 	
 	#if (html5 || flash || !lime_legacy)
 		private static var _gameInput:GameInput = new GameInput();
-		private var devices:Array<GameInputDevice>;
+		private var gamepads:Array<GameInputDevice>;
+		private var joysticks:Array<Joystick>;
 	#end
 	
 	public function new () {
@@ -46,21 +47,15 @@ class Main extends Sprite {
 		});
 		
 		#if (html5 || flash || !lime_legacy)
-		devices = [];
+		
+		gamepads = [];
 		_gameInput.addEventListener(GameInputEvent.DEVICE_ADDED, onDeviceAdded);
 		_gameInput.addEventListener(GameInputEvent.DEVICE_REMOVED, onDeviceRemoved);
 		
 		stage.addEventListener(Event.ENTER_FRAME, onEnter);
 		
-		stage.application.addModule(new JoystickModule(
-			onJoystickAxisMove,
-			onJoystickButtonDown,
-			onJoystickButtonUp,
-			onJoystickConnect,
-			onJoystickDisconnect,
-			onJoystickHatMove,
-			onJoystickTrackballMove
-		));
+		joysticks = [];
+		Joystick.onConnect.add(onJoystickConnect);
 		
 		#else
 		stage.addEventListener(JoystickEvent.AXIS_MOVE, handleAxisMove);
@@ -89,7 +84,7 @@ class Main extends Sprite {
 		
 		var visual = new GamepadVisual();
 		
-		for (device in devices)
+		for (device in gamepads)
 		{
 			var did = (device.id);
 			#if flash
@@ -206,7 +201,7 @@ class Main extends Sprite {
 	
 	private function onEnter(event:Event):Void
 	{
-		for (device in devices)
+		for (device in gamepads)
 		{
 			for (i in 0...device.numControls)
 			{
@@ -236,23 +231,20 @@ class Main extends Sprite {
 		removeDevice(device);
 	}
 	
+	public function onJoystickConnect (joystick:Joystick):Void { 
+		addJoystick(joystick);
+	};
 	public function onJoystickAxisMove (joystick:Joystick, axis:Int, value:Float):Void { 
 		updateVisual(joystick.id, "axis", axis, value);
 	};
-	public function onJoystickButtonDown (joystick:Joystick, button:Int):Void { 
-		trace("b joystick id = " + joystick.id + " button = " + button);
+	public function onJoystickButtonDown (joystick:Joystick, button:Int):Void {
 		updateVisual(joystick.id, "button", button, 1);
 	};
-	public function onJoystickButtonUp (joystick:Joystick, button:Int):Void { 
+	public function onJoystickButtonUp (joystick:Joystick, button:Int):Void {
 		updateVisual(joystick.id, "button", button, 0);
 	};
-	public function onJoystickConnect (joystick:Joystick):Void { 
-		trace("c joystick id = " + joystick.id);
-		addJoystickVisual(joystick.id);
-	};
 	public function onJoystickDisconnect (joystick:Joystick):Void { 
-		trace("d joystick id = " + joystick.id);
-		removeVisual(joystick.id, joystickVisuals);
+		removeJoystick(joystick);
 	};
 	public function onJoystickHatMove (joystick:Joystick, hat:Int, position:JoystickHatPosition):Void { 
 		updateVisual(joystick.id, "hat", hat, position);
@@ -261,26 +253,68 @@ class Main extends Sprite {
 		updateVisual(joystick.id, "ball", trackball, value);
 	};
 	
+	private function addJoystick(joystick:Joystick)
+	{
+		for (j in joysticks)
+		{
+			if (j.id == joystick.id)
+			{
+				return;
+			}
+		}
+		
+		joystick.onAxisMove.add     (function(axis:Int, value:Float)                { onJoystickAxisMove     (joystick, axis, value);       } );
+		joystick.onButtonDown.add   (function(button:Int)                           { onJoystickButtonDown   (joystick, button);            } );
+		joystick.onButtonUp.add     (function(button:Int)                           { onJoystickButtonUp     (joystick, button);            } );
+		joystick.onHatMove.add      (function(hat:Int,position:JoystickHatPosition) { onJoystickHatMove      (joystick, hat, position);     } );
+		joystick.onTrackballMove.add(function(trackball:Int, value:Float)           { onJoystickTrackballMove(joystick, trackball, value);  } );
+		joystick.onDisconnect.add   (function()                                     { onJoystickDisconnect   (joystick);                    } );
+		
+		joysticks.push(joystick);
+		addJoystickVisual(joystick.id);
+	}
+	
+	private function removeJoystick(joystick:Joystick)
+	{
+		for (j in joysticks)
+		{
+			if (j.id == joystick.id)
+			{
+				joysticks.remove(j);
+				
+				for (l in j.onAxisMove.listeners)      { j.onAxisMove.remove(l);      }
+				for (l in j.onButtonDown.listeners)    { j.onButtonDown.remove(l);    }
+				for (l in j.onButtonUp.listeners)      { j.onButtonUp.remove(l);      }
+				for (l in j.onHatMove.listeners)       { j.onHatMove.remove(l);       }
+				for (l in j.onTrackballMove.listeners) { j.onTrackballMove.remove(l); }
+				for (l in j.onDisconnect.listeners)    { j.onDisconnect.remove(l);    }
+				
+				removeVisual(joystick.id, joystickVisuals);
+				return;
+			}
+		}
+	}
+	
 	private function addDevice(device:GameInputDevice)
 	{
-		for (d in devices)
+		for (d in gamepads)
 		{
 			if (d.id == device.id)
 			{
 				return;
 			}
 		}
-		devices.push(device);
+		gamepads.push(device);
 		addGamepadVisual(Std.parseInt(device.id));
 	}
 	
 	private function removeDevice(device:GameInputDevice)
 	{
-		for (d in devices)
+		for (d in gamepads)
 		{
 			if (d.id == device.id)
 			{
-				devices.remove(d);
+				gamepads.remove(d);
 				removeVisual(Std.parseInt(device.id), gamepadVisuals);
 				return;
 			}
