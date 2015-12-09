@@ -33,7 +33,7 @@ class Main extends Sprite {
 	}
 	
 	
-	public function addGamepadVisual (id:Int):Void {
+	public function addGamepadVisual (id:String):Void {
 		
 		for (visual in gamepadVisuals) {
 			
@@ -49,26 +49,8 @@ class Main extends Sprite {
 		
 		for (device in gamepads) {
 			
-			var did = (device.id);
-			
-			#if flash
-			
-			var temp = device.id.split ("_");
-			
-			if (temp != null && temp.length > 0) {
-				
-				did = (temp[temp.length - 1]);
-				
-			}
-			
-			#end
-			
-			if (Std.string (id) == did) {
-				
-				visual.makeGamepad (device);
-				gamepadVisuals.push (visual);
-				
-			}
+			visual.makeGamepad (device);
+			gamepadVisuals.push (visual);
 			
 		}
 		
@@ -95,7 +77,7 @@ class Main extends Sprite {
 	}
 	
 	
-	public function removeVisual (id:Int, visuals:Array<GamepadVisual>):Void {
+	public function removeVisual (id:String, visuals:Array<GamepadVisual>):Void {
 		
 		for (visual in visuals) {
 			
@@ -121,7 +103,7 @@ class Main extends Sprite {
 	}
 	
 	
-	public function updateGamepadVisual (deviceId:Int, type:String, id:Int, value:Float):Void {
+	public function updateGamepadVisual (deviceId:String, type:String, id:Int, value:Float):Void {
 		
 		for (visual in gamepadVisuals) {
 			
@@ -149,7 +131,7 @@ class Main extends Sprite {
 		device.enabled = true;
 		
 		gamepads.push (device);
-		addGamepadVisual (Std.parseInt (device.id));
+		addGamepadVisual (device.id);
 		
 	}
 	
@@ -160,7 +142,7 @@ class Main extends Sprite {
 		device.enabled = false;
 		
 		gamepads.remove (device);
-		removeVisual (Std.parseInt (device.id), gamepadVisuals);
+		removeVisual (device.id, gamepadVisuals);
 		
 	}
 	
@@ -175,9 +157,8 @@ class Main extends Sprite {
 				var temp = control.id.split ("_");
 				var type = temp[0].toLowerCase ();
 				var id   = Std.parseInt (temp[1]);
-				var deviceId = Std.parseInt (device.id);
 				
-				updateGamepadVisual (deviceId, type, id, control.value);
+				updateGamepadVisual (device.id, type, id, control.value);
 				
 			}
 		}

@@ -12,7 +12,7 @@ import openfl.text.TextField;
  */
 class GamepadVisual extends Sprite
 {
-	public var id:Int;
+	public var id:String;
 	private var controls:Array<GamepadControlVisual>;
 	private var label:TextField;
 	
@@ -41,7 +41,7 @@ class GamepadVisual extends Sprite
 		}
 	}
 	
-	public function makeJoystick(deviceId:Int)
+	public function makeJoystick(deviceId:String)
 	{
 		id = deviceId;
 		var arr = [];
@@ -71,7 +71,7 @@ class GamepadVisual extends Sprite
 	#if (flash || html5 || !lime_legacy)
 	public function makeGamepad(device:GameInputDevice)
 	{
-		id = Std.parseInt(device.id);
+		id = device.id;
 		var arr = [];
 		for (i in 0...device.numControls)
 		{
