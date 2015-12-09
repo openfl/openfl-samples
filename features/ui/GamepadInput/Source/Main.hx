@@ -188,9 +188,9 @@ class Main extends Sprite {
 	}
 	
 	
-	public function updateVisual (deviceId:Int, type:String, id:Int, value:Float):Void {
+	public function updateGamepadVisual (deviceId:Int, type:String, id:Int, value:Float):Void {
 		
-		for (visual in joystickVisuals) {
+		for (visual in gamepadVisuals) {
 			
 			if (visual.id == deviceId) {
 				
@@ -200,7 +200,12 @@ class Main extends Sprite {
 			
 		}
 		
-		for (visual in gamepadVisuals) {
+	}
+	
+	
+	public function updateJoystickVisual (deviceId:Int, type:String, id:Int, value:Float):Void {
+		
+		for (visual in joystickVisuals) {
 			
 			if (visual.id == deviceId) {
 				
@@ -244,22 +249,21 @@ class Main extends Sprite {
 	
 	public function joystick_onAxisMove (joystick:Joystick, axis:Int, value:Float):Void {
 		
-		updateVisual (joystick.id, "axis", axis, value);
+		updateJoystickVisual (joystick.id, "axis", axis, value);
 		
 	}
 	
 	
 	public function joystick_onButtonDown (joystick:Joystick, button:Int):Void {
 		
-		trace (joystick.id, button);
-		updateVisual (joystick.id, "button", button, 1);
+		updateJoystickVisual (joystick.id, "button", button, 1);
 		
 	}
 	
 	
 	public function joystick_onButtonUp (joystick:Joystick, button:Int):Void {
 		
-		updateVisual (joystick.id, "button", button, 0);
+		updateJoystickVisual (joystick.id, "button", button, 0);
 		
 	}
 	
@@ -291,14 +295,14 @@ class Main extends Sprite {
 	
 	public function joystick_onHatMove (joystick:Joystick, hat:Int, position:JoystickHatPosition):Void {
 		
-		updateVisual (joystick.id, "hat", hat, position);
+		updateJoystickVisual (joystick.id, "hat", hat, position);
 		
 	}
 	
 	
 	public function joystick_onTrackballMove (joystick:Joystick, trackball:Int, value:Float):Void {
 		
-		updateVisual (joystick.id, "ball", trackball, value);
+		updateJoystickVisual (joystick.id, "ball", trackball, value);
 		
 	}
 	
@@ -311,7 +315,7 @@ class Main extends Sprite {
 		
 		for (i in 0...event.axis.length) {
 			
-			updateVisual (event.device, "axis", i, event.axis[i]);
+			updateJoystickVisual (event.device, "axis", i, event.axis[i]);
 			
 		}
 		
@@ -319,22 +323,22 @@ class Main extends Sprite {
 	
 	private function legacy_onJoystickBallMove (event:JoystickEvent):Void {
 		
-		updateVisual (event.device, "ball", 0, event.x);
-		updateVisual (event.device, "ball", 1, event.y);
+		updateJoystickVisual (event.device, "ball", 0, event.x);
+		updateJoystickVisual (event.device, "ball", 1, event.y);
 		
 	}
 	
 	
 	private function legacy_onJoystickButtonDown (event:JoystickEvent):Void {
 		
-		updateVisual (event.device, "button", event.id, 1);
+		updateJoystickVisual (event.device, "button", event.id, 1);
 		
 	}
 	
 	
 	private function legacy_onJoystickButtonUp (event:JoystickEvent):Void {
 		
-		updateVisual (event.device, "button", event.id, 0);
+		updateJoystickVisual (event.device, "button", event.id, 0);
 		
 	}
 	
@@ -355,8 +359,8 @@ class Main extends Sprite {
 	
 	private function legacy_onJoystickHatMove(event:JoystickEvent):Void {
 		
-		updateVisual (event.device, "hat", 0, event.x);
-		updateVisual (event.device, "hat", 1, event.y);
+		updateJoystickVisual (event.device, "hat", 0, event.x);
+		updateJoystickVisual (event.device, "hat", 1, event.y);
 		
 	}
 	
@@ -375,7 +379,7 @@ class Main extends Sprite {
 				var id   = Std.parseInt (temp[1]);
 				var deviceId = Std.parseInt (device.id);
 				
-				updateVisual (deviceId, type, id, control.value);
+				updateGamepadVisual (deviceId, type, id, control.value);
 				
 			}
 		}
