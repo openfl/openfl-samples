@@ -222,8 +222,6 @@ class Main extends Sprite {
 	
 	private function gameInput_onDeviceAdded (event:GameInputEvent):Void {
 		
-		trace ("DEVICE ADDED");
-		
 		var device = event.device;
 		device.enabled = true;
 		
@@ -234,8 +232,6 @@ class Main extends Sprite {
 	
 	
 	private function gameInput_onDeviceRemoved (event:GameInputEvent):Void {
-		
-		trace ("DEVICE REMOVED");
 		
 		var device = event.device;
 		device.enabled = false;
@@ -270,11 +266,6 @@ class Main extends Sprite {
 	
 	public function joystick_onConnect (joystick:Joystick):Void {
 		
-		trace ("CONNECT JOYSTICK");
-		
-		trace (joystick);
-		joystick.onButtonDown.add (function (id) { trace ("DOWN: " + id); } );
-		
 		joystick.onAxisMove.add (joystick_onAxisMove.bind (joystick));
 		joystick.onButtonDown.add (joystick_onButtonDown.bind (joystick));
 		joystick.onButtonUp.add (joystick_onButtonUp.bind (joystick));
@@ -290,8 +281,6 @@ class Main extends Sprite {
 	
 	
 	public function joystick_onDisconnect (joystick:Joystick):Void {
-		
-		trace ("DISCONNECT JOYSTICK");
 		
 		joysticks.remove (joystick);
 		
