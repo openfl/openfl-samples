@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Hello Triangle" package="org.openfl.samples.hellotriangle" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="HelloTriangle" />
+	
+	<source path="Source" />
+	
+	<set name="webgl" if="html5" />
+	<haxedef name="webgl" if="html5" />
+	
+	<haxelib name="openfl" />
+	
+</project>
