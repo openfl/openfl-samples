@@ -63,7 +63,7 @@ class Main extends Sprite {
 	
 	private function compare(bmp:BitmapData, list:Array<BitmapData>):Array<BitmapData> {
 		
-		var result = -5;
+		var result:Dynamic = -5;
 		var resultBmps = [];
 		for (other in list) {
 			
