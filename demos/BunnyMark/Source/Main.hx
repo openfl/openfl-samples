@@ -10,7 +10,8 @@ import openfl.display.Tileset;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.Assets;
-
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 
 class Main extends Sprite {
 	
@@ -53,6 +54,15 @@ class Main extends Sprite {
 		fps = new FPS ();
 		addChild (fps);
 		
+		bunniesCounter = new TextField();
+		bunniesCounter.selectable = false;
+		bunniesCounter.mouseEnabled = false;
+		bunniesCounter.defaultTextFormat = fps.defaultTextFormat;
+		bunniesCounter.text = 'Bunnies: 0';
+		bunniesCounter.x = stage.stageWidth - bunniesCounter.width - 10;
+		bunniesCounter.y = fps.y;
+		addChild(bunniesCounter);
+		
 		stage.addEventListener (MouseEvent.MOUSE_DOWN, stage_onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
 		stage.addEventListener (Event.ENTER_FRAME, stage_onEnterFrame);
@@ -75,6 +85,9 @@ class Main extends Sprite {
 		bunny.speedY = (Math.random () * 5) - 2.5;
 		bunnies.push (bunny);
 		layer.addTile (bunny);
+		
+		bunniesCounter.text = 'Bunnies: ${Std.string(bunnies.length)}';
+		bunniesCounter.x = stage.stageWidth - bunniesCounter.width - 10;
 		
 	}
 	
