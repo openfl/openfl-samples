@@ -27,7 +27,7 @@ class Main extends Sprite {
 	private var maxY:Int;
 	private var tilemap:Tilemap;
 	private var tileset:Tileset;
-	
+	private var bunniesCounter:TextField;
 	
 	public function new () {
 		
