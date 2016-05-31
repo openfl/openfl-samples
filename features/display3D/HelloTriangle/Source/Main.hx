@@ -2,7 +2,6 @@ package;
 
 
 import openfl.display.Sprite;
-import openfl.display3D._shaders.AGLSLShaderUtils;
 import openfl.display3D.Context3D;
 import openfl.display3D.Context3DProgramType;
 import openfl.display3D.Context3DVertexBufferFormat;
@@ -13,6 +12,7 @@ import openfl.events.Event;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
 import openfl.geom.Vector3D;
+import openfl.utils.AGALMiniAssembler;
 import openfl.Lib;
 import openfl.Vector;
 
@@ -54,12 +54,14 @@ class Main extends Sprite {
 		indexBuffer = context3D.createIndexBuffer (3);
 		indexBuffer.uploadFromVector (indices, 0, 3);
 		
-		var vertexShader = AGLSLShaderUtils.createShader (Context3DProgramType.VERTEX,
+		var assembler = new AGALMiniAssembler ();
+		
+		var vertexShader = assembler.assemble (Context3DProgramType.VERTEX,
 			"m44 op, va0, vc0\n" +
 			"mov v0, va1"
 		);
 		
-		var fragmentShader = AGLSLShaderUtils.createShader (Context3DProgramType.FRAGMENT,
+		var fragmentShader = assembler.assemble (Context3DProgramType.FRAGMENT,
 			"mov oc, v0"
 		);
 		
