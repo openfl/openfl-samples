@@ -66,11 +66,7 @@ class Main extends Sprite {
 		program = context3D.createProgram ();
 		program.upload (vertexShader, fragmentShader);
 		
-		#if flash
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		#else
-		context3D.setRenderMethod (this_onEnterFrame);
-		#end
 		
 	}
 	
@@ -92,9 +88,9 @@ class Main extends Sprite {
 		
 		context3D.clear (1, 1, 1, 1);
 		
+		context3D.setProgram (program);
 		context3D.setVertexBufferAt (0, vertexBuffer, 0, Context3DVertexBufferFormat.FLOAT_3);
 		context3D.setVertexBufferAt (1, vertexBuffer, 3, Context3DVertexBufferFormat.FLOAT_3);
-		context3D.setProgram (program);
 		
 		var m = new Matrix3D ();
 		m.appendRotation (Lib.getTimer () / 40, Vector3D.Z_AXIS);

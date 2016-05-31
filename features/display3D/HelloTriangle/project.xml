@@ -6,9 +6,6 @@
 	
 	<source path="Source" />
 	
-	<set name="webgl" if="html5" />
-	<haxedef name="webgl" if="html5" />
-	
 	<haxelib name="openfl" />
 	
 </project>
