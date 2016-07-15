@@ -2,7 +2,6 @@ package;
 
 
 import openfl.display.Tile;
-import openfl.display.TileData;
 
 
 class Bunny extends Tile {
@@ -12,9 +11,9 @@ class Bunny extends Tile {
 	public var speedY:Float;
 	
 	
-	public function new (tileData:TileData) {
+	public function new () {
 		
-		super (tileData);
+		super (0);
 		
 	}
 	
