@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "3.3.1",
-	"releasenote": "Work on TileMap BunnyMark, minor changes",
+	"version": "4.0.0",
+	"releasenote": "Added HelloTriangle, updated Tilemap use",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
