@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Stage3D Camera" package="org.openfl.samples.stage3dcamera" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="Stage3DCamera" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
