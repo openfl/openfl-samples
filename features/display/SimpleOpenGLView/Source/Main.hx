@@ -1,18 +1,18 @@
 package;
 
 
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLBuffer;
+import lime.graphics.opengl.GLProgram;
+import lime.graphics.opengl.GLTexture;
+import lime.graphics.opengl.GLUniformLocation;
+import lime.utils.Float32Array;
+import lime.utils.UInt8Array;
 import openfl.display.BitmapData;
 import openfl.display.OpenGLView;
 import openfl.display.Sprite;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
-import openfl.gl.GL;
-import openfl.gl.GLBuffer;
-import openfl.gl.GLProgram;
-import openfl.gl.GLTexture;
-import openfl.gl.GLUniformLocation;
-import openfl.utils.Float32Array;
-import openfl.utils.UInt8Array;
 import openfl.Assets;
 
 
@@ -90,17 +90,11 @@ class Main extends Sprite {
 	
 	private function createTexture ():Void {
 		
-		#if lime
-		var pixelData = bitmapData.image.data;
-		#else
-		var pixelData = new UInt8Array (bitmapData.getPixels (bitmapData.rect));
-		#end
-		
 		texture = GL.createTexture ();
 		GL.bindTexture (GL.TEXTURE_2D, texture);
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
-		GL.texImage2D (GL.TEXTURE_2D, 0, GL.RGBA, bitmapData.width, bitmapData.height, 0, GL.RGBA, GL.UNSIGNED_BYTE, pixelData);
+		GL.texImage2D (GL.TEXTURE_2D, 0, GL.RGBA, bitmapData.width, bitmapData.height, 0, GL.RGBA, GL.UNSIGNED_BYTE, bitmapData.image.data);
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
 		GL.texParameteri (GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
 		GL.bindTexture (GL.TEXTURE_2D, null);
@@ -136,19 +130,19 @@ class Main extends Sprite {
 		
 		var fragmentShaderSource = 
 			
-			#if !desktop
-			"precision mediump float;" +
-			#end
-			"varying vec2 vTexCoord;
+			"#ifdef GL_ES
+			precision mediump float;
+			#endif
+			varying vec2 vTexCoord;
 			uniform sampler2D uImage0;
 			
 			void main(void)
 			{"
-			#if lime_legacy
-				+ "gl_FragColor = texture2D (uImage0, vTexCoord).gbar;" + 
-			#else
+				#if (js && html5)
 				+ "gl_FragColor = texture2D (uImage0, vTexCoord);" + 
-			#end
+				#else
+				+ "gl_FragColor = texture2D (uImage0, vTexCoord).bgra;" + 
+				#end
 			"}";
 		
 		var fragmentShader = GL.createShader (GL.FRAGMENT_SHADER);
@@ -187,6 +181,9 @@ class Main extends Sprite {
 		
 		GL.clearColor (1.0, 1.0, 1.0, 1.0);
 		GL.clear (GL.COLOR_BUFFER_BIT);
+		
+		GL.enable (GL.BLEND);
+		GL.blendFunc (GL.ONE, GL.ONE_MINUS_SRC_ALPHA);
 		
 		var positionX = (stage.stageWidth - bitmapData.width) / 2;
 		var positionY = (stage.stageHeight - bitmapData.height) / 2;
