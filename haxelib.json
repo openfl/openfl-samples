@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "4.0.0",
-	"releasenote": "Added HelloTriangle, updated Tilemap use",
+	"version": "4.2.0",
+	"releasenote": "Fixed SimpleOpenGLView, added gamepad support to PiratePig",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
