@@ -372,6 +372,7 @@ class PiratePigGame extends Sprite {
 		
 		tiles = new Array <Array <Tile>> ();
 		usedTiles = new Array <Tile> ();
+		gamepads = new Array ();
 		
 		for (row in 0...NUM_ROWS) {
 			
@@ -395,6 +396,7 @@ class PiratePigGame extends Sprite {
 		gameInput = new GameInput ();
 		gameInput.addEventListener (GameInputEvent.DEVICE_ADDED, gameInput_onDeviceAdded);
 		gameInput.addEventListener (GameInputEvent.DEVICE_REMOVED, gameInput_onDeviceRemoved);
+		
 	}
 	
 	
