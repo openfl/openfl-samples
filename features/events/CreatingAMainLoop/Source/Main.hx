@@ -34,7 +34,7 @@ class Main extends Sprite {
 	
 	private function update (deltaTime:Int):Void {
 		
-		if (sprite.x + sprite.width >= stage.stageWidth || sprite.x <= 0) {
+		if (sprite.x + sprite.width >= stage.stageWidth || sprite.x < 0) {
 			
 			speed *= -1;
 			

@@ -6,6 +6,7 @@ import motion.Actuate;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import openfl.events.GameInputEvent;
 import openfl.events.MouseEvent;
 import openfl.filters.BlurFilter;
 import openfl.filters.DropShadowFilter;
@@ -14,12 +15,11 @@ import openfl.media.Sound;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
-import openfl.Assets;
-import openfl.Lib;
 import openfl.ui.GameInput;
-import openfl.events.GameInputEvent;
 import openfl.ui.GameInputDevice;
 import openfl.ui.GameInputControl;
+import openfl.Assets;
+import openfl.Lib;
 
 
 class PiratePigGame extends Sprite {
@@ -30,9 +30,9 @@ class PiratePigGame extends Sprite {
 	
 	private static var tileImages = [ "images/game_bear.png", "images/game_bunny_02.png", "images/game_carrot.png", "images/game_lemon.png", "images/game_panda.png", "images/game_piratePig.png" ];
 	
+	private var Background:Sprite;
 	private var Cursor:Bitmap;
 	private var CursorHighlight:Bitmap;
-	private var Background:Sprite;
 	private var IntroSound:Sound;
 	private var Logo:Bitmap;
 	private var Score:TextField;
@@ -45,13 +45,14 @@ class PiratePigGame extends Sprite {
 	public var currentScore:Int;
 	
 	private var cacheMouse:Point;
+	private var cursorPosition:Point;
 	private var gameInput:GameInput;
 	private var gamepads:Array<GamepadWrapper>;
 	private var needToCheckMatches:Bool;
 	private var selectedTile:Tile;
 	private var tiles:Array <Array <Tile>>;
 	private var usedTiles:Array <Tile>;
-	private var cursorLoc:Point;
+	
 	
 	public function new () {
 		
@@ -163,8 +164,12 @@ class PiratePigGame extends Sprite {
 		Cursor.y = TileContainer.y;
 		CursorHighlight.x = Cursor.x;
 		CursorHighlight.y = Cursor.y;
-		addChild(Cursor);
-		addChild(CursorHighlight);
+		addChild (Cursor);
+		addChild (CursorHighlight);
+		
+		gameInput = new GameInput ();
+		gameInput.addEventListener (GameInputEvent.DEVICE_ADDED, gameInput_onDeviceAdded);
+		gameInput.addEventListener (GameInputEvent.DEVICE_REMOVED, gameInput_onDeviceRemoved);
 		
 	}
 	
@@ -325,39 +330,6 @@ class PiratePigGame extends Sprite {
 	}
 	
 	
-	private function checkInput():Void {
-		
-		for (gamepad in gamepads) {
-			
-			gamepad.update();
-			
-		}
-		
-		if (gamepads.length > 0) {
-			
-			var holdA = gamepads[0].a.pressed;
-			
-			if (gamepads[0].up.justPressed)
-				moveCursor(0, -1, holdA);
-			else if (gamepads[0].down.justPressed)
-				moveCursor(0, 1, holdA);
-			else if (gamepads[0].left.justPressed)
-				moveCursor(-1, 0, holdA);
-			else if (gamepads[0].right.justPressed)
-				moveCursor(1, 0, holdA);
-			
-			Cursor.visible = !holdA;
-			CursorHighlight.visible = holdA;
-		}
-		else {
-			
-			Cursor.visible = false;
-			CursorHighlight.visible = false;
-		}
-		
-	}
-	
-	
 	private function getPosition (row:Int, column:Int):Point {
 		
 		return new Point (column * (57 + 16), row * (57 + 16));
@@ -393,39 +365,38 @@ class PiratePigGame extends Sprite {
 		Cursor = new Bitmap (Assets.getBitmapData ("images/cursor.png"));
 		CursorHighlight = new Bitmap (Assets.getBitmapData ("images/cursor_highlight.png"));
 		
-		gameInput = new GameInput ();
-		gameInput.addEventListener (GameInputEvent.DEVICE_ADDED, gameInput_onDeviceAdded);
-		gameInput.addEventListener (GameInputEvent.DEVICE_REMOVED, gameInput_onDeviceRemoved);
-		
 	}
 	
 	
-	private function moveCursor(X:Int, Y:Int, HoldA:Bool):Void {
+	private function moveCursor (x:Int, y:Int, aPressed:Bool):Void {
 		
-		if (cursorLoc == null) cursorLoc = new Point();
+		if (cursorPosition == null) cursorPosition = new Point();
 		
-		var oldTile = tiles[Std.int(cursorLoc.y)][Std.int(cursorLoc.x)];
+		var oldTile = tiles[Std.int (cursorPosition.y)][Std.int (cursorPosition.x)];
 		
-		cursorLoc.x += X;
-		cursorLoc.y += Y;
+		cursorPosition.x += x;
+		cursorPosition.y += y;
 		
-		if (cursorLoc.y > tiles.length - 1) cursorLoc.y = tiles.length - 1;
-		if (cursorLoc.x > tiles[0].length -1 ) cursorLoc.x = tiles[0].length - 1;
-		if (cursorLoc.y < 0) cursorLoc.y = 0;
-		if (cursorLoc.x < 0) cursorLoc.x = 0;
+		if (cursorPosition.y > tiles.length - 1) cursorPosition.y = tiles.length - 1;
+		if (cursorPosition.x > tiles[0].length - 1) cursorPosition.x = tiles[0].length - 1;
+		if (cursorPosition.y < 0) cursorPosition.y = 0;
+		if (cursorPosition.x < 0) cursorPosition.x = 0;
 		
-		var theTile = tiles[Std.int(cursorLoc.y)][Std.int(cursorLoc.x)];
-		if (theTile != null)
-		{
-			Cursor.x = TileContainer.x + theTile.x;
-			Cursor.y = TileContainer.y + theTile.y;
+		var tile = tiles[Std.int (cursorPosition.y)][Std.int (cursorPosition.x)];
+		
+		if (tile != null) {
+			
+			Cursor.x = TileContainer.x + tile.x;
+			Cursor.y = TileContainer.y + tile.y;
 			CursorHighlight.x = Cursor.x;
 			CursorHighlight.y = Cursor.y;
 			
-			if (HoldA && oldTile != theTile && oldTile != null)
-			{
-				swapTile(oldTile, Std.int(cursorLoc.y), Std.int(cursorLoc.x));
+			if (aPressed && oldTile != tile && oldTile != null) {
+				
+				swapTile (oldTile, Std.int (cursorPosition.y), Std.int (cursorPosition.x));
+				
 			}
+			
 		}
 		
 	}
@@ -556,11 +527,85 @@ class PiratePigGame extends Sprite {
 	}
 	
 	
+	private function updateGamepadInput ():Void {
+		
+		for (gamepad in gamepads) {
+			
+			gamepad.update ();
+			
+		}
+		
+		if (gamepads.length > 0) {
+			
+			var aPressed = gamepads[0].a.pressed;
+			
+			if (gamepads[0].up.justPressed) {
+				
+				moveCursor (0, -1, aPressed);
+				
+			} else if (gamepads[0].down.justPressed) {
+				
+				moveCursor(0, 1, aPressed);
+				
+			} else if (gamepads[0].left.justPressed) {
+				
+				moveCursor( -1, 0, aPressed);
+				
+			} else if (gamepads[0].right.justPressed) {
+				
+				moveCursor(1, 0, aPressed);
+				
+			}
+			
+			Cursor.visible = !aPressed;
+			CursorHighlight.visible = aPressed;
+			
+		} else {
+			
+			Cursor.visible = false;
+			CursorHighlight.visible = false;
+			
+		}
+		
+	}
+	
+	
 	
 	
 	// Event Handlers
 	
 	
+	
+	
+	
+	private function gameInput_onDeviceAdded (event:GameInputEvent):Void {
+		
+		var device = event.device;
+		device.enabled = true;
+		
+		gamepads.push (new GamepadWrapper (device));
+		
+	}
+	
+	
+	private function gameInput_onDeviceRemoved (event:GameInputEvent):Void {
+		
+		var device = event.device;
+		device.enabled = false;
+		
+		for (gamepad in gamepads) {
+			
+			if (gamepad.device == device) {
+				
+				gamepad.destroy ();
+				gamepads.remove (gamepad);
+				return;
+				
+			}
+			
+		}
+		
+	}
 	
 	
 	private function stage_onMouseUp (event:MouseEvent):Void {
@@ -612,42 +657,10 @@ class PiratePigGame extends Sprite {
 		
 	}
 	
-	private function gameInput_onDeviceAdded (event:GameInputEvent):Void {
-		
-		var device = event.device;
-		device.enabled = true;
-		
-		if (gamepads == null)
-		{
-			gamepads = [];
-		}
-		
-		gamepads.push (new GamepadWrapper(device));
-		
-	}
-	
-	
-	private function gameInput_onDeviceRemoved (event:GameInputEvent):Void {
-		
-		var device = event.device;
-		device.enabled = false;
-		
-		for (gamepad in gamepads)
-		{
-			if (gamepad.device == device)
-			{
-				gamepad.destroy();
-				gamepads.remove(gamepad);
-				return;
-			}
-		}
-		
-	}
-	
 	
 	private function this_onEnterFrame (event:Event):Void {
 		
-		checkInput();
+		updateGamepadInput ();
 		
 		if (needToCheckMatches) {
 			

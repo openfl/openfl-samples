@@ -218,8 +218,6 @@ class Main extends Sprite {
 		
 		while (mipWidth > 0 && mipHeight > 0) {
 			
-			trace (mipWidth, mipHeight);
-			
 			mipImage.draw (originalImage, scaleTransform, null, null, null, true);
 			texture.uploadFromBitmapData (mipImage, mipLevel);
 			scaleTransform.scale (0.5, 0.5);

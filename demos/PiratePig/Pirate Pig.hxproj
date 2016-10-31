@@ -15,20 +15,22 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="D:\Development\Haxe\openfl" />
-    <class path="D:\Development\Haxe\lime" />
-    <class path="D:\Development\Haxe\actuate" />
+    <class path="C:\Development\Haxe\openfl" />
+    <class path="C:\Development\Haxe\lime" />
+    <class path="C:\Development\Haxe\actuate" />
     <class path="Source" />
-    <class path="Export\html5\haxe" />
+    <class path="C:\Development\Haxe\openfl\externs\core\openfl" />
+    <class path="C:\Development\Haxe\openfl\externs\extras" />
+    <class path="Export\html5\release\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=3.2.2&#xA;lime=2.5.2&#xA;actuate=1.8.6&#xA;openfl-next&#xA;tools=2.5.2&#xA;no-compilation&#xA;openfl-html5&#xA;canvas&#xA;lime-html5&#xA;html5&#xA;web&#xA;html5" />
+    <option directives="openfl=4.4.0&#xA;lime=3.4.0&#xA;actuate=1.8.7&#xA;tools=3.4.0&#xA;howlerjs&#xA;no-compilation&#xA;openfl-html5&#xA;lime-html5&#xA;html5&#xA;web&#xA;html5&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-    <option additional="--remap flash:openfl&#xA;--macro allowPackage(&quot;flash&quot;)" />
+    <option additional="--macro openfl._internal.utils.ExtraParams.include()&#xA;--macro lime.Lib.extraParams()&#xA;--remap flash:openfl" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
