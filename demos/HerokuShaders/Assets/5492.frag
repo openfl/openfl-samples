@@ -114,8 +114,8 @@ void main() {
 	offset =  - complex_mul(offset, mousePolar) +time*0.0;
 	vec2 uv_distorted = uv;
 	
-	float filter = smoothcircle( -mouse + 0.5 +uv_distorted, 0.15, 64.);
-	uv_distorted = complex_mul(((uv_distorted - 0.5)*mix(2., 12., filter)), mousePolar) + offset;
+	float _filter = smoothcircle( -mouse + 0.5 +uv_distorted, 0.15, 64.);
+	uv_distorted = complex_mul(((uv_distorted - 0.5)*mix(2., 12., _filter)), mousePolar) + offset;
 	
 	vec2 p = uv_distorted;
   vec2 g1, g2;

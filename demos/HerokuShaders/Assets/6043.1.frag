@@ -82,8 +82,8 @@ void main() {
 	offset =  - complex_mul(offset, mousePolar) +time*0.0;
 	vec2 uv_distorted = uv;
 	
-	float filter = smoothcircle( uv_distorted, 0.12, 100.);
-	uv_distorted = complex_mul(((uv_distorted - 0.5)*mix(2., 6., filter)), mousePolar) + offset;
+	float _filter = smoothcircle( uv_distorted, 0.12, 100.);
+	uv_distorted = complex_mul(((uv_distorted - 0.5)*mix(2., 6., _filter)), mousePolar) + offset;
 	
 	
    vec2 p=(gl_FragCoord.xy/resolution.x)*2.0-vec2(1.0,resolution.y/resolution.x);
