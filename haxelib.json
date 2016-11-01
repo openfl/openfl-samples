@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "4.0.0",
-	"releasenote": "Added HelloTriangle, updated Tilemap use",
+	"version": "4.4.0",
+	"releasenote": "More Stage3D samples",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
