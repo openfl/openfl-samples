@@ -9,7 +9,6 @@
 	<source path="Source" />
 	
 	<haxelib name="openfl" />
-	<haxelib name="swf" />
 	
 	<library path="Assets/library.swf" preload="true" />
 	

@@ -4,11 +4,10 @@
 	<haxelib name="actuate" if="setup" />
 	<haxelib name="box2d" if="setup" />
 	<haxelib name="layout" if="setup" />
-	<haxelib name="swf" if="setup" />
 	
 	<sample path="demos" />
 	
-	<sample path="libraries/swf" />
+	<sample path="libraries/layout" />
 	<sample path="libraries/box2d" />
 	<sample path="libraries/actuate" />
 	
