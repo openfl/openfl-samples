@@ -3,6 +3,7 @@ package;
 
 import openfl.display.Sprite;
 import openfl.display3D.Context3D;
+import openfl.display3D.Context3DBlendFactor;
 import openfl.display3D.Context3DProgramType;
 import openfl.display3D.Context3DVertexBufferFormat;
 import openfl.display3D.IndexBuffer3D;
@@ -40,6 +41,8 @@ class Main extends Sprite {
 		
 		context3D = stage.stage3Ds[0].context3D;
 		context3D.configureBackBuffer (stage.stageWidth, stage.stageHeight, 1, true);
+		
+		context3D.setBlendFactors (Context3DBlendFactor.ONE, Context3DBlendFactor.ONE_MINUS_SOURCE_ALPHA);
 		
 		var vertices = Vector.ofArray ([
 			-0.3, -0.3, 0, 1, 0, 0,
