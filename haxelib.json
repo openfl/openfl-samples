@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "4.4.0",
-	"releasenote": "More Stage3D samples",
+	"version": "4.5.0",
+	"releasenote": "Update for OpenFL 4.5.0",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
