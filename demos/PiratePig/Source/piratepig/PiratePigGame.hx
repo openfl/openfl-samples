@@ -6,7 +6,6 @@ import motion.Actuate;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.events.Event;
-import openfl.events.GameInputEvent;
 import openfl.events.MouseEvent;
 import openfl.filters.BlurFilter;
 import openfl.filters.DropShadowFilter;
@@ -15,11 +14,15 @@ import openfl.media.Sound;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import openfl.text.TextFormatAlign;
+import openfl.Assets;
+import openfl.Lib;
+
+#if (!flash || enable_gamepad_support)
+import openfl.events.GameInputEvent;
 import openfl.ui.GameInput;
 import openfl.ui.GameInputDevice;
 import openfl.ui.GameInputControl;
-import openfl.Assets;
-import openfl.Lib;
+#end
 
 
 class PiratePigGame extends Sprite {
@@ -46,12 +49,15 @@ class PiratePigGame extends Sprite {
 	
 	private var cacheMouse:Point;
 	private var cursorPosition:Point;
-	private var gameInput:GameInput;
 	private var gamepads:Array<GamepadWrapper>;
 	private var needToCheckMatches:Bool;
 	private var selectedTile:Tile;
-	private var tiles:Array <Array <Tile>>;
-	private var usedTiles:Array <Tile>;
+	private var tiles:Array<Array<Tile>>;
+	private var usedTiles:Array<Tile>;
+	
+	#if (!flash || enable_gamepad_support)
+	private var gameInput:GameInput;
+	#end
 	
 	
 	public function new () {
@@ -164,12 +170,18 @@ class PiratePigGame extends Sprite {
 		Cursor.y = TileContainer.y;
 		CursorHighlight.x = Cursor.x;
 		CursorHighlight.y = Cursor.y;
+		
+		Cursor.visible = false;
+		CursorHighlight.visible = false;
+		
 		addChild (Cursor);
 		addChild (CursorHighlight);
 		
+		#if (!flash || enable_gamepad_support)
 		gameInput = new GameInput ();
 		gameInput.addEventListener (GameInputEvent.DEVICE_ADDED, gameInput_onDeviceAdded);
 		gameInput.addEventListener (GameInputEvent.DEVICE_REMOVED, gameInput_onDeviceRemoved);
+		#end
 		
 	}
 	
@@ -529,6 +541,8 @@ class PiratePigGame extends Sprite {
 	
 	private function updateGamepadInput ():Void {
 		
+		#if (!flash || enable_gamepad_support)
+		
 		for (gamepad in gamepads) {
 			
 			gamepad.update ();
@@ -567,6 +581,8 @@ class PiratePigGame extends Sprite {
 			
 		}
 		
+		#end
+		
 	}
 	
 	
@@ -577,6 +593,8 @@ class PiratePigGame extends Sprite {
 	
 	
 	
+	
+	#if (!flash || enable_gamepad_support)
 	
 	private function gameInput_onDeviceAdded (event:GameInputEvent):Void {
 		
@@ -606,6 +624,8 @@ class PiratePigGame extends Sprite {
 		}
 		
 	}
+	
+	#end
 	
 	
 	private function stage_onMouseUp (event:MouseEvent):Void {
