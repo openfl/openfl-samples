@@ -143,7 +143,7 @@ class PiratePigGame extends Sprite {
 		Score.selectable = false;
 		Score.defaultTextFormat = defaultFormat;
 		
-		Score.filters = [ new BlurFilter (1.5, 1.5), new DropShadowFilter (1, 45, 0, 0.2, 5, 5) ];
+		//Score.filters = [ new BlurFilter (1.5, 1.5), new DropShadowFilter (1, 45, 0, 0.2, 5, 5) ];
 		
 		Score.embedFonts = true;
 		addChild (Score);
@@ -152,7 +152,7 @@ class PiratePigGame extends Sprite {
 		Background.graphics.beginFill (0xFFFFFF, 0.4);
 		Background.graphics.drawRect (0, 0, contentWidth, 75 * NUM_ROWS);
 		
-		Background.filters = [ new BlurFilter (10, 10) ];
+		//Background.filters = [ new BlurFilter (10, 10) ];
 		addChild (Background);
 		
 		TileContainer.x = 14;
