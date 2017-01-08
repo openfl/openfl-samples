@@ -10,6 +10,8 @@ before_install:
   #- haxelib install openfl > /dev/null
   - git clone --recursive https://github.com/openfl/openfl ~/openfl --depth 1
   - haxelib dev openfl ~/openfl
+  - git clone --recursive https://github.com/openfl/lime ~/lime --depth 1
+  - haxelib dev lime ~/lime
   - haxelib install lime > /dev/null
   - haxelib install hxcpp > /dev/null
   - haxelib install actuate > /dev/null
@@ -18,6 +20,8 @@ before_install:
   - haxelib install layout > /dev/null
   - haxelib install format > /dev/null
   - haxelib dev openfl-samples $(pwd)
+  - haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt
+  - haxelib run lime rebuild tools -nocffi
 
 script:
   - haxelib run openfl create ActuateExample
