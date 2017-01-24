@@ -55,7 +55,7 @@ class Main extends Sprite {
 		if (playing) {
 			
 			playing = false;
-				
+			
 			Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (stop);
 			Actuate.tween (background, fadeOut, { alpha: 0.1 });
 			

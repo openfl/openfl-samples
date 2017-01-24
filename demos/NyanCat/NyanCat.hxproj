@@ -16,11 +16,11 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="D:\Development\Haxe\openfl" />
-    <class path="D:\Development\Haxe\lime" />
+    <class path="C:\Development\Haxe\openfl" />
+    <class path="C:\Development\Haxe\lime" />
     <class path="Source" />
-    <class path="D:\Development\Haxe\openfl\externs\core\openfl" />
-    <class path="D:\Development\Haxe\openfl\externs\extras" />
+    <class path="C:\Development\Haxe\openfl\externs\core\openfl" />
+    <class path="C:\Development\Haxe\openfl\externs\extras" />
     <class path="Export\html5\release\haxe" />
   </classpaths>
   <!-- Build options -->
