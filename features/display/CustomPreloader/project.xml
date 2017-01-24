@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Custom Preloader" package="org.openfl.samples.custompreloader" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="CustomPreloader" preloader="Preloader" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
