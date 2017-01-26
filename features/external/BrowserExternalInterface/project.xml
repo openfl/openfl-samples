@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Browser External Interface" package="org.openfl.samples.browserexternalinterface" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="BrowserExternalInterface" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<template path="Assets/templates" />
+	
+</project>

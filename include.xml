@@ -11,6 +11,7 @@
 	<sample path="libraries/box2d" />
 	<sample path="libraries/actuate" />
 	
+	<sample path="features/external" />
 	<sample path="features/text" />
 	<sample path="features/media" />
 	<sample path="features/events" />

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<title>::APP_TITLE::</title>
+		
+		<script type="text/javascript" src="swfobject.js"></script>
+		<script type="text/javascript">
+			
+			function helloFromOpenFL (message) {
+				
+				alert (message);
+				
+				document.getElementById ("openfl-content").helloFromBrowser ("Hello from the browser");
+				
+			}
+			
+			swfobject.embedSWF ("::APP_FILE::.swf", "openfl-content", "::if (WIN_WIDTH == 0)::800::else::::WIN_WIDTH::::end::", "::if (WIN_HEIGHT == 0)::500::else::::WIN_HEIGHT::::end::", "::SWF_VERSION::", "expressInstall.swf", ::WIN_PARAMETERS::);
+			
+		</script>
+		
+		<style>
+			
+			html, body, #openfl-content { width:::if (WIN_WIDTH == 0)::100%::else::::WIN_WIDTH::px::end::; height:::if (WIN_HEIGHT == 0)::100%::else::::WIN_HEIGHT::px::end::; }
+			body { margin:0; padding:0; overflow:hidden; }
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div id="openfl-content" />
+		
+	</body>
+	
+</html>
