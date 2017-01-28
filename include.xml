@@ -16,5 +16,6 @@
 	<sample path="features/media" />
 	<sample path="features/events" />
 	<sample path="features/display" />
+	<sample path="features/display3D" />
 	
 </extension>
