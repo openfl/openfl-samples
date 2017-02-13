@@ -13,10 +13,10 @@
 	
 	<sample path="features/external" />
 	<sample path="features/display3D" />
+	<sample path="features/ui" />
 	<sample path="features/text" />
 	<sample path="features/media" />
 	<sample path="features/events" />
 	<sample path="features/display" />
-	<sample path="features/ui" />
 	
 </extension>
