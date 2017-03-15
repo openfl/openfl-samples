@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "4.7.0",
-	"releasenote": "Added CustomPreloader sample",
+	"version": "4.9.0",
+	"releasenote": "Added BrowserExternalInterface sample",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
