@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Shaders" package="openfl.example.shaders" version="1.0.0" company="OpenFL" />
+	
+	<app main="Main" file="Shaders" path="Export" />
+	
+	<window background="#FFFFFF" fps="60" />
+	<window width="800" height="480" unless="mobile" />
+	
+	<source path="Source" />
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<icon path="Assets/openfl.svg" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
