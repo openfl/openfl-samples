@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "4.9.0",
-	"releasenote": "Added BrowserExternalInterface sample",
+	"version": "5.1.0",
+	"releasenote": "Minor fix",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
