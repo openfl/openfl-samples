@@ -68,7 +68,8 @@ class Main extends Sprite {
 		
 		vertexBuffer = GL.createBuffer ();
 		GL.bindBuffer (GL.ARRAY_BUFFER, vertexBuffer);
-		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (vertices), GL.STATIC_DRAW);
+		var verticesBytes:Int = Float32Array.BYTES_PER_ELEMENT * vertices.length;
+		GL.bufferData (GL.ARRAY_BUFFER, verticesBytes, new Float32Array (vertices), GL.STATIC_DRAW);
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 		var texCoords = [
@@ -82,7 +83,8 @@ class Main extends Sprite {
 		
 		texCoordBuffer = GL.createBuffer ();
 		GL.bindBuffer (GL.ARRAY_BUFFER, texCoordBuffer);
-		GL.bufferData (GL.ARRAY_BUFFER, new Float32Array (texCoords), GL.STATIC_DRAW);
+		var texCoordsBytes:Int = Float32Array.BYTES_PER_ELEMENT * texCoords.length;
+		GL.bufferData (GL.ARRAY_BUFFER, texCoordsBytes, new Float32Array (texCoords), GL.STATIC_DRAW);
 		GL.bindBuffer (GL.ARRAY_BUFFER, null);
 		
 	}
@@ -207,8 +209,8 @@ class Main extends Sprite {
 		GL.bindBuffer (GL.ARRAY_BUFFER, texCoordBuffer);
 		GL.vertexAttribPointer (texCoordAttribute, 2, GL.FLOAT, false, 0, 0);
 		
-		GL.uniformMatrix4fv (projectionMatrixUniform, false, new Float32Array (projectionMatrix.rawData));
-		GL.uniformMatrix4fv (modelViewMatrixUniform, false, new Float32Array (modelViewMatrix.rawData));
+		GL.uniformMatrix4fv (projectionMatrixUniform, 1, false, new Float32Array (projectionMatrix.rawData));
+		GL.uniformMatrix4fv (modelViewMatrixUniform, 1, false, new Float32Array (modelViewMatrix.rawData));
 		GL.uniform1i (imageUniform, 0);
 		
 		GL.drawArrays (GL.TRIANGLE_STRIP, 0, 4);
