@@ -49,7 +49,9 @@ class Main extends Sprite {
 			
 			buffer = GL.createBuffer ();
 			GL.bindBuffer (GL.ARRAY_BUFFER, buffer);
-			GL.bufferData (GL.ARRAY_BUFFER, new Float32Array ([ -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0 ]), GL.STATIC_DRAW);
+			var bufferArray:Float32Array = new Float32Array ([ -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0 ]);
+			var size:Int = Float32Array.BYTES_PER_ELEMENT * bufferArray.length;
+			GL.bufferData (GL.ARRAY_BUFFER, size, bufferArray, GL.STATIC_DRAW);
 			GL.bindBuffer (GL.ARRAY_BUFFER, null);
 			
 			compile ();
