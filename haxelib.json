@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "5.1.0",
-	"releasenote": "Minor fix",
+	"version": "5.1.1",
+	"releasenote": "Compile fix",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
