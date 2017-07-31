@@ -1,17 +1,17 @@
 package;
 
 
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLBuffer;
+import lime.graphics.opengl.GLProgram;
+import lime.graphics.opengl.GLShader;
+import lime.graphics.opengl.GLUniformLocation;
+import lime.utils.Float32Array;
 import openfl.display.OpenGLView;
 import openfl.display.Sprite;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
-import openfl.gl.GL;
-import openfl.gl.GLBuffer;
-import openfl.gl.GLProgram;
-import openfl.gl.GLShader;
-import openfl.gl.GLUniformLocation;
 import openfl.utils.ByteArray;
-import openfl.utils.Float32Array;
 import openfl.Assets;
 import openfl.Lib;
 
