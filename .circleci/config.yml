@@ -3,7 +3,7 @@ jobs:
 
   build:
     docker:
-     - image: openfl/openfl-tests-unit-3.4:0.0.2
+     - image: openfl/openfl-tests-unit-3.4:0.0.3
     steps:
      - checkout
      - run: git clone --recursive https://github.com/openfl/openfl ~/openfl --depth 1
