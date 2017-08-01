@@ -1,0 +1,44 @@
+version: 2
+jobs:
+
+  build:
+    docker:
+     - image: openfl/openfl-tests-unit-3.4:0.0.2
+    steps:
+     - checkout
+     - run: git clone --recursive https://github.com/openfl/openfl ~/openfl --depth 1
+     - run: haxelib dev openfl ~/openfl
+     - run: git clone --recursive https://github.com/openfl/lime ~/lime --depth 1
+     - run: haxelib dev lime ~/lime
+     - run: haxelib install actuate
+     - run: haxelib install box2d
+     - run: haxelib install layout
+     - run: haxelib dev openfl-samples ~/project
+     - run: haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt
+     - run: haxelib run lime rebuild tools -nocffi
+     - run: haxelib run openfl create ActuateExample
+     - run: haxelib run openfl create AddingAnimation
+     - run: haxelib run openfl create AddingText
+     - run: haxelib run openfl create BunnyMark
+     - run: haxelib run openfl create DisplayingABitmap
+     - run: haxelib run openfl create HandlingKeyboardEvents
+     - run: haxelib run openfl create HandlingMouseEvents
+     - run: haxelib run openfl create HerokuShaders
+     - run: haxelib run openfl create PiratePig
+     - run: haxelib run openfl create PlayingSound
+     - run: haxelib run openfl create SimpleBox2D
+     - run: haxelib run openfl create SimpleOpenGLView
+     - run: haxelib run openfl create SimpleSWFLayout
+     - run: haxelib run openfl build ~/project/ActuateExample flash
+     - run: haxelib run openfl build ~/project/AddingAnimation flash
+     - run: haxelib run openfl build ~/project/AddingText flash
+     - run: haxelib run openfl build ~/project/BunnyMark neko
+     - run: haxelib run openfl build ~/project/DisplayingABitmap flash
+     - run: haxelib run openfl build ~/project/HandlingKeyboardEvents flash
+     - run: haxelib run openfl build ~/project/HandlingMouseEvents flash
+     - run: haxelib run openfl build ~/project/HerokuShaders neko
+     - run: haxelib run openfl build ~/project/PiratePig flash
+     - run: haxelib run openfl build ~/project/PlayingSound flash
+     - run: haxelib run openfl build ~/project/SimpleBox2D flash
+     - run: haxelib run openfl build ~/project/SimpleOpenGLView neko
+     - run: haxelib run openfl build ~/project/SimpleSWFLayout flash
