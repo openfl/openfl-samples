@@ -140,16 +140,6 @@ class Main extends Sprite {
 		addChild(t);
 	}
 	
-	function font(str:String):String
-	{
-		var f = Assets.getFont("assets/"+str);
-		if (f != null)
-		{
-			return f.fontName;
-		}
-		return str;
-	}
-	
 	//Demos
 	
 	function demo0():Void
@@ -162,7 +152,7 @@ class Main extends Sprite {
 	
 	function demo1():Void
 	{
-		var f = font("LIBERATIONSERIF-REGULAR.TTF");
+		var f = "Liberation Serif Regular";
 		makeText(50, 50, TextFormatAlign.CENTER, 24, f, true);
 		makeText(50, 175, TextFormatAlign.LEFT, 24, f, true);
 		makeText(50, 300, TextFormatAlign.RIGHT, 24, f, true);
@@ -179,7 +169,7 @@ class Main extends Sprite {
 	
 	function demo3():Void
 	{
-		var f = font("LIBERATIONSERIF-REGULAR.TTF");
+		var f = "Liberation Serif Regular";
 		makeText(50, 50, TextFormatAlign.CENTER, 12, f, true);
 		makeText(50, 175, TextFormatAlign.LEFT, 12, f, true);
 		makeText(50, 300, TextFormatAlign.RIGHT, 12, f, true);
@@ -188,7 +178,7 @@ class Main extends Sprite {
 	
 	function demo4():Void
 	{
-		var f = font("nokiafc22.ttf");
+		var f = "Nokia Cellphone FC Small";
 		makeText(50, 50, TextFormatAlign.CENTER, 8, f, true);
 		makeText(50, 175, TextFormatAlign.LEFT, 8, f, true);
 		makeText(50, 300, TextFormatAlign.RIGHT, 8, f, true);
@@ -197,7 +187,7 @@ class Main extends Sprite {
 	
 	function demo5():Void
 	{
-		var f = font("nokiafc22.ttf");
+		var f = "Nokia Cellphone FC Small";
 		makeText(50, 50, TextFormatAlign.CENTER, 16, f, true);
 		makeText(50, 175, TextFormatAlign.LEFT, 16, f, true);
 		makeText(50, 300, TextFormatAlign.RIGHT, 16, f, true);
