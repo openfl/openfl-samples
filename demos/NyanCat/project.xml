@@ -12,6 +12,4 @@
 	
 	<library path="Assets/library.swf" preload="true" />
 	
-	<assets path="Assets" rename="assets" />
-	
 </project>
