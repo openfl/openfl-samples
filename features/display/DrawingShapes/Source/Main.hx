@@ -1,6 +1,7 @@
 package;
 
 
+import flash.display.GraphicsPathCommand;
 import openfl.display.CapsStyle;
 import openfl.display.Graphics;
 import openfl.display.Sprite;
@@ -113,7 +114,49 @@ class Main extends Sprite {
 		curve.x = 20;
 		curve.y = 340;
 		addChild (curve);
-		
+
+        var ring = new Sprite();
+        ring.graphics.beginFill(0x24AFC4);
+        ring.graphics.drawRect (0, 0, 120, 100);
+        ring.graphics.drawRect (10, 10, 100, 80);
+        ring.graphics.endFill();
+        ring.x = 20;
+        ring.y = 380;
+        addChild(ring);
+
+
+        var ringPath = new Sprite();
+        ringPath.graphics.beginFill(0x24AFC4);
+        ringPath.graphics.drawPath(
+            flash.Vector.ofArray([
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.MOVE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO,
+                GraphicsPathCommand.LINE_TO
+            ]), flash.Vector.ofArray([
+                120.0, 0, 120, 100, 0, 100, 0, 0,
+                10, 10,
+                110, 10, 110, 90, 10, 90, 10, 10
+            ]));
+        ringPath.graphics.endFill();
+        ringPath.x = 160;
+        ringPath.y = 380;
+        addChild(ringPath);
+
+        var polyline = new Sprite ();
+        polyline.graphics.lineStyle (10, 0x24AFC4);
+        polyline.graphics.moveTo(0, 50);
+        polyline.graphics.lineTo (150, 0);
+        polyline.graphics.lineTo (300, 50);
+        polyline.graphics.lineStyle();
+        polyline.x = 300;
+        polyline.y = 380;
+        addChild (polyline);
 	}
 	
 	
