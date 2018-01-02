@@ -5,18 +5,18 @@
 	<haxelib name="box2d" if="setup" />
 	<haxelib name="layout" if="setup" />
 	
-	<sample path="demos" />
+	<sample path="haxelib/demos" />
 	
-	<sample path="libraries/layout" />
-	<sample path="libraries/box2d" />
-	<sample path="libraries/actuate" />
+	<sample path="haxelib/libraries/layout" />
+	<sample path="haxelib/libraries/box2d" />
+	<sample path="haxelib/libraries/actuate" />
 	
-	<sample path="features/external" />
-	<sample path="features/display3D" />
-	<sample path="features/ui" />
-	<sample path="features/text" />
-	<sample path="features/media" />
-	<sample path="features/events" />
-	<sample path="features/display" />
+	<sample path="haxelib/features/external" />
+	<sample path="haxelib/features/display3D" />
+	<sample path="haxelib/features/ui" />
+	<sample path="haxelib/features/text" />
+	<sample path="haxelib/features/media" />
+	<sample path="haxelib/features/events" />
+	<sample path="haxelib/features/display" />
 	
 </extension>
