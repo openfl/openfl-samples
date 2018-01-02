@@ -8,7 +8,8 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			"openfl": "openfl/lib/openfl"
+			"openfl": path.resolve (__dirname, "node_modules/openfl/lib/openfl"),
+			"motion": path.resolve (__dirname, "node_modules/actuate/lib/motion")
 		}
 	},
 	module: {

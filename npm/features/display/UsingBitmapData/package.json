@@ -1,5 +1,5 @@
 {
-  "name": "org.openfl.samples.helloworld-haxe",
+  "name": "usingbitmapdata",
   "version": "1.0.0",
   "private": true,
   "config": {
@@ -21,5 +21,6 @@
     "start": "npm run start:dev",
     "start:dev": "webpack-dev-server --open --config webpack.dev.js",
     "start:prod": "webpack-dev-server --open --config webpack.prod.js"
-  }
+  },
+  "dependencies": {}
 }

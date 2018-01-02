@@ -1,5 +1,6 @@
--main Main
+-main App
 -js src/app.js
 -cp node_modules/openfl/lib
 -cp src
 -D source-map
+-D mute-sound
