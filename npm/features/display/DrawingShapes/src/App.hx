@@ -133,7 +133,7 @@ class App extends Sprite {
 	
 	static function main () {
 		
-		var stage = new Stage (550, 400, 0xFFFFFF, App);
+		var stage = new Stage (650, 400, 0xFFFFFF, App);
 		js.Browser.document.body.appendChild (stage.element);
 		
 	}
