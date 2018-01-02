@@ -4,4 +4,3 @@
 -cp node_modules/actuate/lib
 -cp src
 -D source-map
--D mute-sound

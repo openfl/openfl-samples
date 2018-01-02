@@ -1,8 +1,8 @@
-import openfl.display.Application;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Loader;
 import openfl.display.Sprite;
+import openfl.display.Stage;
 import openfl.display.Tilemap;
 import openfl.display.Tileset;
 import openfl.events.Event;
@@ -31,13 +31,11 @@ class Main extends Sprite {
 		
 		bunnies = [];
 		
-		//addEventListener (Event.ADDED_TO_STAGE, function (_) {
-			var loader = new Loader ();
-			loader.contentLoaderInfo.addEventListener (Event.COMPLETE, function (event) {
-				start (cast (loader.content, Bitmap).bitmapData);
-			});
-			loader.load (new URLRequest ("wabbit_alpha.png"));
-		//});
+		var loader = new Loader ();
+		loader.contentLoaderInfo.addEventListener (Event.COMPLETE, function (event) {
+			start (cast (loader.content, Bitmap).bitmapData);
+		});
+		loader.load (new URLRequest ("wabbit_alpha.png"));
 		
 	}
 	
@@ -170,21 +168,8 @@ class Main extends Sprite {
 	
 	static function main () {
 		
-		var div = js.Browser.document.createElement ("div");
-		js.Browser.document.body.appendChild (div);
-		
-		var app = new Application ();
-		app.create ({
-			windows: [{
-				width: 550,
-				height: 400,
-				element: div
-			}]
-		});
-		app.exec ();
-		
-		var stage = app.window.stage;
-		stage.addChild (new Main ());
+		var stage = new Stage (550, 400, 0xFFFFFF, Main);
+		js.Browser.document.body.appendChild (stage.element);
 		
 	}
 	

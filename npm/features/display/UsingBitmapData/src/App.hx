@@ -107,7 +107,7 @@ class App extends Sprite {
 			
 			Assets.registerLibrary ("default", library);
 			
-			var stage = new Stage (800, 600, 0xFFFFFF, App);
+			var stage = new Stage (550, 400, 0xFFFFFF, App);
 			js.Browser.document.body.appendChild (stage.element);
 			
 		}).onError (function (e) {
