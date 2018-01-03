@@ -6,6 +6,7 @@
     "haxe": "3.4.4"
   },
   "devDependencies": {
+    "actuate": "^1.8.7-alpha.4",
     "haxe": "^4.1.0",
     "haxe-loader": "^0.5.0",
     "openfl": "*",

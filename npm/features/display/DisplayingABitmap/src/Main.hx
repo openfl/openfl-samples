@@ -1,7 +1,7 @@
-import openfl.display.Application;
 import openfl.display.Bitmap;
 import openfl.display.Loader;
 import openfl.display.Sprite;
+import openfl.display.Stage;
 import openfl.events.Event;
 import openfl.net.URLRequest;
 
@@ -46,21 +46,8 @@ class Main extends Sprite {
 	
 	static function main () {
 		
-		var div = js.Browser.document.createElement ("div");
-		js.Browser.document.body.appendChild (div);
-		
-		var app = new Application ();
-		app.create ({
-			windows: [{
-				width: 550,
-				height: 400,
-				element: div
-			}]
-		});
-		app.exec ();
-		
-		var stage = app.window.stage;
-		stage.addChild (new Main ());
+		var stage = new Stage (550, 400, 0xFFFFFF, Main);
+		js.Browser.document.body.appendChild (stage.element);
 		
 	}
 	
