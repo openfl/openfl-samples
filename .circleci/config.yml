@@ -49,11 +49,17 @@ jobs:
     steps:
      - checkout
      - run:
-         name: Install Dependencies
-         command: find . -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
+         name: Install Dependencies (Demos)
+         command: find npm/demos -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
      - run:
-         name: Build Sample
-         command: find . -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
+         name: Install Dependencies (Features)
+         command: find npm/features -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
+     - run:
+         name: Build Demos
+         command: find npm/demos -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
+     - run:
+         name: Build Features
+         command: find npm/features -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
   
 workflows:
   version: 2
