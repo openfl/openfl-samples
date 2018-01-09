@@ -1,7 +1,7 @@
 version: 2
 jobs:
-
-  build:
+  
+  Haxelib:
     docker:
      - image: openfl/openfl-tests-unit-3.4:0.0.3
     steps:
@@ -42,3 +42,23 @@ jobs:
      - run: haxelib run openfl build ~/project/SimpleBox2D flash
      - run: haxelib run openfl build ~/project/SimpleOpenGLView neko
      - run: haxelib run openfl build ~/project/SimpleSWFLayout flash
+  
+  NPM:
+    docker:
+     - image: openfl/ci-openfl-js:0.0.2
+    steps:
+     - checkout
+     - run:
+         name: Install Dependencies
+         command: find . -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
+     - run:
+         name: Build Sample
+         command: find . -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
+  
+workflows:
+  version: 2
+  
+  build:
+    jobs:
+     - NPM
+     - Haxelib
