@@ -9,6 +9,7 @@
     "haxe": "^4.1.0",
     "haxe-loader": "^0.5.0",
     "openfl": "*",
+    "swf-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
@@ -16,12 +17,11 @@
   },
   "scripts": {
     "build": "npm run build:prod",
-    "build:dev": "npm run process-swf && webpack --config webpack.dev.js",
-    "build:prod": "npm run process-swf && webpack --config webpack.prod.js",
-    "process-swf": "openfljs process assets/library.swf dist/library.bundle",
+    "build:dev": "webpack --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
     "start": "npm run start:dev",
-    "start:dev": "npm run process-swf && webpack-dev-server --open --config webpack.dev.js",
-    "start:prod": "npm run process-swf && webpack-dev-server --open --config webpack.prod.js"
+    "start:dev": "webpack-dev-server --open --config webpack.dev.js",
+    "start:prod": "webpack-dev-server --open --config webpack.prod.js"
   },
   "dependencies": {}
 }

@@ -16,6 +16,10 @@ module.exports = {
 			{
 				test: /\.hxml$/,
 				loader: 'haxe-loader',
+			},
+			{
+				test: /\.swf$/,
+				loader: 'swf-loader'
 			}
 		]
 	}

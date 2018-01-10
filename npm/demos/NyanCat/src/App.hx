@@ -10,7 +10,9 @@ class App extends Sprite {
 		
 		super ();
 		
-		AssetLibrary.loadFromFile ("library.bundle").onComplete (function (library:AssetLibrary) {
+		var libraryPath = untyped require ("./assets/library.swf");
+		
+		AssetLibrary.loadFromFile (libraryPath).onComplete (function (library:AssetLibrary) {
 			
 			var cat = library.getMovieClip ("NyanCatAnimation");
 			addChild (cat);
