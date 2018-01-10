@@ -38,7 +38,7 @@ class App extends Sprite {
 		
 		var background = cast (layout.Background, MovieClip);
 		var column = cast (layout.Column, MovieClip);
-		var header =cast (layout.Header, MovieClip);
+		var header = cast (layout.Header, MovieClip);
 		
 		background.width = stage.stageWidth;
 		background.height = stage.stageHeight;
