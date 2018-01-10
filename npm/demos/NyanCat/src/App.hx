@@ -1,6 +1,7 @@
 import openfl.display.Sprite;
 import openfl.display.Stage;
 import openfl.utils.AssetLibrary;
+import js.Lib.require;
 
 
 class App extends Sprite {
@@ -10,9 +11,7 @@ class App extends Sprite {
 		
 		super ();
 		
-		var libraryPath = untyped require ("./assets/library.swf");
-		
-		AssetLibrary.loadFromFile (libraryPath).onComplete (function (library:AssetLibrary) {
+		AssetLibrary.loadFromFile (require ("./assets/library.swf")).onComplete (function (library:AssetLibrary) {
 			
 			var cat = library.getMovieClip ("NyanCatAnimation");
 			addChild (cat);
