@@ -2,7 +2,7 @@
 <project>
 	
 	<meta title="Stage3D Mipmap" package="org.openfl.samples.stage3dmipmap" version="1.0.0" company="OpenFL" />
-	<app main="Main" path="Export" file="Stage3DCMipmap" />
+	<app main="Main" path="Export" file="Stage3DMipmap" />
 	
 	<source path="Source" />
 	
