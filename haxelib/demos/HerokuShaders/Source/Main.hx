@@ -9,7 +9,7 @@ import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
 import openfl.display.AbstractView;
 import openfl.display.Sprite;
-import openfl.events.AbstractViewEvent;
+import openfl.events.RenderEvent;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
@@ -46,7 +46,7 @@ class Main extends Sprite {
 		currentIndex = 0;
 		
 		view = new AbstractView ();
-		view.addEventListener (AbstractViewEvent.RENDER_OPENGL, render);
+		view.addEventListener (RenderEvent.RENDER_OPENGL, render);
 		addChild (view);
 		
 	}
@@ -167,7 +167,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function render (event:AbstractViewEvent):Void {
+	private function render (event:RenderEvent):Void {
 		
 		var gl = event.gl;
 		

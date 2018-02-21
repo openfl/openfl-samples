@@ -9,7 +9,7 @@ import lime.utils.GLUtils;
 import openfl.display.AbstractView;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
-import openfl.events.AbstractViewEvent;
+import openfl.events.RenderEvent;
 import openfl.geom.Matrix;
 import openfl.utils.Assets;
 
@@ -37,9 +37,9 @@ class Main extends Sprite {
 		bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		
 		view = new AbstractView ();
-		view.addEventListener (AbstractViewEvent.RENDER_CAIRO, renderCairo);
-		view.addEventListener (AbstractViewEvent.RENDER_CANVAS, renderCanvas);
-		view.addEventListener (AbstractViewEvent.RENDER_OPENGL, renderOpenGL);
+		view.addEventListener (RenderEvent.RENDER_CAIRO, renderCairo);
+		view.addEventListener (RenderEvent.RENDER_CANVAS, renderCanvas);
+		view.addEventListener (RenderEvent.RENDER_OPENGL, renderOpenGL);
 		addChild (view);
 		
 		view.x = 100;
@@ -49,7 +49,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function renderCairo (event:AbstractViewEvent):Void {
+	private function renderCairo (event:RenderEvent):Void {
 		
 		if (cairoPattern == null) {
 			
@@ -81,7 +81,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function renderCanvas (event:AbstractViewEvent):Void {
+	private function renderCanvas (event:RenderEvent):Void {
 		
 		var context = event.context;
 		var transform = event.renderTransform;
@@ -92,7 +92,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function renderOpenGL (event:AbstractViewEvent):Void {
+	private function renderOpenGL (event:RenderEvent):Void {
 		
 		var gl:WebGLContext = event.gl;
 		
