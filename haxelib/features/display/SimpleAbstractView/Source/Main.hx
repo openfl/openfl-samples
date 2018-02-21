@@ -6,10 +6,10 @@ import lime.graphics.opengl.*;
 import lime.math.Matrix3;
 import lime.utils.Float32Array;
 import lime.utils.GLUtils;
-import openfl.display.AbstractRender;
+import openfl.display.AbstractView;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
-import openfl.events.AbstractRenderEvent;
+import openfl.events.AbstractViewEvent;
 import openfl.geom.Matrix;
 import openfl.utils.Assets;
 
@@ -27,6 +27,7 @@ class Main extends Sprite {
 	private var glTexture:GLTexture;
 	private var glTextureAttribute:Int;
 	private var glVertexAttribute:Int;
+	private var view:AbstractView;
 	
 	
 	public function new () {
@@ -35,20 +36,20 @@ class Main extends Sprite {
 		
 		bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		
-		var abstractRender = new AbstractRender ();
-		abstractRender.addEventListener (AbstractRenderEvent.RENDER_CAIRO, renderCairo);
-		abstractRender.addEventListener (AbstractRenderEvent.RENDER_CANVAS, renderCanvas);
-		abstractRender.addEventListener (AbstractRenderEvent.RENDER_OPENGL, renderOpenGL);
-		addChild (abstractRender);
+		view = new AbstractView ();
+		view.addEventListener (AbstractViewEvent.RENDER_CAIRO, renderCairo);
+		view.addEventListener (AbstractViewEvent.RENDER_CANVAS, renderCanvas);
+		view.addEventListener (AbstractViewEvent.RENDER_OPENGL, renderOpenGL);
+		addChild (view);
 		
-		abstractRender.x = 100;
-		abstractRender.y = 100;
-		abstractRender.rotation = 6;
+		view.x = 100;
+		view.y = 100;
+		view.rotation = 6;
 		
 	}
 	
 	
-	private function renderCairo (event:AbstractRenderEvent):Void {
+	private function renderCairo (event:AbstractViewEvent):Void {
 		
 		if (cairoPattern == null) {
 			
@@ -80,7 +81,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function renderCanvas (event:AbstractRenderEvent):Void {
+	private function renderCanvas (event:AbstractViewEvent):Void {
 		
 		var context = event.context;
 		var transform = event.renderTransform;
@@ -91,7 +92,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function renderOpenGL (event:AbstractRenderEvent):Void {
+	private function renderOpenGL (event:AbstractViewEvent):Void {
 		
 		var gl:WebGLContext = event.gl;
 		

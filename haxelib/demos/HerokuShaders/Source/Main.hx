@@ -7,9 +7,9 @@ import lime.graphics.opengl.GLShader;
 import lime.graphics.opengl.GLUniformLocation;
 import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
-import openfl.display.AbstractRender;
+import openfl.display.AbstractView;
 import openfl.display.Sprite;
-import openfl.events.AbstractRenderEvent;
+import openfl.events.AbstractViewEvent;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
@@ -23,7 +23,6 @@ class Main extends Sprite {
 	private static var glFragmentShaders = [ #if mobile "6284.1", "6238", "6147.1", "5891.5", "5805.18", "5492", "5398.8" #else "6286", "6288.1", "6284.1", "6238", "6223.2", "6175", "6162", "6147.1", "6049", "6043.1", "6022", "5891.5", "5805.18", "5812", "5733", "5454.21", "5492", "5359.8", "5398.8", "4278.1" #end ];
 	private static var maxTime = 7000;
 	
-	private var abstractRender:AbstractRender;
 	private var currentIndex:Int;
 	private var glBackbufferUniform:GLUniformLocation;
 	private var glBuffer:GLBuffer;
@@ -36,6 +35,7 @@ class Main extends Sprite {
 	private var glVertexPosition:Int;
 	private var initialized:Bool;
 	private var startTime:Int;
+	private var view:AbstractView;
 	
 	
 	public function new () {
@@ -45,9 +45,9 @@ class Main extends Sprite {
 		glFragmentShaders = randomizeArray (glFragmentShaders);
 		currentIndex = 0;
 		
-		abstractRender = new AbstractRender ();
-		abstractRender.addEventListener (AbstractRenderEvent.RENDER_OPENGL, render);
-		addChild (abstractRender);
+		view = new AbstractView ();
+		view.addEventListener (AbstractViewEvent.RENDER_OPENGL, render);
+		addChild (view);
 		
 	}
 	
@@ -167,7 +167,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function render (event:AbstractRenderEvent):Void {
+	private function render (event:AbstractViewEvent):Void {
 		
 		var gl = event.gl;
 		
