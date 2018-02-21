@@ -154,6 +154,13 @@ class Main extends Sprite {
 			
 			glTexture = bitmapData.getTexture (cast gl);
 			
+		} else {
+			
+			gl.useProgram (glProgram);
+			
+			gl.enableVertexAttribArray (glVertexAttribute);
+			gl.enableVertexAttribArray (glTextureAttribute);
+			
 		}
 		
 		var matrix = event.getProjectionMatrix (event.renderTransform);
@@ -183,6 +190,17 @@ class Main extends Sprite {
 		gl.vertexAttribPointer (glTextureAttribute, 2, gl.FLOAT, false, 5 * Float32Array.BYTES_PER_ELEMENT, 3 * Float32Array.BYTES_PER_ELEMENT);
 		
 		gl.drawArrays (gl.TRIANGLE_STRIP, 0, 4);
+		
+		gl.bindBuffer (gl.ARRAY_BUFFER, null);
+		gl.bindTexture (gl.TEXTURE_2D, null);
+		
+		#if desktop
+		gl.disable (gl.TEXTURE_2D);
+		#end
+		
+		gl.disableVertexAttribArray (glVertexAttribute);
+		gl.disableVertexAttribArray (glTextureAttribute);
+		gl.useProgram (null);
 		
 	}
 	
