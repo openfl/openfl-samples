@@ -8,6 +8,8 @@
 	
 	<source path="Source" />
 	
+	<define name="stats" if="html5" />
+	
 	<haxelib name="openfl" />
 	
 	<assets path="Assets" rename="assets" />

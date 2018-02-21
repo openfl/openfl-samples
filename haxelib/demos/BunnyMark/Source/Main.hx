@@ -45,8 +45,10 @@ class Main extends Sprite {
 		tilemap = new Tilemap (stage.stageWidth, stage.stageHeight, tileset);
 		addChild (tilemap);
 		
+		#if !html5
 		fps = new FPS ();
 		addChild (fps);
+		#end
 		
 		stage.addEventListener (MouseEvent.MOUSE_DOWN, stage_onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
