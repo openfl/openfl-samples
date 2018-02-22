@@ -54,7 +54,9 @@ class Main extends Sprite {
 		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
 		stage.addEventListener (Event.ENTER_FRAME, stage_onEnterFrame);
 		
-		for (i in 0...100) {
+		var count = #if bunnies Std.parseInt (haxe.macro.Compiler.getDefine ("bunnies")) #else 100 #end;
+		
+		for (i in 0...count) {
 			
 			addBunny ();
 			
