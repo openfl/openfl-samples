@@ -13,6 +13,10 @@ import openfl.events.RenderEvent;
 import openfl.geom.Matrix;
 import openfl.utils.Assets;
 
+#if (js && html5)
+import js.html.Image;
+#end
+
 
 class Main extends Sprite {
 	
@@ -21,6 +25,7 @@ class Main extends Sprite {
 	private var cairoMatrix:Matrix3;
 	private var cairoPattern:CairoPattern;
 	private var cairoSurface:CairoSurface;
+	private var domImage:#if (js && html5) Image #else Dynamic #end;
 	private var glBuffer:GLBuffer;
 	private var glMatrixUniform:GLUniformLocation;
 	private var glProgram:GLProgram;
@@ -37,14 +42,23 @@ class Main extends Sprite {
 		bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		
 		view = new AbstractView ();
+		view.addEventListener (RenderEvent.CLEAR_DOM, clearDOM);
 		view.addEventListener (RenderEvent.RENDER_CAIRO, renderCairo);
 		view.addEventListener (RenderEvent.RENDER_CANVAS, renderCanvas);
+		view.addEventListener (RenderEvent.RENDER_DOM, renderDOM);
 		view.addEventListener (RenderEvent.RENDER_OPENGL, renderOpenGL);
 		addChild (view);
 		
 		view.x = 100;
 		view.y = 100;
 		view.rotation = 6;
+		
+	}
+	
+	
+	private function clearDOM (event:RenderEvent):Void {
+		
+		event.element.removeChild (domImage);
 		
 	}
 	
@@ -88,6 +102,20 @@ class Main extends Sprite {
 		
 		context.setTransform (transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty);
 		context.drawImage (bitmapData.image.src, 0, 0, bitmapData.width, bitmapData.height);
+		
+	}
+	
+	
+	private function renderDOM (event:RenderEvent):Void {
+		
+		if (domImage == null) {
+			
+			domImage = new Image ();
+			domImage.src = Assets.getPath ("assets/openfl.png");
+			
+		}
+		
+		event.applyStyle (domImage);
 		
 	}
 	
