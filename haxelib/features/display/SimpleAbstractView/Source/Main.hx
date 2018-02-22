@@ -25,7 +25,6 @@ class Main extends Sprite {
 	private var cairoMatrix:Matrix3;
 	private var cairoPattern:CairoPattern;
 	private var cairoSurface:CairoSurface;
-	private var domImage:#if (js && html5) Image #else Dynamic #end;
 	private var glBuffer:GLBuffer;
 	private var glMatrixUniform:GLUniformLocation;
 	private var glProgram:GLProgram;
@@ -33,6 +32,10 @@ class Main extends Sprite {
 	private var glTextureAttribute:Int;
 	private var glVertexAttribute:Int;
 	private var view:AbstractView;
+	
+	#if (js && html5)
+	private var domImage:Image;
+	#end
 	
 	
 	public function new () {
@@ -58,7 +61,9 @@ class Main extends Sprite {
 	
 	private function clearDOM (event:RenderEvent):Void {
 		
-		event.element.removeChild (domImage);
+		#if (js && html5)
+		event.clearDOMStyle (domImage);
+		#end
 		
 	}
 	
@@ -67,9 +72,7 @@ class Main extends Sprite {
 		
 		if (cairoPattern == null) {
 			
-			cairoMatrix = new Matrix3 ();
 			var surface = bitmapData.getSurface ();
-			
 			cairoPattern = CairoPattern.createForSurface (surface);
 			
 			if (event.allowSmoothing) {
@@ -85,10 +88,8 @@ class Main extends Sprite {
 		}
 		
 		var cairo = event.cairo;
-		var transform = event.renderTransform;
 		
-		cairoMatrix.setTo (transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty);
-		cairo.matrix = cairoMatrix;
+		cairo.matrix = event.getCairoMatrix (event.renderTransform);
 		cairo.source = cairoPattern;
 		cairo.paint ();
 		
@@ -108,6 +109,7 @@ class Main extends Sprite {
 	
 	private function renderDOM (event:RenderEvent):Void {
 		
+		#if (js && html5)
 		if (domImage == null) {
 			
 			domImage = new Image ();
@@ -115,7 +117,8 @@ class Main extends Sprite {
 			
 		}
 		
-		event.applyStyle (domImage);
+		event.applyDOMStyle (domImage);
+		#end
 		
 	}
 	
@@ -191,7 +194,7 @@ class Main extends Sprite {
 			
 		}
 		
-		var matrix = event.getProjectionMatrix (event.renderTransform);
+		var matrix = event.getOpenGLMatrix (event.renderTransform);
 		gl.uniformMatrix4fv (glMatrixUniform, false, matrix);
 		
 		gl.activeTexture (gl.TEXTURE0);
