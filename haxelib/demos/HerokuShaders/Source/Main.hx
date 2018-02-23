@@ -7,7 +7,6 @@ import lime.graphics.opengl.GLShader;
 import lime.graphics.opengl.GLUniformLocation;
 import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
-import openfl.display.AbstractView;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.RenderEvent;
@@ -36,7 +35,6 @@ class Main extends Sprite {
 	private var glVertexPosition:Int;
 	private var initialized:Bool;
 	private var startTime:Int;
-	private var view:AbstractView;
 	
 	
 	public function new () {
@@ -46,17 +44,15 @@ class Main extends Sprite {
 		glFragmentShaders = randomizeArray (glFragmentShaders);
 		currentIndex = 0;
 		
-		view = new AbstractView ();
-		view.addEventListener (RenderEvent.RENDER_OPENGL, render);
-		view.addEventListener (Event.ENTER_FRAME, enterFrame);
-		addChild (view);
+		addEventListener (RenderEvent.RENDER_OPENGL, render);
+		addEventListener (Event.ENTER_FRAME, enterFrame);
 		
 	}
 	
 	
 	private function enterFrame (event:Event):Void {
 		
-		view.invalidate ();
+		invalidate ();
 		
 	}
 	

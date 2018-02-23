@@ -6,7 +6,6 @@ import lime.graphics.opengl.*;
 import lime.math.Matrix3;
 import lime.utils.Float32Array;
 import lime.utils.GLUtils;
-import openfl.display.AbstractView;
 import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.events.RenderEvent;
@@ -31,7 +30,6 @@ class Main extends Sprite {
 	private var glTexture:GLTexture;
 	private var glTextureAttribute:Int;
 	private var glVertexAttribute:Int;
-	private var view:AbstractView;
 	
 	#if (js && html5)
 	private var domImage:Image;
@@ -44,17 +42,15 @@ class Main extends Sprite {
 		
 		bitmapData = Assets.getBitmapData ("assets/openfl.png");
 		
-		view = new AbstractView ();
-		view.addEventListener (RenderEvent.CLEAR_DOM, clearDOM);
-		view.addEventListener (RenderEvent.RENDER_CAIRO, renderCairo);
-		view.addEventListener (RenderEvent.RENDER_CANVAS, renderCanvas);
-		view.addEventListener (RenderEvent.RENDER_DOM, renderDOM);
-		view.addEventListener (RenderEvent.RENDER_OPENGL, renderOpenGL);
-		addChild (view);
+		addEventListener (RenderEvent.CLEAR_DOM, clearDOM);
+		addEventListener (RenderEvent.RENDER_CAIRO, renderCairo);
+		addEventListener (RenderEvent.RENDER_CANVAS, renderCanvas);
+		addEventListener (RenderEvent.RENDER_DOM, renderDOM);
+		addEventListener (RenderEvent.RENDER_OPENGL, renderOpenGL);
 		
-		view.x = 100;
-		view.y = 100;
-		view.rotation = 6;
+		x = 100;
+		y = 100;
+		rotation = 6;
 		
 	}
 	
