@@ -27,7 +27,7 @@ jobs:
      - run: haxelib run openfl create PiratePig
      - run: haxelib run openfl create PlayingSound
      - run: haxelib run openfl create SimpleBox2D
-     - run: haxelib run openfl create SimpleOpenGLView
+     - run: haxelib run openfl create SimpleAbstractView
      - run: haxelib run openfl create SimpleSWFLayout
      - run: haxelib run openfl build ~/project/ActuateExample flash
      - run: haxelib run openfl build ~/project/AddingAnimation flash
@@ -40,7 +40,7 @@ jobs:
      - run: haxelib run openfl build ~/project/PiratePig flash
      - run: haxelib run openfl build ~/project/PlayingSound flash
      - run: haxelib run openfl build ~/project/SimpleBox2D flash
-     - run: haxelib run openfl build ~/project/SimpleOpenGLView neko
+     - run: haxelib run openfl build ~/project/SimpleAbstractView neko
      - run: haxelib run openfl build ~/project/SimpleSWFLayout flash
   
   NPM:
