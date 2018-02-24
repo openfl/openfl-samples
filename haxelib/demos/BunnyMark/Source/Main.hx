@@ -8,7 +8,8 @@ import openfl.display.Tilemap;
 import openfl.display.Tileset;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
-import openfl.Assets;
+import openfl.utils.Assets;
+import openfl.Vector;
 
 
 class Main extends Sprite {
@@ -22,8 +23,13 @@ class Main extends Sprite {
 	private var minY:Int;
 	private var maxX:Int;
 	private var maxY:Int;
-	private var tilemap:Tilemap;
 	private var tileset:Tileset;
+	
+	#if (flash || use_tilemap)
+	private var tilemap:Tilemap;
+	#else
+	private var matrices:Vector<Float>;
+	#end
 	
 	
 	public function new () {
@@ -42,8 +48,12 @@ class Main extends Sprite {
 		tileset = new Tileset (bitmapData);
 		tileset.addRect (bitmapData.rect);
 		
+		#if (flash || use_tilemap)
 		tilemap = new Tilemap (stage.stageWidth, stage.stageHeight, tileset);
 		addChild (tilemap);
+		#else
+		matrices = new Vector<Float> ();
+		#end
 		
 		#if !html5
 		fps = new FPS ();
@@ -73,7 +83,17 @@ class Main extends Sprite {
 		bunny.speedX = Math.random () * 5;
 		bunny.speedY = (Math.random () * 5) - 2.5;
 		bunnies.push (bunny);
+		
+		#if (!flash && !use_tilemap)
+		matrices.push (1);
+		matrices.push (0);
+		matrices.push (0);
+		matrices.push (1);
+		matrices.push (0);
+		matrices.push (0);
+		#elseif !use_tilearray
 		tilemap.addTile (bunny);
+		#end
 		
 	}
 	
@@ -87,7 +107,22 @@ class Main extends Sprite {
 	
 	private function stage_onEnterFrame (event:Event):Void {
 		
-		for (bunny in bunnies) {
+		var bunny;
+		
+		#if use_tilearray
+		var tiles = tilemap.getTiles ();
+		tiles.length = bunnies.length;
+		tiles.position = 0;
+		var matrix = tiles.matrix;
+		#end
+		
+		for (i in 0...bunnies.length) {
+			
+			bunny = bunnies[i];
+			
+			#if use_tilearray
+			tiles.position = i;
+			#end
 			
 			bunny.x += bunny.speedX;
 			bunny.y += bunny.speedY;
@@ -123,7 +158,26 @@ class Main extends Sprite {
 				
 			}
 			
+			#if (!flash && !use_tilemap)
+			matrices[i * 6 + 4] = bunny.x;
+			matrices[i * 6 + 5] = bunny.y;
+			#elseif use_tilearray
+			matrix.tx = bunny.x;
+			matrix.ty = bunny.y;
+			tiles.matrix = matrix;
+			#end
+			
 		}
+		
+		#if (!flash && !use_tilemap)
+		graphics.clear ();
+		graphics.beginFill (0xFFFFFF);
+		graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
+		graphics.beginBitmapFill (tileset.bitmapData);
+		graphics.drawQuads (matrices);
+		#elseif use_tilearray
+		tilemap.setTiles (tiles);
+		#end
 		
 		if (addingBunnies) {
 			
