@@ -28,7 +28,6 @@ class Main extends Sprite {
 	#if (flash || use_tilemap)
 	private var tilemap:Tilemap;
 	#else
-	private var rects:Vector<Float>;
 	private var indices:Vector<Int>;
 	private var transforms:Vector<Float>;
 	#end
@@ -56,7 +55,6 @@ class Main extends Sprite {
 		tilemap.tileColorTransformEnabled = false;
 		addChild (tilemap);
 		#else
-		rects = new Vector<Float> ([ 0, 0, bitmapData.width, bitmapData.height ]);
 		indices = new Vector<Int> ();
 		transforms = new Vector<Float> ();
 		#end
@@ -162,7 +160,7 @@ class Main extends Sprite {
 		graphics.beginFill (0xFFFFFF);
 		graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
 		graphics.beginBitmapFill (tileset.bitmapData);
-		graphics.drawQuads (rects, indices, transforms);
+		graphics.drawQuads (tileset.rectData, indices, transforms);
 		#end
 		
 		if (addingBunnies) {
