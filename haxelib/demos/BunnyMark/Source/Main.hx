@@ -28,7 +28,9 @@ class Main extends Sprite {
 	#if (flash || use_tilemap)
 	private var tilemap:Tilemap;
 	#else
-	private var matrices:Vector<Float>;
+	private var rects:Vector<Float>;
+	private var indices:Vector<Int>;
+	private var transforms:Vector<Float>;
 	#end
 	
 	
@@ -50,9 +52,13 @@ class Main extends Sprite {
 		
 		#if (flash || use_tilemap)
 		tilemap = new Tilemap (stage.stageWidth, stage.stageHeight, tileset);
+		tilemap.tileAlphaEnabled = false;
+		tilemap.tileColorTransformEnabled = false;
 		addChild (tilemap);
 		#else
-		matrices = new Vector<Float> ();
+		rects = new Vector<Float> ([ 0, 0, bitmapData.width, bitmapData.height ]);
+		indices = new Vector<Int> ();
+		transforms = new Vector<Float> ();
 		#end
 		
 		#if !html5
@@ -85,13 +91,10 @@ class Main extends Sprite {
 		bunnies.push (bunny);
 		
 		#if (!flash && !use_tilemap)
-		matrices.push (1);
-		matrices.push (0);
-		matrices.push (0);
-		matrices.push (1);
-		matrices.push (0);
-		matrices.push (0);
-		#elseif !use_tilearray
+		indices.push (bunny.id);
+		transforms.push (0);
+		transforms.push (0);
+		#else
 		tilemap.addTile (bunny);
 		#end
 		
@@ -109,20 +112,9 @@ class Main extends Sprite {
 		
 		var bunny;
 		
-		#if use_tilearray
-		var tiles = tilemap.getTiles ();
-		tiles.length = bunnies.length;
-		tiles.position = 0;
-		var matrix = tiles.matrix;
-		#end
-		
 		for (i in 0...bunnies.length) {
 			
 			bunny = bunnies[i];
-			
-			#if use_tilearray
-			tiles.position = i;
-			#end
 			
 			bunny.x += bunny.speedX;
 			bunny.y += bunny.speedY;
@@ -159,12 +151,8 @@ class Main extends Sprite {
 			}
 			
 			#if (!flash && !use_tilemap)
-			matrices[i * 6 + 4] = bunny.x;
-			matrices[i * 6 + 5] = bunny.y;
-			#elseif use_tilearray
-			matrix.tx = bunny.x;
-			matrix.ty = bunny.y;
-			tiles.matrix = matrix;
+			transforms[i * 2] = bunny.x;
+			transforms[i * 2 + 1] = bunny.y;
 			#end
 			
 		}
@@ -174,9 +162,7 @@ class Main extends Sprite {
 		graphics.beginFill (0xFFFFFF);
 		graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
 		graphics.beginBitmapFill (tileset.bitmapData);
-		graphics.drawQuads (matrices);
-		#elseif use_tilearray
-		tilemap.setTiles (tiles);
+		graphics.drawQuads (rects, indices, transforms);
 		#end
 		
 		if (addingBunnies) {
