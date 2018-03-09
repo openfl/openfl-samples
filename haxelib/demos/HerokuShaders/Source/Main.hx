@@ -7,6 +7,7 @@ import lime.graphics.opengl.GLShader;
 import lime.graphics.opengl.GLUniformLocation;
 import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
+import openfl.display.OpenGLRenderer;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.RenderEvent;
@@ -174,7 +175,8 @@ class Main extends Sprite {
 	
 	private function render (event:RenderEvent):Void {
 		
-		var gl = event.gl;
+		var renderer:OpenGLRenderer = cast event.renderer;
+		var gl = renderer.gl;
 		
 		glInitialize (gl);
 		
