@@ -1,27 +1,27 @@
-package;
-
-
-import lime.graphics.opengl.GLBuffer;
-import lime.graphics.opengl.GLProgram;
-import lime.graphics.opengl.GLShader;
-import lime.graphics.opengl.GLUniformLocation;
-import lime.graphics.GLRenderContext;
-import lime.utils.Float32Array;
+import js.html.webgl.Buffer in GLBuffer;
+import js.html.webgl.Program in GLProgram;
+import js.html.webgl.RenderingContext in GLRenderContext;
+import js.html.webgl.Shader in GLShader;
+import js.html.webgl.UniformLocation in GLUniformLocation;
+import js.html.Float32Array;
 import openfl.display.OpenGLRenderer;
 import openfl.display.Sprite;
+import openfl.display.Stage;
 import openfl.events.Event;
 import openfl.events.RenderEvent;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
+import openfl.utils.AssetLibrary;
+import openfl.utils.AssetManifest;
 import openfl.utils.ByteArray;
 import openfl.Assets;
 import openfl.Lib;
 
 
-class Main extends Sprite {
+class App extends Sprite {
 	
 	
-	private static var glFragmentShaders = [ #if mobile "6284.1", "6238", "6147.1", "5891.5", "5805.18", "5492", "5398.8" #else "6286", "6288.1", "6284.1", "6238", "6223.2", "6175", "6162", "6147.1", "6049", "6043.1", "6022", "5891.5", "5805.18", "5812", "5733", "5454.21", "5492", "5359.8", "5398.8", "4278.1" #end ];
+	private static var glFragmentShaders = [ "6286", "6288.1", "6284.1", "6238", "6223.2", "6175", "6162", "6147.1", "6049", "6043.1", "6022", "5891.5", "5805.18", "5812", "5733", "5454.21", "5492", "5359.8", "5398.8", "4278.1" ];
 	private static var maxTime = 7000;
 	
 	private var currentIndex:Int;
@@ -63,16 +63,11 @@ class Main extends Sprite {
 		var program = gl.createProgram ();
 		var vertex = Assets.getText ("assets/heroku.vert");
 		
-		#if desktop
-		var fragment = "";
-		#else
 		var fragment = "precision mediump float;";
-		#end
-		
 		fragment += Assets.getText ("assets/" + glFragmentShaders[currentIndex] + ".frag");
 		
-		var vs = glCreateShader (gl, vertex, gl.VERTEX_SHADER);
-		var fs = glCreateShader (gl, fragment, gl.FRAGMENT_SHADER);
+		var vs = glCreateShader (gl, vertex, GLRenderContext.VERTEX_SHADER);
+		var fs = glCreateShader (gl, fragment, GLRenderContext.FRAGMENT_SHADER);
 		
 		if (vs == null || fs == null) return;
 		
@@ -84,10 +79,10 @@ class Main extends Sprite {
 		
 		gl.linkProgram (program);
 		
-		if (gl.getProgramParameter (program, gl.LINK_STATUS) == 0) {
+		if (gl.getProgramParameter (program, GLRenderContext.LINK_STATUS) == 0) {
 			
 			trace (gl.getProgramInfoLog (program));
-			trace ("VALIDATE_STATUS: " + gl.getProgramParameter (program, gl.VALIDATE_STATUS));
+			trace ("VALIDATE_STATUS: " + gl.getProgramParameter (program, GLRenderContext.VALIDATE_STATUS));
 			trace ("ERROR: " + gl.getError ());
 			return;
 			
@@ -95,8 +90,6 @@ class Main extends Sprite {
 		
 		if (glCurrentProgram != null) {
 			
-			if (glPositionAttribute > -1) gl.disableVertexAttribArray (glPositionAttribute);
-			gl.disableVertexAttribArray (glVertexPosition);
 			gl.deleteProgram (glCurrentProgram);
 			
 		}
@@ -104,7 +97,7 @@ class Main extends Sprite {
 		glCurrentProgram = program;
 		
 		glPositionAttribute = gl.getAttribLocation (glCurrentProgram, "surfacePosAttrib");
-		if (glPositionAttribute > -1) gl.enableVertexAttribArray (glPositionAttribute);
+		gl.enableVertexAttribArray (glPositionAttribute);
 		
 		glVertexPosition = gl.getAttribLocation (glCurrentProgram, "position");
 		gl.enableVertexAttribArray (glVertexPosition);
@@ -126,7 +119,7 @@ class Main extends Sprite {
 		gl.shaderSource (shader, source);
 		gl.compileShader (shader);
 		
-		if (gl.getShaderParameter (shader, gl.COMPILE_STATUS) == 0) {
+		if (gl.getShaderParameter (shader, GLRenderContext.COMPILE_STATUS) == 0) {
 			
 			trace (gl.getShaderInfoLog (shader));
 			return null;
@@ -143,11 +136,10 @@ class Main extends Sprite {
 		if (!initialized) {
 			
 			glBuffer = gl.createBuffer ();
-			gl.bindBuffer (gl.ARRAY_BUFFER, glBuffer);
+			gl.bindBuffer (GLRenderContext.ARRAY_BUFFER, glBuffer);
 			var glBufferArray = new Float32Array ([ -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0 ]);
-			var size = Float32Array.BYTES_PER_ELEMENT * glBufferArray.length;
-			gl.bufferData (gl.ARRAY_BUFFER, size, glBufferArray, gl.STATIC_DRAW);
-			gl.bindBuffer (gl.ARRAY_BUFFER, null);
+			gl.bufferData (GLRenderContext.ARRAY_BUFFER, glBufferArray, GLRenderContext.STATIC_DRAW);
+			gl.bindBuffer (GLRenderContext.ARRAY_BUFFER, null);
 			
 			glCompile (gl);
 			
@@ -178,7 +170,6 @@ class Main extends Sprite {
 	private function render (event:RenderEvent):Void {
 		
 		var renderer:OpenGLRenderer = cast event.renderer;
-		renderer.setShader (null);
 		var gl = renderer.gl;
 		
 		glInitialize (gl);
@@ -195,14 +186,14 @@ class Main extends Sprite {
 		gl.uniform1i (glBackbufferUniform, 0 );
 		gl.uniform2f (glSurfaceSizeUniform, stage.stageWidth, stage.stageHeight);
 		
-		gl.bindBuffer (gl.ARRAY_BUFFER, glBuffer);
-		if (glPositionAttribute > -1) gl.vertexAttribPointer (glPositionAttribute, 2, gl.FLOAT, false, 0, 0);
-		gl.vertexAttribPointer (glVertexPosition, 2, gl.FLOAT, false, 0, 0);
+		gl.bindBuffer (GLRenderContext.ARRAY_BUFFER, glBuffer);
+		gl.vertexAttribPointer (glPositionAttribute, 2, GLRenderContext.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer (glVertexPosition, 2, GLRenderContext.FLOAT, false, 0, 0);
 		
 		gl.clearColor (0, 0, 0, 1);
-		gl.clear (gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
-		gl.drawArrays (gl.TRIANGLES, 0, 6);
-		gl.bindBuffer (gl.ARRAY_BUFFER, null);
+		gl.clear (GLRenderContext.COLOR_BUFFER_BIT | GLRenderContext.DEPTH_BUFFER_BIT );
+		gl.drawArrays (GLRenderContext.TRIANGLES, 0, 6);
+		gl.bindBuffer (GLRenderContext.ARRAY_BUFFER, null);
 		
 		if (time > maxTime && glFragmentShaders.length > 1) {
 			
@@ -217,6 +208,33 @@ class Main extends Sprite {
 			glCompile (gl);
 			
 		}
+		
+	}
+	
+	
+	static function main () {
+		
+		var manifest = new AssetManifest ();
+		manifest.addText ("assets/heroku.vert");
+		
+		for (shader in glFragmentShaders) {
+			
+			manifest.addText ("assets/" + shader + ".frag");
+			
+		}
+		
+		AssetLibrary.loadFromManifest (manifest).onComplete (function (library) {
+			
+			Assets.registerLibrary ("default", library);
+			
+			var stage = new Stage (550, 400, 0xFFFFFF, App);
+			js.Browser.document.body.appendChild (stage.element);
+			
+		}).onError (function (e) {
+			
+			trace (e);
+			
+		});
 		
 	}
 	
