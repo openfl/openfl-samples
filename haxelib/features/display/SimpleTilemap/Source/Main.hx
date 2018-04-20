@@ -5,7 +5,6 @@ import openfl.display.Sprite;
 import openfl.display.Tile;
 import openfl.display.Tilemap;
 import openfl.display.Tileset;
-import openfl.events.Event;
 import openfl.geom.Rectangle;
 import openfl.utils.Assets;
 
@@ -13,49 +12,9 @@ import openfl.utils.Assets;
 class Main extends Sprite {
 	
 	
-	private var blobAnimation:Array<Int>;
-	private var bugAnimation:Array<Int>;
-	private var owlAnimation:Array<Int>;
-	private var snailAnimation:Array<Int>;
-	private var tiles:Array<AnimatedTile>;
-	private var tilemap:Tilemap;
-	private var tileset:Tileset;
-	
-	
 	public function new () {
 		
 		super ();
-		
-		buildTileset ();
-		
-		tilemap = new Tilemap (176, 32, tileset);
-		tilemap.smoothing = false;
-		tilemap.scaleX = 4;
-		tilemap.scaleY = 4;
-		tilemap.y = (stage.stageHeight - tilemap.height) / 2;
-		tilemap.x = (stage.stageWidth - tilemap.width) / 2;
-		addChild (tilemap);
-		
-		var snail = new AnimatedTile (snailAnimation);
-		var blob = new AnimatedTile (blobAnimation);
-		var owl = new AnimatedTile (owlAnimation);
-		var bug = new AnimatedTile (bugAnimation);
-		
-		tiles = [ snail, blob, owl, bug ];
-		
-		for (i in 0...tiles.length) {
-			
-			tiles[i].x = 48 * i;
-			tilemap.addTile (tiles[i]);
-			
-		}
-		
-		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		
-	}
-	
-	
-	private function buildTileset ():Void {
 		
 		/**
 		 * "Various Creatures" by GrafxKid is licensed under CC BY 3.0
@@ -63,44 +22,38 @@ class Main extends Sprite {
 		 * (https://creativecommons.org/licenses/by/3.0/)
 		 */
 		var bitmapData = Assets.getBitmapData ("assets/tileset.png");
+		var tileset = new Tileset (bitmapData);
 		
-		tileset = new Tileset (bitmapData);
+		var gumdropID = tileset.addRect (new Rectangle (0, 0, 32, 32));
+		var balloonID = tileset.addRect (new Rectangle (0, 64, 32, 32));
+		var robotID = tileset.addRect (new Rectangle (0, 96, 32, 32));
+		var compyID = tileset.addRect (new Rectangle (0, 224, 32, 32));
 		
-		snailAnimation = [];
-		blobAnimation = [];
-		owlAnimation = [];
-		bugAnimation = [];
+		var tilemap = new Tilemap (stage.stageWidth, stage.stageHeight, tileset);
+		tilemap.smoothing = false;
+		tilemap.scaleX = 4;
+		tilemap.scaleY = 4;
+		addChild (tilemap);
 		
-		var rect = new Rectangle (0, 0, 32, 32);
+		var gumdrop = new Tile (gumdropID);
+		gumdrop.x = 12;
+		gumdrop.y = 48;
+		tilemap.addTile (gumdrop);
 		
-		for (i in 0...4) {
-			
-			rect.x = 32 * i;
-			
-			rect.y = 32;
-			snailAnimation.push (tileset.addRect (rect));
-			
-			rect.y = 32 * 4;
-			blobAnimation.push (tileset.addRect (rect));
-			
-			rect.y = 32 * 5;
-			owlAnimation.push (tileset.addRect (rect));
-			
-			rect.y = 32 * 6;
-			bugAnimation.push (tileset.addRect (rect));
-			
-		}
+		var balloon = new Tile (balloonID);
+		balloon.x = 60;
+		balloon.y = 48;
+		tilemap.addTile (balloon);
 		
-	}
-	
-	
-	private function this_onEnterFrame (event:Event):Void {
+		var robot = new Tile (robotID);
+		robot.x = 108;
+		robot.y = 48;
+		tilemap.addTile (robot);
 		
-		for (tile in tiles) {
-			
-			tile.update ();
-			
-		}
+		var compy = new Tile (compyID);
+		compy.x = 156;
+		compy.y = 48;
+		tilemap.addTile (compy);
 		
 	}
 	
