@@ -2,18 +2,18 @@
   "name": "org.openfl.samples.addinganimation-haxe",
   "version": "1.0.0",
   "private": true,
-  "config": {
-    "haxe": "3.4.4"
-  },
   "devDependencies": {
     "actuate": "^1.8.7-alpha.3",
-    "haxe": "^4.1.0",
+    "haxe": "^5.0.0",
     "haxe-loader": "^0.5.0",
     "openfl": "^7.0.0",
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.1"
+  },
+  "haxeDependencies": {
+    "haxe": "3.4.7"
   },
   "scripts": {
     "build": "npm run build:prod",
