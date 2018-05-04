@@ -7,6 +7,10 @@ import lime.math.Matrix3;
 import lime.utils.Float32Array;
 import lime.utils.GLUtils;
 import openfl.display.BitmapData;
+import openfl.display.CairoRenderer;
+import openfl.display.CanvasRenderer;
+import openfl.display.DOMRenderer;
+import openfl.display.OpenGLRenderer;
 import openfl.display.Sprite;
 import openfl.events.RenderEvent;
 import openfl.geom.Matrix;
@@ -58,7 +62,8 @@ class Main extends Sprite {
 	private function clearDOM (event:RenderEvent):Void {
 		
 		#if (js && html5)
-		event.clearDOMStyle (domImage);
+		var renderer:DOMRenderer = cast event.renderer;
+		renderer.clearStyle (domImage);
 		#end
 		
 	}
@@ -83,9 +88,11 @@ class Main extends Sprite {
 			
 		}
 		
-		var cairo = event.cairo;
+		var renderer:CairoRenderer = cast event.renderer;
+		var cairo = renderer.cairo;
 		
-		cairo.matrix = event.getCairoMatrix (event.renderTransform);
+		renderer.applyMatrix (event.objectMatrix, cairo);
+		
 		cairo.source = cairoPattern;
 		cairo.paint ();
 		
@@ -94,8 +101,9 @@ class Main extends Sprite {
 	
 	private function renderCanvas (event:RenderEvent):Void {
 		
-		var context = event.context;
-		var transform = event.renderTransform;
+		var renderer:CanvasRenderer = cast event.renderer;
+		var context = renderer.context;
+		var transform = event.objectMatrix;
 		
 		context.setTransform (transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty);
 		context.drawImage (bitmapData.image.src, 0, 0, bitmapData.width, bitmapData.height);
@@ -121,7 +129,8 @@ class Main extends Sprite {
 	
 	private function renderOpenGL (event:RenderEvent):Void {
 		
-		var gl:WebGLContext = event.gl;
+		var renderer:OpenGLRenderer = cast event.renderer;
+		var gl:WebGLContext = renderer.gl;
 		
 		if (glProgram == null) {
 			
@@ -190,7 +199,7 @@ class Main extends Sprite {
 			
 		}
 		
-		var matrix = event.getOpenGLMatrix (event.renderTransform);
+		var matrix = renderer.getMatrix (event.objectMatrix);
 		gl.uniformMatrix4fv (glMatrixUniform, false, matrix);
 		
 		gl.activeTexture (gl.TEXTURE0);
