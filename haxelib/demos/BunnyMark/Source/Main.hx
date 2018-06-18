@@ -52,6 +52,7 @@ class Main extends Sprite {
 		#if (flash || use_tilemap)
 		tilemap = new Tilemap (stage.stageWidth, stage.stageHeight, tileset);
 		tilemap.tileAlphaEnabled = false;
+		tilemap.tileBlendModeEnabled = false;
 		tilemap.tileColorTransformEnabled = false;
 		addChild (tilemap);
 		#else
