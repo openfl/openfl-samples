@@ -475,25 +475,21 @@ class PiratePigGame extends Sprite {
 		var currentWidth = width;
 		var currentHeight = height;
 		
-		if (currentWidth > maxWidth || currentHeight > maxHeight) {
+    var maxScaleX = maxWidth / currentWidth;
+    var maxScaleY = maxHeight / currentHeight;
+    
+    if (maxScaleX < maxScaleY) {
+      
+      currentScale = maxScaleX;
+      
+    } else {
+      
+      currentScale = maxScaleY;
+      
+    }
 			
-			var maxScaleX = maxWidth / currentWidth;
-			var maxScaleY = maxHeight / currentHeight;
-			
-			if (maxScaleX < maxScaleY) {
-				
-				currentScale = maxScaleX;
-				
-			} else {
-				
-				currentScale = maxScaleY;
-				
-			}
-			
-			scaleX = currentScale;
-			scaleY = currentScale;
-			
-		}
+    scaleX = currentScale;
+    scaleY = currentScale;
 		
 		x = newWidth / 2 - (currentWidth * currentScale) / 2;
 		
