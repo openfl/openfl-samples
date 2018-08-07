@@ -8,17 +8,17 @@ class Script extends hxp.Script {
 		super ();
 		
 		var paths = [];
-		getPaths ("demos", paths);
-		getPaths ("features/display", paths);
-		getPaths ("features/display3D", paths);
-		getPaths ("features/events", paths);
-		getPaths ("features/external", paths);
-		getPaths ("features/media", paths);
-		getPaths ("features/text", paths);
-		getPaths ("features/ui", paths);
-		getPaths ("libraries/actuate", paths);
-		getPaths ("libraries/box2d", paths);
-		getPaths ("libraries/layout", paths);
+		findPaths ("demos", paths);
+		findPaths ("features/display", paths);
+		findPaths ("features/display3D", paths);
+		findPaths ("features/events", paths);
+		findPaths ("features/external", paths);
+		findPaths ("features/media", paths);
+		findPaths ("features/text", paths);
+		findPaths ("features/ui", paths);
+		findPaths ("libraries/actuate", paths);
+		findPaths ("libraries/box2d", paths);
+		findPaths ("libraries/layout", paths);
 		
 		if (command == "list") {
 			
@@ -26,7 +26,7 @@ class Script extends hxp.Script {
 				Log.println (path);
 			}
 			
-		} else if (command == "test") {
+		} else {
 			
 			if (commandArgs.length > 0) {
 				var sampleName = commandArgs.shift ();
@@ -41,19 +41,21 @@ class Script extends hxp.Script {
 				if (!match) {
 					paths = [];
 					if (sampleName == "features") {
-						getPaths ("features/display", paths);
-						getPaths ("features/display3D", paths);
-						getPaths ("features/events", paths);
-						getPaths ("features/external", paths);
-						getPaths ("features/media", paths);
-						getPaths ("features/text", paths);
-						getPaths ("features/ui", paths);
+						findPaths ("features/display", paths);
+						findPaths ("features/display3D", paths);
+						findPaths ("features/events", paths);
+						findPaths ("features/external", paths);
+						findPaths ("features/media", paths);
+						findPaths ("features/text", paths);
+						findPaths ("features/ui", paths);
 					} else if (sampleName == "libraries") {
-						getPaths ("libraries/actuate", paths);
-						getPaths ("libraries/box2d", paths);
-						getPaths ("libraries/layout", paths);
+						findPaths ("libraries/actuate", paths);
+						findPaths ("libraries/box2d", paths);
+						findPaths ("libraries/layout", paths);
+					} else if (FileSystem.exists (sampleName)) {
+						findPaths (sampleName, paths);
 					} else {
-						getPaths (sampleName, paths);
+						commandArgs.unshift (sampleName);
 					}
 				}
 			}
@@ -62,22 +64,33 @@ class Script extends hxp.Script {
 			if (commandArgs.length > 0) {
 				targets = commandArgs;
 			} else {
-				targets = [ "neko", "flash", "linux", "electron" ];
+				var hostPlatform = switch (System.hostPlatform) {
+					case WINDOWS: "windows";
+					case MAC: "mac";
+					case LINUX: "linux";
+					default: "";
+				}
+				if (System.hostPlatform != MAC) {
+					targets = [ "neko", "flash", hostPlatform, "electron" ];
+				} else {
+					targets = [ "neko", /*"flash",*/ hostPlatform, "electron" ];
+				}
 			}
 			
 			for (path in paths) {
 				var sampleName = Path.standardize (path).split ("/").pop ();
 				for (target in targets) {
-					Log.info (Log.accentColor + "Running Sample: " + sampleName + " [" + target + "]" + Log.resetColor);
+					
+					Log.info (Log.accentColor + "Running Command: " + command + " " + sampleName + " " + target + Log.resetColor);
 					if (FileSystem.exists (Path.combine (path, "script.hx"))) {
 						if (target == "electron") continue; // TODO
-						var args = [ "test", Path.combine (path, "script.hx"), target ];
+						var args = [ command, Path.combine (path, "script.hx"), target ];
 						for (flag in flags.keys ()) {
 							args.push ("-" + flag);
 						}
 						System.runCommand ("", "hxp", args);
 					} else {
-						var args = [ "test", path, target ];
+						var args = [ command, path, target ];
 						for (flag in flags.keys ()) {
 							args.push ("-" + flag);
 						}
@@ -87,15 +100,11 @@ class Script extends hxp.Script {
 				}
 			}
 			
-		} else {
-			
-			Log.error ("Unknown command");
-			
 		}
 		
 	}
 	
-	private function getPaths (directory:String, paths:Array<String>):Void {
+	private function findPaths (directory:String, paths:Array<String>):Void {
 		
 		directory = Path.combine (Path.combine (Sys.getCwd (), "haxelib"), directory);
 		for (path in FileSystem.readDirectory (directory)) {
