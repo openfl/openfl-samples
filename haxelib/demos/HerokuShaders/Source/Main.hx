@@ -5,7 +5,6 @@ import lime.graphics.opengl.GLBuffer;
 import lime.graphics.opengl.GLProgram;
 import lime.graphics.opengl.GLShader;
 import lime.graphics.opengl.GLUniformLocation;
-import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
 import openfl.display.OpenGLRenderer;
 import openfl.display.Sprite;
@@ -16,6 +15,12 @@ import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
 import openfl.Assets;
 import openfl.Lib;
+
+#if (lime >= "7.0.0")
+import lime.graphics.WebGLRenderContext;
+#else
+import lime.graphics.opengl.WebGLRenderContext;
+#end
 
 
 class Main extends Sprite {
@@ -58,7 +63,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function glCompile (gl:GLRenderContext):Void {
+	private function glCompile (gl:WebGLRenderContext):Void {
 		
 		var program = gl.createProgram ();
 		var vertex = Assets.getText ("assets/heroku.vert");
@@ -120,7 +125,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function glCreateShader (gl:GLRenderContext, source:String, type:Int):GLShader {
+	private function glCreateShader (gl:WebGLRenderContext, source:String, type:Int):GLShader {
 		
 		var shader = gl.createShader (type);
 		gl.shaderSource (shader, source);
@@ -138,7 +143,7 @@ class Main extends Sprite {
 	}
 	
 	
-	private function glInitialize (gl:GLRenderContext):Void {
+	private function glInitialize (gl:WebGLRenderContext):Void {
 		
 		if (!initialized) {
 			
@@ -146,7 +151,7 @@ class Main extends Sprite {
 			gl.bindBuffer (gl.ARRAY_BUFFER, glBuffer);
 			var glBufferArray = new Float32Array ([ -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0 ]);
 			var size = Float32Array.BYTES_PER_ELEMENT * glBufferArray.length;
-			gl.bufferData (gl.ARRAY_BUFFER, size, glBufferArray, gl.STATIC_DRAW);
+			gl.bufferData (gl.ARRAY_BUFFER, glBufferArray, gl.STATIC_DRAW);
 			gl.bindBuffer (gl.ARRAY_BUFFER, null);
 			
 			glCompile (gl);
@@ -179,7 +184,8 @@ class Main extends Sprite {
 		
 		var renderer:OpenGLRenderer = cast event.renderer;
 		renderer.setShader (null);
-		var gl = renderer.gl;
+		
+		var gl:WebGLRenderContext = renderer.gl;
 		
 		glInitialize (gl);
 		
