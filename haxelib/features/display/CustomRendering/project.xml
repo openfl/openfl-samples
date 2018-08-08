@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Simple AbstractRender" package="org.openfl.samples.simpleabstractrender" version="1.0.0" company="OpenFL" />
-	<app main="Main" path="Export" file="SimpleAbstractRender" />
+	<meta title="CustomRendering" package="org.openfl.samples.customrendering" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="CustomRendering" />
 	
 	<source path="Source" />
 	

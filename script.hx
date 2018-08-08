@@ -128,7 +128,7 @@ class Script extends hxp.Script {
 			if (!flags.exists ("noneko") && !flags.exists ("nocairo")) targets.push ("neko -Dcairo");
 			if (!flags.exists ("noelectron")) targets.push ("electron");
 			if (!flags.exists ("noelectron") && !flags.exists ("nocanvas")) targets.push ("electron -Dcanvas");
-			if (!flags.exists ("noelectron") && !flags.exists ("nodom")) targets.push ("electron -dom");
+			if (!flags.exists ("noelectron") && !flags.exists ("nodom")) targets.push ("electron -Ddom");
 			if (!flags.exists ("nocpp")) targets.push (hostPlatform);
 			if (!flags.exists ("noflash")) targets.push ("flash");
 			

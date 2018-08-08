@@ -58,7 +58,9 @@ class Main extends Sprite {
 	
 	private function enterFrame (event:Event):Void {
 		
+		#if !flash
 		invalidate ();
+		#end
 		
 	}
 	

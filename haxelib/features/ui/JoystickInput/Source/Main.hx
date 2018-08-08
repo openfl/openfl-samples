@@ -193,9 +193,10 @@ class Main extends Sprite {
 	}
 	
 	
-	public function joystick_onTrackballMove (joystick:Joystick, trackball:Int, value:Float):Void {
+	public function joystick_onTrackballMove (joystick:Joystick, trackball:Int, x:Float, y:Float):Void {
 		
-		updateJoystickVisual (joystick.id, "ball", trackball, value);
+		updateJoystickVisual (joystick.id, "ball", 0, x);
+		updateJoystickVisual (joystick.id, "ball", 1, y);
 		
 	}
 	

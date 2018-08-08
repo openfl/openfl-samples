@@ -70,6 +70,8 @@ class Main extends Sprite {
 	
 	private function renderCairo (event:RenderEvent):Void {
 		
+		#if !flash
+		
 		if (cairoPattern == null) {
 			
 			var surface = bitmapData.getSurface ();
@@ -94,6 +96,8 @@ class Main extends Sprite {
 		
 		cairo.source = cairoPattern;
 		cairo.paint ();
+		
+		#end
 		
 	}
 	
@@ -190,7 +194,9 @@ class Main extends Sprite {
 			gl.bindBuffer (gl.ARRAY_BUFFER, null);
 			
 			// TODO
+			#if !flash
 			glTexture = bitmapData.getTexture (@:privateAccess renderer.__context);
+			#end
 			
 		} else {
 			
