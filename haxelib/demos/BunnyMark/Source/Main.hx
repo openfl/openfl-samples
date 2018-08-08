@@ -160,7 +160,7 @@ class Main extends Sprite {
 		graphics.clear ();
 		graphics.beginFill (0xFFFFFF);
 		graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
-		graphics.beginBitmapFill (tileset.bitmapData);
+		graphics.beginBitmapFill (tileset.bitmapData, null, false);
 		graphics.drawQuads (tileset.rectData, indices, transforms);
 		#end
 		
