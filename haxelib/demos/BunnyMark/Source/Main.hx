@@ -68,6 +68,7 @@ class Main extends Sprite {
 		stage.addEventListener (MouseEvent.MOUSE_DOWN, stage_onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
 		stage.addEventListener (Event.ENTER_FRAME, stage_onEnterFrame);
+		stage.addEventListener (Event.RESIZE, stage_onResize);
 		
 		var count = #if bunnies Std.parseInt (haxe.macro.Compiler.getDefine ("bunnies")) #else 100 #end;
 		
@@ -188,6 +189,19 @@ class Main extends Sprite {
 		
 		addingBunnies = false;
 		trace (bunnies.length + " bunnies");
+		
+	}
+	
+	
+	private function stage_onResize (event:Event):Void {
+		
+		maxX = stage.stageWidth;
+		maxY = stage.stageHeight;
+		
+		#if (flash || use_tilemap)
+		tilemap.width = stage.stageWidth;
+		tilemap.height = stage.stageHeight;
+		#end
 		
 	}
 	

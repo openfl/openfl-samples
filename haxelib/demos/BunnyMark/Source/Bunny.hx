@@ -4,7 +4,7 @@ package;
 import openfl.display.Tile;
 
 
-#if use_tilemap
+#if (flash || use_tilemap)
 
 
 class Bunny extends Tile {
