@@ -52,7 +52,7 @@ class Script extends hxp.Script {
 						findPaths ("libraries/actuate", paths);
 						findPaths ("libraries/box2d", paths);
 						findPaths ("libraries/layout", paths);
-					} else if (FileSystem.exists (sampleName)) {
+					} else if (FileSystem.exists (Path.combine ("haxelib", sampleName))) {
 						findPaths (sampleName, paths);
 					} else {
 						commandArgs.unshift (sampleName);
@@ -71,28 +71,43 @@ class Script extends hxp.Script {
 					default: "";
 				}
 				if (System.hostPlatform != MAC) {
-					targets = [ "neko", "flash", hostPlatform, "electron" ];
+					targets = [ "neko", "neko -Dcairo", "flash", hostPlatform, "electron", "electron -Dcanvas", "electron -Ddom" ];
 				} else {
-					targets = [ "neko", /*"flash",*/ hostPlatform, "electron" ];
+					targets = [ "neko", "neko -Dcairo", /*"flash", hostPlatform,*/ "electron", "electron -Dcanvas", "electron -Ddom" ];
 				}
 			}
 			
 			for (path in paths) {
 				var sampleName = Path.standardize (path).split ("/").pop ();
 				for (target in targets) {
-					
 					Log.info (Log.accentColor + "Running Command: " + command + " " + sampleName + " " + target + Log.resetColor);
 					if (FileSystem.exists (Path.combine (path, "script.hx"))) {
 						if (target == "electron") continue; // TODO
-						var args = [ command, Path.combine (path, "script.hx"), target ];
+						var args = [ command, Path.combine (path, "script.hx") ].concat (target.split (" "));
 						for (flag in flags.keys ()) {
 							args.push ("-" + flag);
 						}
+						for (define in defines.keys ()) {
+							args.push ("-D");
+							if (defines.get (define) != "") {
+								args.push (define + "=" + defines.get (define));
+							} else {
+								args.push (define);
+							}
+						}
 						System.runCommand ("", "hxp", args);
 					} else {
-						var args = [ command, path, target ];
+						var args = [ command, path, ].concat (target.split (" "));
 						for (flag in flags.keys ()) {
 							args.push ("-" + flag);
+						}
+						for (define in defines.keys ()) {
+							args.push ("-D");
+							if (defines.get (define) != "") {
+								args.push (define + "=" + defines.get (define));
+							} else {
+								args.push (define);
+							}
 						}
 						if (target == "flash") args.push ("-notrace");
 						System.runCommand ("", "lime", args);

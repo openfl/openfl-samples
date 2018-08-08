@@ -5,7 +5,6 @@ import lime.graphics.cairo.*;
 import lime.graphics.opengl.*;
 import lime.math.Matrix3;
 import lime.utils.Float32Array;
-import lime.utils.GLUtils;
 import openfl.display.BitmapData;
 import openfl.display.CairoRenderer;
 import openfl.display.CanvasRenderer;
@@ -114,6 +113,8 @@ class Main extends Sprite {
 	private function renderDOM (event:RenderEvent):Void {
 		
 		#if (js && html5)
+		var renderer:DOMRenderer = cast event.renderer;
+		
 		if (domImage == null) {
 			
 			domImage = new Image ();
@@ -121,7 +122,7 @@ class Main extends Sprite {
 			
 		}
 		
-		event.applyDOMStyle (domImage);
+		renderer.applyStyle (this, domImage);
 		#end
 		
 	}
@@ -130,7 +131,7 @@ class Main extends Sprite {
 	private function renderOpenGL (event:RenderEvent):Void {
 		
 		var renderer:OpenGLRenderer = cast event.renderer;
-		var gl:WebGLContext = renderer.gl;
+		var gl = renderer.gl;
 		
 		if (glProgram == null) {
 			
@@ -162,7 +163,7 @@ class Main extends Sprite {
 					gl_FragColor = texture2D (uImage0, vTexCoord);
 				}";
 			
-			glProgram = GLUtils.createProgram (vertexSource, fragmentSource);
+			glProgram = GLProgram.fromSources (gl, vertexSource, fragmentSource);
 			gl.useProgram (glProgram);
 			
 			glVertexAttribute = gl.getAttribLocation (glProgram, "aPosition");
@@ -188,7 +189,8 @@ class Main extends Sprite {
 			gl.bufferData (gl.ARRAY_BUFFER, new Float32Array (data), gl.STATIC_DRAW);
 			gl.bindBuffer (gl.ARRAY_BUFFER, null);
 			
-			glTexture = bitmapData.getTexture (cast gl);
+			// TODO
+			glTexture = bitmapData.getTexture (@:privateAccess renderer.__context);
 			
 		} else {
 			
