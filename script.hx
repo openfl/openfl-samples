@@ -18,7 +18,7 @@ class Script extends hxp.Script {
 		initHXCPPCache ();
 		
 		samples = [];
-		findSamples ("haxelib", samples);
+		findSamples ("", samples);
 		
 		samples.sort (function (a, b) {
 			a = a.toLowerCase ();
@@ -148,16 +148,32 @@ class Script extends hxp.Script {
 					script = "hxp";
 					args.push (Path.combine (path, "script.hx"));
 					if (target.split (" ")[0] == "electron") continue; // TODO, MinimalApplication
+					args = args.concat (target.split (" "));
+					
+					Log.info (Log.accentColor + script + " " + command + " " + sampleName + " " + target + Log.resetColor);
+					
+				} else if (FileSystem.exists (Path.combine (path, "package.json"))) {
+					
+					if (target != targets[0]) continue;
+					script = "npm";
+					if (target == "install") {
+						args = [ "install", "-s" ];
+					} else {
+						args = [ "start", "-s" ];
+					}
+					
+					Log.info (Log.accentColor + "cd " + path + " && " + script + " " + args.join (" ") + Log.resetColor);
 					
 				} else {
 					
 					args.push (path);
+					args = args.concat (target.split (" "));
+					
+					Log.info (Log.accentColor + script + " " + command + " " + sampleName + " " + target + Log.resetColor);
 					
 				}
 				
-				Log.info (Log.accentColor + script + " " + command + " " + sampleName + " " + target + Log.resetColor);
 				
-				args = args.concat (target.split (" "));
 				
 				for (flag in flags.keys ()) {
 					args.push ("-" + flag);
@@ -176,7 +192,11 @@ class Script extends hxp.Script {
 					args.push ("-notrace");
 				}
 				
-				System.runCommand ("", script, args);
+				if (script == "npm") {
+					System.runCommand (path, script, args);
+				} else {
+					System.runCommand ("", script, args);
+				}
 				
 			}
 			
@@ -193,15 +213,21 @@ class Script extends hxp.Script {
 			
 			if (FileSystem.isDirectory (filePath)) {
 				
-				if (FileSystem.exists (Path.combine (filePath, "project.xml")) || FileSystem.exists (Path.combine (filePath, "script.hx"))) {
+				var match = false;
+				
+				for (file in [ "project.xml", "script.hx", "package.json" ]) {
 					
-					list.push (Path.standardize (filePath));
-					
-				} else {
-					
-					findSamples (filePath, list);
+					if (FileSystem.exists (Path.combine (filePath, file))) {
+						
+						list.push (Path.standardize (filePath));
+						match = true;
+						break;
+						
+					}
 					
 				}
+				
+				if (!match) findSamples (filePath, list);
 				
 			}
 			
