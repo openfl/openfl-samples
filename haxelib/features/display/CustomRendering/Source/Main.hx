@@ -19,6 +19,12 @@ import openfl.utils.Assets;
 import js.html.Image;
 #end
 
+#if (lime >= "7.0.0")
+import lime.graphics.WebGLRenderContext;
+#else
+import lime.graphics.opengl.WebGLContext in WebGLRenderContext;
+#end
+
 
 class Main extends Sprite {
 	
@@ -135,7 +141,7 @@ class Main extends Sprite {
 	private function renderOpenGL (event:RenderEvent):Void {
 		
 		var renderer:OpenGLRenderer = cast event.renderer;
-		var gl = renderer.gl;
+		var gl:WebGLRenderContext = renderer.gl;
 		
 		if (glProgram == null) {
 			
@@ -167,7 +173,7 @@ class Main extends Sprite {
 					gl_FragColor = texture2D (uImage0, vTexCoord);
 				}";
 			
-			glProgram = GLProgram.fromSources (gl, vertexSource, fragmentSource);
+			glProgram = #if (lime >= "7.0.0") GLProgram.fromSources (gl, vertexSource, fragmentSource); #else lime.utils.GLUtils.createProgram (vertexSource, fragmentSource); #end
 			gl.useProgram (glProgram);
 			
 			glVertexAttribute = gl.getAttribLocation (glProgram, "aPosition");

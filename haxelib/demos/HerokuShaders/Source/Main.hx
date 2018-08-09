@@ -19,7 +19,7 @@ import openfl.Lib;
 #if (lime >= "7.0.0")
 import lime.graphics.WebGLRenderContext;
 #else
-import lime.graphics.opengl.WebGLRenderContext;
+import lime.graphics.opengl.WebGLContext in WebGLRenderContext;
 #end
 
 
