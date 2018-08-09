@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": [],
 	"description": "OpenFL samples",
-	"version": "6.0.0",
-	"releasenote": "Import fix",
+	"version": "8.4.0",
+	"releasenote": "Minor fixes, updated for OpenFL 8.4",
 	"contributors": [ "singmajesty" ],
 	"dependencies": {}
 }
