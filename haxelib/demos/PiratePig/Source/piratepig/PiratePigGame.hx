@@ -162,16 +162,13 @@ class PiratePigGame extends Sprite {
 		Sound4 = Assets.getSound ("sound4");
 		Sound5 = Assets.getSound ("sound5");
 		
-		Cursor.x = TileContainer.x;
-		Cursor.y = TileContainer.y;
-		CursorHighlight.x = Cursor.x;
-		CursorHighlight.y = Cursor.y;
-		
 		Cursor.visible = false;
+		Cursor.alpha = 0.7;
 		CursorHighlight.visible = false;
+		CursorHighlight.alpha = 0.7;
 		
-		addChild (Cursor);
-		addChild (CursorHighlight);
+		TileContainer.addChild (Cursor);
+		TileContainer.addChild (CursorHighlight);
 		
 		#if (!flash || enable_gamepad_support)
 		gameInput = new GameInput ();
@@ -394,8 +391,10 @@ class PiratePigGame extends Sprite {
 		
 		if (tile != null) {
 			
-			Cursor.x = TileContainer.x + tile.x;
-			Cursor.y = TileContainer.y + tile.y;
+			var targetTilePosition = getPosition (Std.int (cursorPosition.y), Std.int (cursorPosition.x));
+			
+			Cursor.x = targetTilePosition.x;
+			Cursor.y = targetTilePosition.y;
 			CursorHighlight.x = Cursor.x;
 			CursorHighlight.y = Cursor.y;
 			
@@ -551,15 +550,15 @@ class PiratePigGame extends Sprite {
 				
 			} else if (gamepads[0].down.justPressed) {
 				
-				moveCursor(0, 1, aPressed);
+				moveCursor (0, 1, aPressed);
 				
 			} else if (gamepads[0].left.justPressed) {
 				
-				moveCursor( -1, 0, aPressed);
+				moveCursor (-1, 0, aPressed);
 				
 			} else if (gamepads[0].right.justPressed) {
 				
-				moveCursor(1, 0, aPressed);
+				moveCursor (1, 0, aPressed);
 				
 			}
 			
