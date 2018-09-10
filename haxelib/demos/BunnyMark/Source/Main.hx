@@ -1,6 +1,8 @@
 package;
 
 
+import lime.ui.Gamepad;
+import lime.ui.GamepadButton;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.display.Tile;
@@ -62,13 +64,21 @@ class Main extends Sprite {
 		
 		#if !html5
 		fps = new FPS ();
+		#if !hide_fps
 		addChild (fps);
+		#end
 		#end
 		
 		stage.addEventListener (MouseEvent.MOUSE_DOWN, stage_onMouseDown);
 		stage.addEventListener (MouseEvent.MOUSE_UP, stage_onMouseUp);
 		stage.addEventListener (Event.ENTER_FRAME, stage_onEnterFrame);
 		stage.addEventListener (Event.RESIZE, stage_onResize);
+		
+		Gamepad.onConnect.add (gamepad_onConnect);
+		
+		for (gamepad in Gamepad.devices) {
+			gamepad_onConnect (gamepad);
+		}
 		
 		var count = #if bunnies Std.parseInt (haxe.macro.Compiler.getDefine ("bunnies")) #else 100 #end;
 		
@@ -106,6 +116,29 @@ class Main extends Sprite {
 	// Event Handlers
 	
 	
+	
+	
+	private function gamepad_onButtonDown (button:GamepadButton):Void {
+		
+		addingBunnies = true;
+		
+	}
+	
+	
+	private function gamepad_onButtonUp (button:GamepadButton):Void {
+		
+		addingBunnies = false;
+		trace (bunnies.length + " bunnies");
+		
+	}
+	
+	
+	private function gamepad_onConnect (gamepad:Gamepad):Void {
+		
+		gamepad.onButtonDown.add (gamepad_onButtonDown);
+		gamepad.onButtonUp.add (gamepad_onButtonUp);
+		
+	}
 	
 	
 	private function stage_onEnterFrame (event:Event):Void {
@@ -166,6 +199,10 @@ class Main extends Sprite {
 		#end
 		
 		if (addingBunnies) {
+			
+			#if hide_fps
+			trace (fps.currentFPS);
+			#end
 			
 			for (i in 0...100) {
 				
