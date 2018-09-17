@@ -6,6 +6,7 @@
 	
 	<source path="Source" />
 	
+	<haxelib name="actuate" />
 	<haxelib name="openfl" />
 	
 	<assets path="Assets" rename="assets" include="*.mp4" if="flash || html5" embed="false" />
