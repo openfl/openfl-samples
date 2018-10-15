@@ -201,7 +201,7 @@ class Main extends Sprite {
 			
 			// TODO
 			#if !flash
-			glTexture = bitmapData.getTexture (@:privateAccess renderer.__context);
+			glTexture = @:privateAccess bitmapData.getTexture (@:privateAccess renderer.__context3D).__textureID;
 			#end
 			
 		} else {
