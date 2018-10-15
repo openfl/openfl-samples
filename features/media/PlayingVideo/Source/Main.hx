@@ -66,7 +66,7 @@ class Main extends Sprite {
 	
 	
 	private function netConnection_onNetStatus (event:NetStatusEvent):Void {
-		trace (event.info.code);
+		
 		if (event.info.code == "NetStream.Play.Complete") {
 			
 			Actuate.tween (overlay, 1, { alpha: 1 });
