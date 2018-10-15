@@ -10,11 +10,11 @@ jobs:
      - run: haxelib dev openfl ~/openfl
      - run: git clone --recursive https://github.com/openfl/lime ~/lime --depth 1
      - run: haxelib dev lime ~/lime
+     - run: haxelib install hxp
      - run: haxelib run openfl setup -cli -y
      - run: haxelib install actuate
      - run: haxelib install box2d
      - run: haxelib install layout
-     - run: haxelib install hxp
      - run: haxelib dev openfl-samples ~/project
      - run: haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt
      - run: haxelib run lime rebuild tools -nocffi
