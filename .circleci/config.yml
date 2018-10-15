@@ -1,7 +1,7 @@
 version: 2
 jobs:
   
-  Haxelib:
+  build:
     docker:
      - image: openfl/openfl-tests-unit-3.4:0.0.3
     steps:
@@ -43,28 +43,9 @@ jobs:
      - run: haxelib run openfl build ~/project/SimpleAbstractView neko
      - run: haxelib run openfl build ~/project/SimpleSWFLayout flash
   
-  NPM:
-    docker:
-     - image: openfl/ci-openfl-js:0.0.2
-    steps:
-     - checkout
-     - run:
-         name: Install Dependencies (Demos)
-         command: find npm/demos -maxdepth 1 -mindepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
-     - run:
-         name: Install Dependencies (Features)
-         command: find npm/features -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm install" \;
-     - run:
-         name: Build Demos
-         command: find npm/demos -maxdepth 1 -mindepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
-     - run:
-         name: Build Features
-         command: find npm/features -maxdepth 2 -mindepth 2 -type d \( ! -name . \) -exec bash -c "cd '{}' && npm run build" \;
-  
 workflows:
   version: 2
   
   build:
     jobs:
-     - NPM
-     - Haxelib
+     - build
