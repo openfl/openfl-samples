@@ -13,6 +13,7 @@ jobs:
      - run: haxelib install actuate
      - run: haxelib install box2d
      - run: haxelib install layout
+     - run: haxelib install hxp
      - run: haxelib dev openfl-samples ~/project
      - run: haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt
      - run: haxelib run lime rebuild tools -nocffi
