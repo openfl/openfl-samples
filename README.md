@@ -3,6 +3,8 @@
 OpenFL Samples
 ==============
 
+_Haxelib-based samples are located here, check out [https://github.com/openfl/openfl-samples-haxe](https://github.com/openfl/openfl-samples-haxe) for NPM-based samples._
+
 A collection of sample projects illustrating different OpenFL features.
 
 

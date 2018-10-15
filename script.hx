@@ -40,7 +40,7 @@ class Script extends hxp.Script {
 			
 			default:
 				
-				Log.error ("Unkown command \"" + command + "\"");
+				Log.error ("Unknown command \"" + command + "\"");
 			
 		}
 		
@@ -85,14 +85,6 @@ class Script extends hxp.Script {
 			if (paths.length == 0) {
 				for (sample in samples) {
 					if (StringTools.startsWith (sample, sampleName)) {
-						paths.push (sample);
-					}
-				}
-			}
-			
-			if (paths.length == 0) {
-				for (sample in samples) {
-					if (StringTools.startsWith (sample, Path.combine ("haxelib", sampleName))) {
 						paths.push (sample);
 					}
 				}
