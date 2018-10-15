@@ -10,8 +10,8 @@ jobs:
      - run: haxelib dev openfl ~/openfl
      - run: git clone --recursive https://github.com/openfl/lime ~/lime --depth 1
      - run: haxelib dev lime ~/lime
+     - run: cp ~/lime/templates/bin/lime.sh /usr/local/bin/lime
      - run: haxelib install hxp
-     - run: cp "~/lime/templates/bin/lime.sh" lime
      - run: haxelib install box2d
      - run: haxelib install layout
      - run: haxelib dev openfl-samples ~/project
