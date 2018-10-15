@@ -15,8 +15,8 @@ jobs:
      - run: haxelib install box2d
      - run: haxelib install layout
      - run: haxelib dev openfl-samples ~/project
-     - run: haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt
-     - run: haxelib run lime rebuild tools -nocffi
+     - run: haxelib run openfl rebuild linux -release -64 -nocffi > log.txt || cat log.txt
+     - run: haxelib run openfl rebuild tools -nocffi
      - run: haxelib run hxp build all html5
      - run: haxelib run hxp build all flash
      - run: haxelib run hxp build all neko
