@@ -28,8 +28,8 @@ class Main extends Sprite
 		stage.color = 0xA0A0A0;
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, function(e:KeyboardEvent)
 		{
-			if (e.keyCode == 39)
-			{ // Right Arrow
+			if (e.keyCode == 39) // Right Arrow
+			{
 				demo++;
 				if (demo > MAX_DEMO)
 				{
@@ -37,8 +37,8 @@ class Main extends Sprite
 				}
 				showDemo(demo);
 			}
-			else if (e.keyCode == 37)
-			{ // Left Arrow
+			else if (e.keyCode == 37) // Left Arrow
+			{
 				demo--;
 				if (demo < 0)
 				{
@@ -46,24 +46,24 @@ class Main extends Sprite
 				}
 				showDemo(demo);
 			}
-			else if (e.keyCode == 49)
-			{ // 1
+			else if (e.keyCode == 49) // 1
+			{
 				compare("flash");
 			}
-			else if (e.keyCode == 50)
-			{ // 2
+			else if (e.keyCode == 50) // 2
+			{
 				compare("legacy");
 			}
-			else if (e.keyCode == 51)
-			{ // 3
+			else if (e.keyCode == 51) // 3
+			{
 				compare("html5");
 			}
-			else if (e.keyCode == 38)
-			{ // Up
+			else if (e.keyCode == 38) // Up
+			{
 				changeAlpha(-1);
 			}
-			else if (e.keyCode == 40)
-			{ // Down
+			else if (e.keyCode == 40) // Down
+			{
 				changeAlpha(1);
 			}
 		});
