@@ -112,6 +112,8 @@ class Script extends hxp.Script
 			targets = [];
 			if (!flags.exists("noneko")) targets.push("neko");
 			if (!flags.exists("noneko") && !flags.exists("nocairo")) targets.push("neko -Dcairo");
+			if (!flags.exists("nohl")) targets.push("hl");
+			if (!flags.exists("nohl") && !flags.exists("nohl")) targets.push("hl -Dcairo");
 			if (!flags.exists("noelectron")) targets.push("electron");
 			if (!flags.exists("noelectron") && !flags.exists("nocanvas")) targets.push("electron -Dcanvas");
 			if (!flags.exists("noelectron") && !flags.exists("nodom")) targets.push("electron -Ddom");
