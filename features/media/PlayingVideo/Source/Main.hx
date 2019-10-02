@@ -34,6 +34,7 @@ class Main extends Sprite
 		overlay.graphics.beginFill(0, 0.5);
 		overlay.graphics.drawRect(0, 0, 560, 320);
 		overlay.addEventListener(MouseEvent.MOUSE_DOWN, overlay_onMouseDown);
+		overlay.buttonMode = true;
 		addChild(overlay);
 
 		netConnection.addEventListener(NetStatusEvent.NET_STATUS, netConnection_onNetStatus);
