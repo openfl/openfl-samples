@@ -95,11 +95,11 @@ class Main extends Sprite
 				}
 			}
 
-			if (Std.is(result, BitmapData))
+			if (#if (haxe_ver >= 4.2) Std.isOfType #else Std.is #end(result, BitmapData))
 			{
 				resultBmps.push(cast result);
 			}
-			else if (Std.is(result, Int))
+			else if (#if (haxe_ver >= 4.2) Std.isOfType #else Std.is #end(result, Int))
 			{
 				var i:Int = cast result;
 				var bmp = switch (i)
