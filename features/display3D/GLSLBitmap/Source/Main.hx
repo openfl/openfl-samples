@@ -28,7 +28,29 @@ class Main extends Sprite
 	{
 		super();
 
-		var context = stage.context3D;
+		if (stage.context3D != null)
+		{
+			initialize();
+		}
+		else
+		{
+			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, initialize);
+			stage.stage3Ds[0].requestContext3D();
+		}
+	}
+
+	private function initialize(?_):Void
+	{
+		var context = null;
+
+		if (stage.context3D != null)
+		{
+			context = stage.context3D;
+		}
+		else
+		{
+			context = stage.stage3Ds[0].context3D;
+		}
 
 		if (context == null)
 		{
@@ -37,27 +59,27 @@ class Main extends Sprite
 		}
 
 		var vertexSource = "attribute vec4 aPosition;
-			attribute vec2 aTexCoord;
-			varying vec2 vTexCoord;
-			
-			uniform mat4 uMatrix;
-			
-			void main(void) {
-				
-				vTexCoord = aTexCoord;
-				gl_Position = uMatrix * aPosition;
-				
-			}";
+				attribute vec2 aTexCoord;
+				varying vec2 vTexCoord;
+
+				uniform mat4 uMatrix;
+
+				void main(void) {
+
+					vTexCoord = aTexCoord;
+					gl_Position = uMatrix * aPosition;
+
+				}";
 
 		var fragmentSource = #if !desktop "precision mediump float;" + #end
 
 		"varying vec2 vTexCoord;
-			uniform sampler2D uImage0;
-			
-			void main(void)
-			{
-				gl_FragColor = texture2D (uImage0, vTexCoord);
-			}";
+				uniform sampler2D uImage0;
+
+				void main(void)
+				{
+					gl_FragColor = texture2D (uImage0, vTexCoord);
+				}";
 
 		program = context.createProgram(GLSL);
 		program.uploadSources(vertexSource, fragmentSource);
