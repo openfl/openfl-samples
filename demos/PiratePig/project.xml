@@ -17,7 +17,7 @@
 	
 	<icon path="Assets/images/icon.svg" />
 	
-	<set name="use-mp3" if="web" unless="emscripten" />
+	<set name="use-mp3" if="web || air" unless="emscripten" />
 	
 	<assets path="Assets/sounds" rename="sounds" if="use-mp3">
 		<sound path="3.mp3" id="sound3" />
