@@ -42,7 +42,6 @@ class Clock extends Sprite
 	{
 		var shortHandLength = radius / 2.0;
 		var longHandsLength = 3.0 * radius / 4.0;
-		var frameThickness = radius / 5.0;
 
 		hands.graphics.clear();
 
