@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="World Clock" package="org.openfl.samples.textalignment" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="WorldClock" />
+
+	<window allow-high-dpi="true"/>
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+</project>
