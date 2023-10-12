@@ -1,0 +1,5 @@
+enum Player
+{
+	X;
+	O;
+}
