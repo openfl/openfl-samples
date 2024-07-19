@@ -1,11 +1,11 @@
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE.md) [![Haxelib Version](https://img.shields.io/github/tag/openfl/openfl-samples.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/openfl-samples) [![Build Status](https://img.shields.io/circleci/project/github/openfl/openfl-samples/master.svg)](https://circleci.com/gh/openfl/openfl-samples)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE.md) [![Haxelib Version](https://img.shields.io/github/tag/openfl/openfl-samples.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/openfl-samples)
 
 OpenFL Samples
 ==============
 
 _Haxelib-based samples are located here, check out [https://github.com/openfl/openfl-samples-haxe](https://github.com/openfl/openfl-samples-haxe) for NPM-based samples._
 
-A collection of sample projects illustrating different OpenFL features.
+A collection of sample projects illustrating different [OpenFL](https://www.openfl.org/) features.
 
 
 Installation
