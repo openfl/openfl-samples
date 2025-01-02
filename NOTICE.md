@@ -2,7 +2,7 @@ Notices
 =======
 
 ### OpenFL Samples
-Copyright (c) 2013-2023 OpenFL contributors
+Copyright (c) 2013-2025 Joshua Granick and other OpenFL contributors
 
 Portions of other MIT-license projects are also used, including content that is
 
