@@ -27,7 +27,7 @@
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="nme" />
+    <library name="openfl" />
     <library name="actuate" />
     <library name="box2d" />
   </haxelib>
