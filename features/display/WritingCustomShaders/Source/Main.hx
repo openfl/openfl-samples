@@ -2,6 +2,7 @@ package;
 
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import openfl.display.PixelSnapping;
 import openfl.display.Sprite;
 import openfl.filters.ShaderFilter;
 import openfl.events.Event;
@@ -21,11 +22,14 @@ class Main extends Sprite
 		displayObject = new Sprite();
 
 		displayObjectShader = new CustomDisplayObjectShader();
-		displayObjectShader.vertexMultiplier.value = [1, 1, 1, 1];
-		displayObjectShader.fragmentMultiplier.value = [1, 1, 1, 1];
-		displayObject.shader = displayObjectShader;
+		if (displayObjectShader.data != null)
+		{
+			displayObjectShader.data.vertexMultiplier.value = [1, 1, 1, 1];
+			displayObjectShader.data.fragmentMultiplier.value = [1, 1, 1, 1];
+			displayObject.shader = displayObjectShader;
+		}
 
-		displayObject.addChild(new Bitmap(Assets.getBitmapData("assets/openfl.png"), null, true));
+		displayObject.addChild(new Bitmap(Assets.getBitmapData("assets/openfl.png"), PixelSnapping.AUTO, true));
 		displayObject.x = (stage.stageWidth - displayObject.width) / 2;
 		displayObject.y = (stage.stageHeight - displayObject.height) / 4;
 		addChild(displayObject);
@@ -33,11 +37,14 @@ class Main extends Sprite
 		renderToTexture = new Sprite();
 
 		renderToTextureShader = new CustomBitmapFilterShader();
-		renderToTextureShader.vertexMultiplier.value = [1, 1, 1, 1];
-		renderToTextureShader.fragmentMultiplier.value = [1, 1, 1, 1];
-		renderToTexture.filters = [new ShaderFilter(renderToTextureShader)];
+		if (renderToTextureShader.data != null)
+		{
+			renderToTextureShader.data.vertexMultiplier.value = [1, 1, 1, 1];
+			renderToTextureShader.data.fragmentMultiplier.value = [1, 1, 1, 1];
+			renderToTexture.filters = [new ShaderFilter(renderToTextureShader)];
+		}
 
-		renderToTexture.addChild(new Bitmap(Assets.getBitmapData("assets/openfl.png"), null, true));
+		renderToTexture.addChild(new Bitmap(Assets.getBitmapData("assets/openfl.png"), PixelSnapping.AUTO, true));
 		renderToTexture.x = (stage.stageWidth - renderToTexture.width) / 2;
 		renderToTexture.y = ((stage.stageHeight - renderToTexture.height) / 4) * 3;
 		addChild(renderToTexture);
@@ -53,18 +60,24 @@ class Main extends Sprite
 		var multiplierY = (Math.random() + 99) / 100;
 		var multiplierAlpha = (Math.random() + 2) / 3;
 
-		displayObjectShader.vertexMultiplier.value[0] = multiplierX;
-		displayObjectShader.vertexMultiplier.value[1] = multiplierY;
-		displayObjectShader.fragmentMultiplier.value[3] = multiplierAlpha;
-		displayObject.invalidate();
+		if (displayObjectShader.data != null)
+		{
+			displayObjectShader.data.vertexMultiplier.value[0] = multiplierX;
+			displayObjectShader.data.vertexMultiplier.value[1] = multiplierY;
+			displayObjectShader.data.fragmentMultiplier.value[3] = multiplierAlpha;
+			displayObject.invalidate();
+		}
 
 		var multiplierX = (Math.random() + 99) / 100;
 		var multiplierY = (Math.random() + 99) / 100;
 		var multiplierAlpha = (Math.random() + 2) / 3;
 
-		renderToTextureShader.vertexMultiplier.value[0] = multiplierX;
-		renderToTextureShader.vertexMultiplier.value[1] = multiplierY;
-		renderToTextureShader.fragmentMultiplier.value[3] = multiplierAlpha;
-		renderToTexture.filters = renderToTexture.filters;
+		if (renderToTextureShader.data != null)
+		{
+			renderToTextureShader.data.vertexMultiplier.value[0] = multiplierX;
+			renderToTextureShader.data.vertexMultiplier.value[1] = multiplierY;
+			renderToTextureShader.data.fragmentMultiplier.value[3] = multiplierAlpha;
+			renderToTexture.filters = renderToTexture.filters;
+		}
 	}
 }
