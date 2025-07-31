@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Displaying a Bitmap" package="org.openfl.samples.displayingabitmap" version="1.0.0" company="OpenFL" />
-	<app main="Main" path="Export" file="DisplayingABitmap" />
+	<meta title="Writing Custom Shaders" package="org.openfl.samples.writingcustomshaders" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="WritingCustomShaders" />
 	
 	<source path="Source" />
 	
